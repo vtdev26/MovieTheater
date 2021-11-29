@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$("#ticket_selling").click(function() {
 		$.get({
-			url: "/showtimes",
+			url: "/admin/showtimes",
 			success: function(response) {
 				$(".container-fluid").html(response);
 			},

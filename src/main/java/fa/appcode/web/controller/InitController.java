@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import fa.appcode.common.logging.LogUtils;
+
 @Controller
 @RequestMapping("/")
 public class InitController {
@@ -22,18 +24,32 @@ public class InitController {
 	public String showLogin() {
 		return "login";
 	}
+	
+	@GetMapping("user/dashboard")
+	public String showUserDashboard(Model model, Principal principal) {
+
+		User account = (User) ((Authentication) principal).getPrincipal();
+		LogUtils.getLogger().info("account login: " + account.getUsername() + " " + account.getPassword());
+		
+		LogUtils.getLogger().info(" aaaa  " +account.getUsername());
+		
+		model.addAttribute("userName", account.getUsername());
+
+		return "user-dashboard";
+	}
+
 
 	@GetMapping("admin/dashboard")
-	public String showDashboard(Model model, Principal principal) {
+	public String showAdminDashboard(Model model, Principal principal) {
 
-//		User account = (User) ((Authentication) principal).getPrincipal();
-//
-//		model.addAttribute("accountLogin", account);
+		User account = (User) ((Authentication) principal).getPrincipal();
+		LogUtils.getLogger().info("account login: " + account.getUsername() + " " + account.getPassword());
+		model.addAttribute("userName", account.getUsername());
 
 		return "dashboard";
 	}
 
-	// khi người dùng là user mà thâm nhập trang admin thì mình vào đây
+	
 	@GetMapping("403")
 	public String accessDenied(Model model, Principal principal) {
 		if (principal != null) {

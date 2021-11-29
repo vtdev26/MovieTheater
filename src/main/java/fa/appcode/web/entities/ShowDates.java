@@ -1,6 +1,7 @@
 package fa.appcode.web.entities;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -11,10 +12,16 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 @Table(name = "show_dates", schema = "movie_theater")
 public class ShowDates {
 	@Id
@@ -31,4 +38,20 @@ public class ShowDates {
 	@OneToMany(mappedBy = "showDates")
 	Set<MovieDate> movieDates;
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(showDateId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ShowDates other = (ShowDates) obj;
+		return Objects.equals(showDateId, other.showDateId);
+	}
 }
