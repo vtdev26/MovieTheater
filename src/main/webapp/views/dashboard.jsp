@@ -1,5 +1,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -146,7 +147,7 @@
 							role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> <span
 								class="mr-2 d-none d-lg-inline text-gray-600 small"><i
-									class="fas fa-caret-down mr-3"></i>Account</span> <img
+									class="fas fa-caret-down mr-3"></i>${userName }</span> <img
 								class="img-profile rounded-circle"
 								src="../resources/img/undraw_profile.svg">
 						</a> <!-- Dropdown - User Information -->
