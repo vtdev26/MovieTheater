@@ -14,7 +14,7 @@ $(document).ready(function() {
 	
 	$("#promotion").click(function() {
 		$.get({
-			url: "/promotion/list",
+			url: "/admin/promotion/list",
 			success: function(response) {
 				$(".container-fluid").html(response);
 			},

@@ -246,6 +246,7 @@
 	<script src="/resources/js/dashboard.js"></script>
 	<script src="/resources/js/ticket-selling/showtimes.js"></script>
 	<script src="/resources/js/movie/list-movie.js"></script>
+	<script src="/resources/js/promotion/list-promotion.js"></script>
 
 </body>
 
