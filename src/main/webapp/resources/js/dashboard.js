@@ -48,7 +48,18 @@ $(document).ready(function() {
 
 		});
 	});
-	
+	//khanhdd7
+	$("#movie").click(function() {
+		$.get({
+			url: "/admin/movie/list",
+			success: function(response) {
+				$(".container-fluid").html(response);
+			},
+			error: function(error) {
+				alert("Falied!" + error);
+			}
+		});
+	});	
 	
 	
 });

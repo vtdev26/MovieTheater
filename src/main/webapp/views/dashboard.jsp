@@ -67,7 +67,7 @@
 			<!-- Nav Item - Pages Collapse Menu -->
 			<li class="nav-item"><a id="employee" class="nav-link collapsed">
 					<i class="fas fa-users"></i> <span>Employee</span>
-			</a> <a class="nav-link collapsed" href="#"> <i class="fas fa-film"></i>
+			</a> <a class="nav-link collapsed" href="#" id="movie"> <i class="fas fa-film"></i>
 					<span>Movie</span>
 			</a> <a class="nav-link collapsed" href="#"> <i
 					class="fas fa-dungeon"></i> <span>Cenima Room</span>
@@ -245,6 +245,7 @@
 	<!-- Dashboard scripts -->
 	<script src="/resources/js/dashboard.js"></script>
 	<script src="/resources/js/ticket-selling/showtimes.js"></script>
+	<script src="/resources/js/movie/list-movie.js"></script>
 
 </body>
 
