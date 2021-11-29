@@ -10,15 +10,25 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.fasterxml.jackson.core.TSFBuilder;
+
 import fa.appcode.services.impl.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	
-	@Autowired
 	private SimpleAuthenticationSuccessHandler successHandler;
+	
+	public WebSecurityConfig(SimpleAuthenticationSuccessHandler successHandler,
+			UserDetailsServiceImpl userDetailsService, SimpleAuthenticationSuccessHandler simpleAuthenticationSuccessHandler) {
+		super();
+		this.successHandler = successHandler;
+		this.userDetailsService = userDetailsService;
+		this.successHandler = simpleAuthenticationSuccessHandler;
+	}
+
+	
 	
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;

@@ -9,7 +9,7 @@
                             </div>
                             <div class="content__time">
 								<c:forEach var="dateItem" items="${listDates}">
-								<button class="content__time--label ${dateSelecting == dateItem ? 'checked' : ''}" value="${dateItem}">
+								<button class="content__time--label" id="${dateSelecting == dateItem ? 'btn_checked' : ''}" value="${dateItem}">
                                     <span class="number">
                     				<fmt:parseDate value="${dateItem}" pattern="yyyy-MM-dd" var="parsedDateTime" type="both" />                                    
                                     <fmt:formatDate pattern="dd/MM" value="${parsedDateTime}" />
@@ -41,16 +41,16 @@
                                     </div>
                                 </div>
 								</c:forEach>
-								<c:if test="${movieDates != null}">
+								<c:if test="${totalPages > 1}">
                                 <nav aria-label="...">
 									<ul class="pagination">
-										<li class="page-item ${pageIndex == 1 ? 'disabled' : ''}"><a class="page-link" id="${previousPage}" href="#">Previous</a></li>
+										<li class="page-item ${pageIndex == 1 ? 'disabled' : ''}"><a class="page-link showtimes" value="${pageIndex - 1}" id="" href="#">Previous</a></li>
 										<c:forEach begin="1" end="${totalPages}" var="page">
-											<li class="page-item ${page == pageIndex ? 'active' : ''}"><a class="page-link" id="${page}" href="#">${page}
+											<li class="page-item ${page == pageIndex ? 'active' : ''}"><a class="page-link showtimes" value="${page}" id="" href="#">${page}
 													<span class="sr-only">(current)</span>
 											</a></li>
 										</c:forEach>
-										<li class="page-item ${pageIndex == totalPages ? 'disabled' : ''}"><a class="page-link" id="${nextPage}" href="#">Next</a></li>
+										<li class="page-item ${pageIndex == totalPages ? 'disabled' : ''}"><a class="page-link showtimes"  value="${pageIndex + 1}" id="" href="#">Next</a></li>
 									</ul>
                                   </nav>								
 								</c:if>

@@ -15,8 +15,8 @@ $(document).ready(function() {
 			}
 		});
 	});
-	$("body").on("click", "a.page-link", function() {
-		var pageIndex = $(this).attr("id");
+	$("body").on("click", "a.showtimes", function() {
+		var pageIndex = $(this).attr("value");
 		$.get({
 			url: "/admin/showtimes",
 			data: {
