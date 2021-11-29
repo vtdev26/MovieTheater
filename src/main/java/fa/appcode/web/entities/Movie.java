@@ -1,6 +1,7 @@
 package fa.appcode.web.entities;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,10 +13,16 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 @Table(name = "movie",schema = "movie_theater")
 public class Movie {
 	@Id
@@ -68,4 +75,21 @@ public class Movie {
 
 	@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
 	private Set<MovieType> movieTypes;
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(movieId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Movie other = (Movie) obj;
+		return Objects.equals(movieId, other.movieId);
+	}
 }
