@@ -11,14 +11,30 @@
                     </div>
                 </div>
 
-                <div class="row mt-5">
-                    <div class="col-lg-9">
-                    </div>
-
+                <div class="row">
+                    <div class="col-lg-8"></div>
+                    
+                   
+                    
+					<div class="col-lg-1">
+					
+						<div>
+						<span class="ml-1">Show</span>
+							<select id="selectPageSizePromotion"class="form-control">
+								<option value=3>3</option>
+								<option value=5 selected>5</option>
+								<option value=7>7</option>
+								<option value=10>10</option>
+								<option value=20>20</option>
+							</select>
+						</div>
+					</div>
+					
                     <div class="col-lg-3">
                         <div class="row">
+                        	<span class="ml-1">Search</span>
                             <div class="input-group rounded mr-3">
-                                <input id="searchInput" type="search" class="form-control rounded" placeholder="Search"
+                                <input id="searchInputPromotion" type="search" class="form-control rounded" placeholder="Search"
                                     aria-label="Search" aria-describedby="search-addon" value="${searchData}" />
                             </div>
                         </div>
@@ -71,22 +87,20 @@
                     <div class="row" ${numOfPages==0?'hidden':''}>
                         <div class="col-lg-12 right">
                             <div aria-label="Page navigation example">
-                                <ul class="pagination">
-                                    <li class="page-item ${currentPage == 1?'disabled':''}"><a id="pre"
-                                            class="page-link" href="#" value="${currentPage-1}">Previous</a></li>
+                                <ul class="pagination" pageIndex="${currentPage}" numOfPages="${numOfPages}" id="paginationPromotion">
+                                    <li class="page-item ${currentPage == 1?'disabled':''}"><a id="prePromotion" 
+                                    		class="page-link" href="#">Previous</a></li>
                                     <c:forEach begin="1" end="${numOfPages}" var="page">
                                         <li class="page-item ${currentPage == page?'active':''}"><a class="page-link"
-                                                href="#" id="page" value="${page}">${page}</a></li>
+                                                href="#" id="pagePromotion" value="${page}">${page}</a></li>
                                     </c:forEach>
-                                    <li class="page-item ${currentPage == numOfPages?'disabled':''}"><a id="next"
-                                            class="page-link" href="#" value="${currentPage+1}">Next</a></li>
+                                    <li class="page-item ${currentPage == numOfPages?'disabled':''}"><a id="nextPromotion"
+                                            class="page-link" href="#">Next</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
 
-<!-- Promotion scripts -->
-        <script type="text/javascript" src="/resources/js/promotion/list-promotion.js"></script>
 
             

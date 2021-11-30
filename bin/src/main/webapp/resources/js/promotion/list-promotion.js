@@ -1,14 +1,14 @@
 $(document).ready(function() {
 
-	$("body").on("click", "a#page", function() {
-		var pageIndex = $(this).attr("value");
-		var searchData = $("#searchInput").val();
-		console.log(pageIndex);
+	$("body").on("change", "#selectPageSizePromotion", function() {
+		var searchDataPromotion = $("#searchInputPromotion").val();
+		var pageSizePromotion = $("#selectPageSizePromotion").val();
+		console.log(pageSizePromotion);
 		$.get({
-			url: "/promotion/search",
+			url: "/admin/promotion/search",
 			data: {
-				pageIndex: pageIndex,
-				searchData: searchData,
+				pageSizePromotion: pageSizePromotion,
+				searchDataPromotion: searchDataPromotion,
 			},
 			success: function(response) {
 				$("div#table-promotion").html(response);
@@ -19,14 +19,17 @@ $(document).ready(function() {
 		});
 	});
 
-	$("body").on("click", "a#pre", function() {
-		var pageIndex = $(this).attr("value");
-		var searchData = $("#searchInput").val();
+	$("body").on("click", "a#pagePromotion", function() {
+		var pageIndexPromotion = $(this).attr("value");
+		var searchDataPromotion = $("#searchInputPromotion").val();
+		var pageSizePromotion = $("#selectPageSizePromotion").val();
+		console.log(pageIndexPromotion);
 		$.get({
-			url: "/promotion/search",
+			url: "/admin/promotion/search",
 			data: {
-				pageIndex: pageIndex,
-				searchData: searchData,
+				pageIndexPromotion: pageIndexPromotion,
+				pageSizePromotion: pageSizePromotion,
+				searchDataPromotion: searchDataPromotion,
 			},
 			success: function(response) {
 				$("div#table-promotion").html(response);
@@ -37,14 +40,17 @@ $(document).ready(function() {
 		});
 	});
 
-	$("body").on("click", "a#next", function() {
-		var pageIndex = $(this).attr("value");
-		var searchData = $("#searchInput").val();
+	$("body").on("click", "a#prePromotion", function() {
+		var pageIndexPromotion = $("ul#paginationPromotion").attr('pageIndex');
+		var searchDataPromotion = $("#searchInputPromotion").val();
+		var pageSizePromotion = $("#selectPageSizePromotion").val();
+		pageIndexPromotion = Number(pageIndexPromotion) - 1;
 		$.get({
-			url: "/promotion/search",
+			url: "/admin/promotion/search",
 			data: {
-				pageIndex: pageIndex,
-				searchData: searchData,
+				pageIndexPromotion: pageIndexPromotion,
+				pageSizePromotion: pageSizePromotion,
+				searchDataPromotion: searchDataPromotion,
 			},
 			success: function(response) {
 				$("div#table-promotion").html(response);
@@ -55,12 +61,37 @@ $(document).ready(function() {
 		});
 	});
 
-	$("body").on("input", "input#searchInput", function() {
-		var searchData = $("#searchInput").val();
+	$("body").on("click", "a#nextPromotion", function() {
+		var pageIndexPromotion = $("ul#paginationPromotion").attr('pageIndex');
+		var searchDataPromotion = $("#searchInputPromotion").val();
+		var pageSizePromotion = $("#selectPageSizePromotion").val();
+		pageIndexPromotion = Number(pageIndexPromotion) + 1;
+		console.log(pageIndexPromotion);
 		$.get({
-			url: "/promotion/search",
+			url: "/admin/promotion/search",
 			data: {
-				searchData: searchData,
+				pageIndexPromotion: pageIndexPromotion,
+				pageSizePromotion: pageSizePromotion,
+				searchDataPromotion: searchDataPromotion,
+			},
+			success: function(response) {
+				$("div#table-promotion").html(response);
+			},
+			error: function(responseError) {
+				alert(JSON.stringify(responseError));
+			}
+		});
+	});
+
+	$("body").on("input", "input#searchInputPromotion", function() {
+		var searchDataPromotion = $("#searchInputPromotion").val();
+		var pageSizePromotion = $("#selectPageSizePromotion").val();
+		$.get({
+			url: "/admin/promotion/search",
+			data: {
+				searchDataPromotion: searchDataPromotion,
+				pageSizePromotion: pageSizePromotion,
+				pageIndexPromotion: 1,
 			},
 			success: function(response) {
 				$("div#table-promotion").html(response);

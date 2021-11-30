@@ -2,10 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <h3 class="row justify-content-center">Employee List</h3>
 <div class="mt-2 mr-4">
 	<hr>
-	<!-- <h5 class="row justify-content-center text-info">List empty !!!!!</h5> -->
+	<h5 class="row justify-content-center text-info" ${numOfPages==0?'':'hidden'}>List employee empty!</h5>
 	<div class="row mt-1">
 		<div class="form-input ml-3">
 			<button type="button" class="btn btn-primary" id="addEmployee">
@@ -51,7 +52,7 @@
 						<th scope="col">Username</th>
 						<th style="">Full name</th>
 						<th scope="col">Date of birth</th>
-						<th scope="col">Gender</th>
+						<th scope="col" style="text-align: center">Gender</th>
 						<th scope="col">Email</th>
 						<th scope="col">Identity card</th>
 						<th scope="col">Phone number</th>
@@ -63,13 +64,13 @@
 				</thead>
 				<tbody>
 
-					<c:forEach items="${employeeVos}" var="employee">
+					<c:forEach items="${employeeVos}" var="employee" varStatus="loop">
 						<tr>
-							<td class="number"></td>
+							<td class="number">${loop.index+1}</td>
 							<td>${employee.userName }</td>
 							<td>${employee.fullName }</td>
 							<td>${employee.dateOfBirth }</td>
-							<td>${employee.gender }</td>
+							<td style="text-align: center">${employee.gender }</td>
 							<td>${employee.email }</td>
 							<td>${employee.identityCard }</td>
 							<td>${employee.phoneNumber }</td>
@@ -109,11 +110,6 @@
 
 <script>
 	// chuonghv99: JS - listEmployee // 
-
-	// Stt column
-	$("td.number").each(function(i, v) {
-		$(v).text(i + 1);
-	});
 
 	// Click add new button 
 	$("body").on("click", "#addEmployee", function(e) {
