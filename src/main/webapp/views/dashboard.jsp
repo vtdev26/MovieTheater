@@ -69,8 +69,8 @@
 					<i class="fas fa-users"></i> <span>Employee</span>
 			</a> <a class="nav-link collapsed" href="#" id="movie"> <i class="fas fa-film"></i>
 					<span>Movie</span>
-			</a> <a class="nav-link collapsed" href="#"> <i
-					class="fas fa-dungeon"></i> <span>Cenima Room</span>
+			</a> <a class="nav-link collapsed" href="#" id="cinema_room"> <i
+					class="fas fa-dungeon"></i> <span>Cinema Room</span>
 			</a> <a class="nav-link collapsed" id="ticket_selling" href="#"> <i
 					class="fab fa-cc-amazon-pay"></i> <span>Ticket Selling</span>
 			</a> <a class="nav-link collapsed" href="#" id="promotion"> <i
@@ -247,6 +247,7 @@
 	<script src="/resources/js/ticket-selling/showtimes.js"></script>
 	<script src="/resources/js/movie/list-movie.js"></script>
 	<script src="/resources/js/promotion/list-promotion.js"></script>
+	<script src="/resources/js/cinema-room/list-room.js"></script>
 
 </body>
 

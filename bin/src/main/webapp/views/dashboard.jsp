@@ -1,5 +1,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,7 +55,7 @@
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item active"><a class="nav-link"
-				href="index.html"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span></a>
+				href="#"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span></a>
 			</li>
 
 			<!-- Divider -->
@@ -66,7 +67,7 @@
 			<!-- Nav Item - Pages Collapse Menu -->
 			<li class="nav-item"><a id="employee" class="nav-link collapsed">
 					<i class="fas fa-users"></i> <span>Employee</span>
-			</a> <a class="nav-link collapsed" href="#"> <i class="fas fa-film"></i>
+			</a> <a class="nav-link collapsed" href="#" id="movie"> <i class="fas fa-film"></i>
 					<span>Movie</span>
 			</a> <a class="nav-link collapsed" href="#"> <i
 					class="fas fa-dungeon"></i> <span>Cenima Room</span>
@@ -146,7 +147,7 @@
 							role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> <span
 								class="mr-2 d-none d-lg-inline text-gray-600 small"><i
-									class="fas fa-caret-down mr-3"></i>Account</span> <img
+									class="fas fa-caret-down mr-3"></i>${userName }</span> <img
 								class="img-profile rounded-circle"
 								src="../resources/img/undraw_profile.svg">
 						</a> <!-- Dropdown - User Information -->
@@ -174,111 +175,6 @@
 
 					<h1 class="row justify-content-center mt-5">Welcome To G3 -
 						MovieTheater</h1>
-
-
-					<!-- <div class="wrapper">
-                            <div class="content">
-                                <div class="content__title">
-                                    <span>showtimes</span>
-                                </div>
-                                <div class="content__time">
-                                    <div class="content__time--label">
-                                        <span class="number">24/11</span>
-                                        <span class="date">Wed</span>
-                                    </div>
-                                    <div class="content__time--label">
-                                        <span class="number">25/11</span>
-                                        <span class="date">Thu</span>
-                                    </div>
-                                    <div class="content__time--label">
-                                        <span class="number">26/11</span>
-                                        <span class="date">Fri</span>
-                                    </div>
-                                    <div class="content__time--label">
-                                        <span class="number">27/11</span>
-                                        <span class="date">Sat</span>
-                                    </div>
-                                    <div class="content__time--label">
-                                        <span class="number">28/11</span>
-                                        <span class="date">Sun</span>
-                                    </div>
-                                    <div class="content__time--label">
-                                        <span class="number">29/11</span>
-                                        <span class="date">Mon</span>
-                                    </div>
-                                </div>
-                                <div class="content__movie">
-                                    <div class="movie">
-                                        <div class="movie__avatar">
-                                            <img src="../Dashboarh_admin/img/book.jpg" alt="">
-                                        </div>
-                                        <div class="movie__detail">
-                                            <div class="movie__detail--name">
-                                                <span>Doctor Strange: Phù Thủy Tối Thượng</span>
-                                            </div>
-                                            <div class="movie__detail--description">
-                                                <span>Doctor Strange</span>
-                                            </div>
-                                            <div class="movie__detail--time">
-                                                <div class="time">
-                                                    08:00
-                                                </div>
-
-                                                <div class="time">
-                                                    09:00
-                                                </div>
-
-                                                <div class="time">
-                                                    10:00
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="movie">
-                                        <div class="movie__avatar">
-                                            <img src="../Dashboarh_admin/img/book.jpg" alt="">
-                                        </div>
-                                        <div class="movie__detail">
-                                            <div class="movie__detail--name">
-                                                <span>Doctor Strange: Phù Thủy Tối Thượng</span>
-                                            </div>
-                                            <div class="movie__detail--description">
-                                                <span>Doctor Strange</span>
-                                            </div>
-                                            <div class="movie__detail--time">
-                                                <div class="time">
-                                                    08:00
-                                                </div>
-
-                                                <div class="time">
-                                                    09:00
-                                                </div>
-
-                                                <div class="time">
-                                                    10:00
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <nav aria-label="...">
-                                        <ul class="pagination">
-                                            <li class="page-item disabled">
-                                                <a class="page-link">Previous</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item active" aria-current="page">
-                                                <a class="page-link" href="#">2</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">Next</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div> -->
 				</div>
 				<!-- /.container-fluid -->
 
@@ -348,6 +244,9 @@
 
 	<!-- Dashboard scripts -->
 	<script src="/resources/js/dashboard.js"></script>
+	<script src="/resources/js/ticket-selling/showtimes.js"></script>
+	<script src="/resources/js/movie/list-movie.js"></script>
+	<script src="/resources/js/promotion/list-promotion.js"></script>
 
 </body>
 

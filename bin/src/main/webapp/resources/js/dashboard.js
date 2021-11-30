@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$("#ticket_selling").click(function() {
 		$.get({
-			url: "/showtimes",
+			url: "/admin/showtimes",
 			success: function(response) {
 				$(".container-fluid").html(response);
 			},
@@ -14,7 +14,7 @@ $(document).ready(function() {
 	
 	$("#promotion").click(function() {
 		$.get({
-			url: "/promotion/list",
+			url: "/admin/promotion/list",
 			success: function(response) {
 				$(".container-fluid").html(response);
 			},
@@ -48,7 +48,18 @@ $(document).ready(function() {
 
 		});
 	});
-	
+	//khanhdd7
+	$("#movie").click(function() {
+		$.get({
+			url: "/admin/movie/list",
+			success: function(response) {
+				$(".container-fluid").html(response);
+			},
+			error: function(error) {
+				alert("Falied!" + error);
+			}
+		});
+	});	
 	
 	
 });

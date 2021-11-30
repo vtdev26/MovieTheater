@@ -61,6 +61,18 @@ $(document).ready(function() {
 		});
 	});	
 	
+	//ThangNT26
+	$("#cinema_room").click(function() {
+		$.get({
+			url: "/room/list-room",
+			success: function(response) {
+				$(".container-fluid").html(response);
+			},
+			error: function(error) {
+				alert("Falied!" + error);
+			}
+		});
+	});
 	
 });
 

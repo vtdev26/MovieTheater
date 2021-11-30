@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="card-header font-weight-bold">View Content List</div>
 <div class="row card-body"">
@@ -12,7 +13,7 @@
 				<th scope="col">Username</th>
 				<th style="">Full name</th>
 				<th scope="col">Date of birth</th>
-				<th scope="col">Gender</th>
+				<th scope="col" style="text-align: center">Gender</th>
 				<th scope="col">Email</th>
 				<th scope="col">Identity card</th>
 				<th scope="col">Phone number</th>
@@ -24,13 +25,13 @@
 		</thead>
 		<tbody>
 
-			<c:forEach items="${employeeVos}" var="employee">
+			<c:forEach items="${employeeVos}" var="employee" varStatus="loop">
 				<tr>
-					<td class="number"></td>
+					<td class="number">${loop.index+1}</td>
 					<td>${employee.userName }</td>
 					<td>${employee.fullName }</td>
 					<td>${employee.dateOfBirth }</td>
-					<td>${employee.gender }</td>
+					<td style="text-align: center">${employee.gender }</td>
 					<td>${employee.email }</td>
 					<td>${employee.identityCard }</td>
 					<td>${employee.phoneNumber }</td>
@@ -41,7 +42,6 @@
 					<td><a href="#" value="${employee.employeeId} type="button"><i
 							class="far fa-trash-alt ml-3"></i> </a></td>
 				</tr>
-
 			</c:forEach>
 
 		</tbody>
