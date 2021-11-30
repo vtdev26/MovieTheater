@@ -3,7 +3,6 @@ package fa.appcode.services.impl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,7 +33,7 @@ public class MovieServiceImpl implements MovieService{
 			} else {
 				searchVal = "%" + searchData + "%";
 			}
-			movies=movieRepository.searchText(searchData, pageable);
+			movies=movieRepository.searchText(searchVal, pageable);
 		}
 		return movies;
 	}

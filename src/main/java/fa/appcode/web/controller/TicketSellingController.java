@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import fa.appcode.common.logging.LogUtils;
 import fa.appcode.config.PageConfig;
 import fa.appcode.services.ShowtimesService;
 import fa.appcode.web.entities.MovieDate;
@@ -32,14 +31,11 @@ public class TicketSellingController {
 
 		List<LocalDate> listDates = showtimesService.getShowDateList(LocalDate.now().toString());
 		
-		LogUtils.getLogger().info(dateSelecting);
-				
 		modelMap.addAttribute("listDates", listDates);
 		
 		PageVo<MovieDate> pages = showtimesService.findMovieTimeByDate(dateSelecting, pageIndex, pageConfig.getMaxPageShowTime());
 		
-		modelMap.addAttribute("dateSelecting", dateSelecting);
-		LogUtils.getLogger().info(pageIndex);
+		modelMap.addAttribute("dateSelecting", dateSelecting == null ? LocalDate.now().toString() : dateSelecting);
 		
 		if(pages != null) {
 			modelMap.addAttribute("pageIndex", pages.getPageIndex());

@@ -21,7 +21,7 @@ h1, h2, h3, h5, body .table {
 }
 
 .content .content__title span {
-    color: rgb(255, 255, 255);
+    color: rgb(255, 120, 0);
     font-size: 2rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -41,14 +41,14 @@ h1, h2, h3, h5, body .table {
     border-radius: 50%;
     width: 3rem;
     height: 2.5rem;
-    background: rgb(75, 105, 122);
+    background: rgb(118, 165, 8);
     padding: 28px;
     cursor: pointer;
     color: #fff;
 }
 
 .content .content__time #btn_checked {
-    background: rgb(196, 193, 29);
+    background: rgb(219, 200, 21);
 }
 
 .content .content__time .content__time--label .number {
@@ -103,7 +103,7 @@ h1, h2, h3, h5, body .table {
 }
 
 .movie__detail .movie__detail--description {
-    color: #ccc;
+    color: rgb(134, 72, 121);
     margin-bottom: 0.5rem;
 }
 

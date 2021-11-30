@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fa.appcode.common.logging.LogUtils;
 import fa.appcode.common.utils.DateUtils;
 import fa.appcode.config.PageConfig;
 import fa.appcode.repositories.ShowtimesRepository;
@@ -49,14 +48,12 @@ public class ShowtimesServiceImpl implements ShowtimesService {
 		}
 
 		List<ShowDates> showDates = null;
+
 		if (date == null) {
-			showDates = showTimesRepository
-					.findAll(showDateSpecification.getListByDate(DateUtils.convertToDate(LocalDate.now())));
-			LogUtils.getLogger().info(DateUtils.convertToDate(LocalDate.now()));
-		} else {
-			showDates = showTimesRepository
-					.findAll(showDateSpecification.getListByDate(DateUtils.convertToDate(LocalDate.parse(date))));
+			date = LocalDate.now() + "";
 		}
+		showDates = showTimesRepository
+				.findAll(showDateSpecification.getListByDate(DateUtils.convertToDate(LocalDate.parse(date))));
 
 		showDates = showDates.stream().distinct().collect(Collectors.toList());
 
@@ -65,11 +62,12 @@ public class ShowtimesServiceImpl implements ShowtimesService {
 		}
 
 		List<MovieDate> movieDates = new ArrayList<MovieDate>();
-		PageVo<MovieDate> pages = new PageVo<MovieDate>();
 
 		for (ShowDates showDate : showDates) {
 			movieDates.addAll(showDate.getMovieDates());
 		}
+
+		PageVo<MovieDate> pages = new PageVo<MovieDate>();
 
 		pages.setTotalPage(movieDates.size() % pageSize == 0 ? (movieDates.size() / pageSize)
 				: (movieDates.size() / pageSize + 1));

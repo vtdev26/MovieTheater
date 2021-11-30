@@ -51,6 +51,9 @@ public class Movie {
 
 	@Column(name = "to_date",  columnDefinition = "DATETIME")
 	private Date toDate;
+	
+	@Column(name = "release_date", columnDefinition = "DATETIME")
+	private Date releaseDate;
 
 	@Column(name = "version", columnDefinition = "NVARCHAR(255)")
 	private String version;
