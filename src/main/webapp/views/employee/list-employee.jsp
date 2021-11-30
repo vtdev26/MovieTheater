@@ -2,10 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <h3 class="row justify-content-center">Employee List</h3>
 <div class="mt-2 mr-4">
 	<hr>
-	<!-- <h5 class="row justify-content-center text-info">List empty !!!!!</h5> -->
+	<h5 class="row justify-content-center text-info" ${numOfPages==0?'':'hidden'}>List employee empty!</h5>
 	<div class="row mt-1">
 		<div class="form-input ml-3">
 			<button type="button" class="btn btn-primary" id="addEmployee">
