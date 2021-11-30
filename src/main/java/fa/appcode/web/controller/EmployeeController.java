@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import fa.appcode.common.logging.LogUtils;
 import fa.appcode.common.utils.ConvertUtils;
+import fa.appcode.config.PageConfig;
 import fa.appcode.services.EmployeeService;
 import fa.appcode.web.vo.EmployeeVo;
 
@@ -31,64 +32,37 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 
+	@Autowired
+	private PageConfig pageConfig;
+
 	@GetMapping("list-employee")
-	public String showListEmployee(@RequestParam(name = "dataSearch", required = false) String dataSearch,
-			@RequestParam(name = "pageIndex", required = false) String pageIndex,
-			@RequestParam(name = "pageSize", required = false) String pageSize, Model model, HttpSession httpSession)
-			throws Exception {
-		LogUtils.getLogger().info("dataSearch NULLLLL ");
-		int pageIndexValue = (pageIndex == null) ? 0 : ConvertUtils.convertStrToInt(pageIndex) - 1;
-		int pageSizeValue = (pageSize == null) ? 5 : ConvertUtils.convertStrToInt(pageSize);
-
-		LogUtils.getLogger().info("pageIndexValue " + pageIndexValue + " pageSizeValue " + pageSizeValue);
-
-		List<EmployeeVo> employeeVos = new ArrayList<EmployeeVo>();
-
-		Page<EmployeeVo> page = employeeService.findAllEmployee(pageIndexValue, pageSizeValue);
-		employeeVos = page.toList();
-		int numOfPages = page.getTotalPages();
-		model.addAttribute("employeeVos", employeeVos);
-		model.addAttribute("numOfPages", numOfPages);
-		model.addAttribute("pageIndex", pageIndexValue + 1);
+	public String showListEmployee(Model model, HttpSession httpSession) throws Exception {
+		int pageIndexValue = pageConfig.getInitPage();
+		int pageSizeValue = pageConfig.getSizePage();
+		Page<EmployeeVo> page = employeeService.findAllEmployee(pageIndexValue - 1, pageSizeValue);
+		model.addAttribute("employeeVos", page.toList());
+		model.addAttribute("numOfPages", page.getTotalPages());
+		model.addAttribute("pageIndex", pageIndexValue);
 
 		return "employee/list-employee";
 	}
 
 	@GetMapping("list-employee/filter")
-	public String showListEmployeeSearch(@RequestParam(name = "dataSearch", required = true) String dataSearch,
+	public String showListEmployeeSearch(
+			@RequestParam(name = "dataSearch", required = true, defaultValue = "") String dataSearch,
 			@RequestParam(name = "pageIndex", required = true) String pageIndex,
 			@RequestParam(name = "pageSize", required = true) String pageSize, Model model, HttpSession httpSession) {
-		LogUtils.getLogger().info("dataSearch KHONG NULLLLL " + dataSearch);
-		int pageIndexValue = ConvertUtils.convertStrToInt(pageIndex) - 1;
-		int pageSizeValue = ConvertUtils.convertStrToInt(pageSize);
-
-		LogUtils.getLogger().info("pageIndexValue " + pageIndexValue + " pageSizeValue " + pageSizeValue);
-
-		List<EmployeeVo> employeeVos = new ArrayList<EmployeeVo>();
-		LogUtils.getLogger().info("dataSearch " + dataSearch);
-		int numOfPages;
-		if (dataSearch == null || "".equals(dataSearch)) {
-			LogUtils.getLogger().info("dataSearch NULLLLL ");
-			Page<EmployeeVo> page = employeeService.findAllEmployee(pageIndexValue, pageSizeValue);
-			employeeVos = page.toList();
-			numOfPages = page.getTotalPages();
-		} else {
-			LogUtils.getLogger().info("dataSearch KHONG  NULLLLL " + dataSearch);
-			Page<EmployeeVo> page = employeeService.findAllEmployee(pageIndexValue, pageSizeValue, dataSearch);
-			employeeVos = page.toList();
-			numOfPages = page.getTotalPages();
-
-		}
-
-		LogUtils.getLogger().info("employee size: " + employeeVos.size());
-
-		model.addAttribute("employeeVos", employeeVos);
-		model.addAttribute("numOfPages", numOfPages);
-		model.addAttribute("pageIndex", pageIndexValue + 1);
-
+		int pageIndexValue = pageConfig.getInitPage();
+		int pageSizeValue = pageConfig.getSizePage();
+		pageIndexValue = ConvertUtils.convertStrToInt(pageIndex);
+		pageSizeValue = ConvertUtils.convertStrToInt(pageSize);
+		Page<EmployeeVo> page = employeeService.findAllEmployee(pageIndexValue - 1, pageSizeValue, dataSearch);
+		model.addAttribute("employeeVos", page.toList());
+		model.addAttribute("numOfPages", page.getTotalPages());
+		model.addAttribute("pageIndex", pageIndexValue);
 		return "employee/table-employee";
 	}
-	
+
 	@GetMapping("add-employee")
 	public String addEmployeeShow() {
 		return "employee/add-employee";

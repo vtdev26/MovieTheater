@@ -17,6 +17,9 @@ public class PageConfig {
 	@Value("${page.init}")
 	private Integer initPage;
 	
+	@Value("${page.size}")
+	private Integer sizePage;
+	
 	@Value("${page.showtimes.size}")
 	private Integer maxPageShowTime;
 	
