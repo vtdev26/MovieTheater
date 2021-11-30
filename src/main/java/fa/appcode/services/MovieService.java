@@ -1,7 +1,5 @@
 package fa.appcode.services;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 
 import fa.appcode.web.entities.Movie;

@@ -23,4 +23,10 @@ public class PageConfig {
 	@Value("${page.showtimes.size}")
 	private Integer maxPageShowTime;
 	
+	@Value("${login.fail.no.author}")
+	private String noAuthor;
+	
+	@Value("${login.fail.no.permit}")
+	private String noPermit;
+	
 }

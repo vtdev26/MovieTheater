@@ -6,9 +6,6 @@
 
 package fa.appcode.web.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import fa.appcode.common.logging.LogUtils;
 import fa.appcode.common.utils.ConvertUtils;
 import fa.appcode.config.PageConfig;
 import fa.appcode.services.EmployeeService;

@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -20,9 +21,15 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import fa.appcode.common.logging.LogUtils;
+import fa.appcode.config.PageConfig;
+
 @Component
 public class SimpleAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
+	@Autowired
+	private PageConfig pageConfig;
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -33,17 +40,18 @@ public class SimpleAuthenticationSuccessHandler implements AuthenticationSuccess
 				try {
 					redirectStrategy.sendRedirect(request, response, "/user/dashboard");
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					LogUtils.getLogger().info(pageConfig.getNoPermit());
+
 				}
 			} else if (authority.getAuthority().equals("ROLE_ADMIN")) {
 				try {
 					redirectStrategy.sendRedirect(request, response, "/admin/dashboard");
 				} catch (Exception e) {
 
-					e.printStackTrace();
+					LogUtils.getLogger().info(pageConfig.getNoPermit());
 				}
 			} else {
+				LogUtils.getLogger().info(pageConfig.getNoAuthor());
 				throw new IllegalStateException();
 			}
 		});
