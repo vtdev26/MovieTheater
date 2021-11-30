@@ -1,3 +1,8 @@
+
+h1, h2, h3, h5, body .table {
+	color: black !important;
+}
+
 .wrapper {
     background-color: #ccc;
     background-image: url("../img/ticket-selling/background.jpg");

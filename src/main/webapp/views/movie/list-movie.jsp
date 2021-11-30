@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<h3 class="row justify-content-center">Movie List</h3>
+<h3 class="row justify-content-center font-weight-bold">Movie List</h3>
                     <div class="mt-2 mr-4">
 
                         <div class="row mt-5">

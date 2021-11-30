@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import fa.appcode.web.entities.Account;
 
-@Repository
+@Repository("accountRepository")
 @Transactional
 public interface AccountRepository extends JpaRepository<Account, String> {
 

@@ -17,7 +17,7 @@
                             <div class="container-fluid">
 
 
-                                <h3 class="row justify-content-center">Cinema room List</h3>
+                                <h3 class="row justify-content-center font-weight-bold">Cinema room List</h3>
                                 <div class="mt-2 mr-4">
 
                                     <hr>
