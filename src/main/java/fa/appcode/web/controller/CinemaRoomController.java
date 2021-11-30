@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import fa.appcode.config.PageConfig;
 import fa.appcode.services.CinemaRoomService;
@@ -58,9 +59,14 @@ public class CinemaRoomController {
 		return "cinema-room/list-room";
 	}
 
-	@GetMapping("/room-images")
-	public String showImageInToolTip(@RequestParam(name = "roomId") String roomId, Model model) {
-
-		return "room-images";
+	@GetMapping("/room-image")
+	@ResponseBody
+	public String showImageInToolTip(@RequestParam(name = "roomId") String roomId, Model model){
+		String roomImgUrl = null;
+		if(!roomId.isEmpty() || roomId != null) {
+			CinemaRoom cinemaRoom = cinemaRoomService.findById(roomId);
+			roomImgUrl = cinemaRoom.getImage();
+		}
+		return roomImgUrl;
 	}
 }

@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+    <style>
+        .imgToolTip {
+            max-width: 100%;
+        }
+    </style>
     <!-- JSTL -->
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -17,7 +22,7 @@
                             <div class="container-fluid">
 
 
-                                <h3 class="row justify-content-center font-weight-bold">Cinema room List</h3>
+                                <h3 class="row justify-content-center">Cinema room List</h3>
                                 <div class="mt-2 mr-4">
 
                                     <hr>
@@ -64,7 +69,7 @@
                                                                     <c:out value="${loop.index + 1}" />
                                                                 </td>
                                                                 <td>${room.cinemaRoomId}</td>
-                                                                <td value="${room.cinemaRoomId}" class="roomToolTipText" style="cursor: pointer;">${room.cinemaRoomName}</td>
+                                                                <td><a value="${room.cinemaRoomId}" data-toggle="tooltip" data-placement="top" data-html="true" class="room-image" style="text-decoration:none;" title="">${room.cinemaRoomName}</a></td>
                                                                 <td>${room.seatQuantity}</td>
                                                                 <td>
                                                                     <a href="${pageContext.servletContext.contextPath}/room/edit-room" type="button" class="btnUpdate" value="${content.contentId}"><i class="fa fa-info-circle" aria-hidden="true"></i> Seat detail</a>
@@ -76,7 +81,6 @@
                                                 </tbody>
                                             </table>
                                         </div>
-
                                         <c:if test="${roomRecords > 0}">
                                             <div class="row">
                                                 <div class="col-lg-12 right">
@@ -97,8 +101,16 @@
                                 </div>
                             </div>
                         </div>
+
+
+
                     </div>
                     <!-- /.container-fluid -->
 
                 </div>
                 <!-- End of Main Content -->
+                <script>
+                    $(function() {
+                        $('[data-toggle="tooltip"]').tooltip()
+                    })
+                </script>

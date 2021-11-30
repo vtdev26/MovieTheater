@@ -1,8 +1,5 @@
 $(document).ready(function() {
 
-	
-
-
 	$("body").on("change keydown", "#searchInput", function() {
 		console.log("pressed key");
 		var searchField = $(this).val();
@@ -74,27 +71,28 @@ $(document).ready(function() {
 		});
 
 	});
-	
-	
-	
-	$("body").on("hover", ".roomToolTipText", function(e) {
-		e.preventDefault();
-		var pageIndex = $(this).attr("id");
-		var searchField = $("#searchData").val();
+
+	$("body").on("mouseenter", ".room-image", function() {
+		var roomId = $(this).attr("value");
 		$.get({
-			url: "/room/list-room",
+			url: "/room/room-image",
 			data: {
-				pageIndex: pageIndex,
-				searchField: searchField,
+				roomId: roomId,
 			},
 			success: function(responseData) {
-				$(".container-fluid").html(responseData);
+				var roomNameImage = $(".room-image");
+				roomNameImage.attr("data-original-title", `<img class="imgToolTip" src='` + responseData + "' />");
+				console.log(responseData);
 			},
 			error: function(responseError) {
 				alert(responseError);
 			}
 		});
-
 	});
+
+	$(function() {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
+
 });
 
