@@ -50,11 +50,12 @@ public class InitController {
 		return "login";
 	}
 
-	@GetMapping("login/error")
-	public String showLoginError(Model model) {
-		model.addAttribute("message", pageConfig.getIncorrect());
+		
+	@GetMapping("logout")
+	public String logout() {
 		return "login";
 	}
+	
 
 	@GetMapping("user/dashboard")
 	public String showUserDashboard(Model model, Principal principal) {

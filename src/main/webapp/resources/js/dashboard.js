@@ -25,29 +25,7 @@ $(document).ready(function() {
 	});
 
 
-	// chuonghv99
-	$("body").on("click", "#employee, #btnBackEmoployee", function(e) {
-		e.preventDefault();
-		document.title = $(this).text();
-		$.ajax({
-			url: "/admin/employee/list-employee",
-			success: function(response) {
-				$("#content-page").html(response);
-				pageIndex = $('ul.pagination').attr('pageIndex');
-				var numOfPages = $('ul.pagination').attr('numOfPages');
-				$('li.page-item').eq(pageIndex).addClass("active");
-				if (pageIndex == 1) {
-					$("a#previous").css("opacity", "0.4");
-					$("a#previous").prop("disabled", true);
-				}
-				if (pageIndex == numOfPages) {
-					$("a#next").css("opacity", "0.4");
-					$("a#next").prop("disabled", true);
-				}
-			},
 
-		});
-	});
 	//khanhdd7
 	$("#movie").click(function() {
 		$.get({
@@ -76,9 +54,32 @@ $(document).ready(function() {
 
 
 
+	// chuonghv99
+	$("body").on("click", "#employee, #btnBackEmoployee", function(e) {
+		e.preventDefault();
+		document.title = $(this).text();
+		$.ajax({
+			url: "/admin/employee/list-employee",
+			success: function(response) {
+				$("#content-page").html(response);
+				pageIndex = $('ul.pagination').attr('pageIndex');
+				var numOfPages = $('ul.pagination').attr('numOfPages');
+				$('li.page-item').eq(pageIndex).addClass("active");
+				if (pageIndex == 1) {
+					$("a#previous").css("opacity", "0.4");
+					$("a#previous").prop("disabled", true);
+				}
+				if (pageIndex == numOfPages) {
+					$("a#next").css("opacity", "0.4");
+					$("a#next").prop("disabled", true);
+				}
+			},
+
+		});
+	});
 
 
-	// ChuongHV1
+	// Click add new  - employee management
 	$("body").on("click", "#addEmployee", function(e) {
 		e.preventDefault();
 		$.get({
@@ -240,11 +241,11 @@ $(document).ready(function() {
 	$("body").on("click", "a#next", function(e) {
 		e.preventDefault();
 		var pageIndex = $('ul.pagination').attr('pageIndex');
-		
+
 		pageIndex = pageIndex - (-1);
 		var dataSearch = $("#inputSearch").val();
 		var pageSize = $("#selectPageSize").val();
-		
+
 		$.get({
 			url: "/admin/employee/list-employee/filter",
 			async: false,
