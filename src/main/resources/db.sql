@@ -8,7 +8,7 @@ SET IDENTITY_INSERT [movie_theater].[roles] OFF
 GO
 INSERT [movie_theater].[account] ([account_id], [address], [date_of_birth], [email], [full_name], [gender], [identity_card], [image], [password], [phone_number], [register_date], [status], [username], [role_id]) VALUES (N'1', N'namdinh', CAST(N'2008-11-11' AS Date), N'chuong1@gmail.com', N'hoang van chuong', N'M', N'123456', N'imgage', N'$2a$10$32S8vE0sFBbyIq68fB.lQeOW9F7vXhSbcpMX7NvdNI9WXb1ohZuyi', N'0999999', CAST(N'2008-11-11' AS Date), 1, N'admin', 1)
 INSERT [movie_theater].[account] ([account_id], [address], [date_of_birth], [email], [full_name], [gender], [identity_card], [image], [password], [phone_number], [register_date], [status], [username], [role_id]) VALUES (N'2', N'quat lam', CAST(N'1999-10-10' AS Date), N'chuong2@gmail.com', N'do nhu the', N'M', N'234557', N'image2', N'$2a$10$32S8vE0sFBbyIq68fB.lQeOW9F7vXhSbcpMX7NvdNI9WXb1ohZuyi', N'111111', CAST(N'1999-11-11' AS Date), 0, N'user', 2)
-INSERT [movie_theater].[account] ([account_id], [address], [date_of_birth], [email], [full_name], [gender], [identity_card], [image], [password], [phone_number], [register_date], [status], [username], [role_id]) VALUES (N'3', N'bach long', CAST(N'1888-08-10' AS Date), N'chuong3@gmail.com', N'tran van chien ', N'M', N'111111', N'image2', N'$2a$10$32S8vE0sFBbyIq68fB.lQeOW9F7vXhSbcpMX7NvdNI9WXb1ohZuyi', N'111111', CAST(N'2018-11-11' AS Date), 0, N'chuong', 1)
+INSERT [movie_theater].[account] ([account_id], [address], [date_of_birth], [email], [full_name], [gender], [identity_card], [image], [password], [phone_number], [register_date], [status], [username], [role_id]) VALUES (N'3', N'bach long', CAST(N'1888-08-10' AS Date), N'chuong3@gmail.com', N'tran van chien ', N'M', N'111111', N'profile1.jpg', N'$2a$10$32S8vE0sFBbyIq68fB.lQeOW9F7vXhSbcpMX7NvdNI9WXb1ohZuyi', N'111111', CAST(N'2018-11-11' AS Date), 0, N'chuong', 1)
 INSERT [movie_theater].[account] ([account_id], [address], [date_of_birth], [email], [full_name], [gender], [identity_card], [image], [password], [phone_number], [register_date], [status], [username], [role_id]) VALUES (N'4', N'giao yen ', CAST(N'2008-10-10' AS Date), N'dieu@gmail.com', N'do vinh ', N'F', N'000000', N'image2', N'$2a$10$32S8vE0sFBbyIq68fB.lQeOW9F7vXhSbcpMX7NvdNI9WXb1ohZuyi', N'111111', CAST(N'2007-09-09' AS Date), 0, N'admin4', 1)
 INSERT [movie_theater].[account] ([account_id], [address], [date_of_birth], [email], [full_name], [gender], [identity_card], [image], [password], [phone_number], [register_date], [status], [username], [role_id]) VALUES (N'5', N'ha noi ', CAST(N'2008-10-10' AS Date), N'chuong5@gmail.com', N'hao an ', N'F', N'111111', N'image2', N'pass', N'111111', CAST(N'2007-09-09' AS Date), 0, N'admin5', 1)
 INSERT [movie_theater].[account] ([account_id], [address], [date_of_birth], [email], [full_name], [gender], [identity_card], [image], [password], [phone_number], [register_date], [status], [username], [role_id]) VALUES (N'6', N'quat lam', CAST(N'1228-10-10' AS Date), N'w', N'kim ngan ', N'M', N'111111', N'image2', N'pass', N'111111', CAST(N'2007-09-09' AS Date), 0, N'admin6', 1)
@@ -26,78 +26,78 @@ INSERT [movie_theater].[employee] ([employee_id], [account_id]) VALUES (N'8', N'
 GO
 SET IDENTITY_INSERT [movie_theater].[cinema_room] ON 
 
-INSERT [movie_theater].[cinema_room] ([cinema_room_id], [cinema_room_name], [cinema_image], [seat_quantity]) VALUES (2, N'room1', N'image 1 path', 50)
-INSERT [movie_theater].[cinema_room] ([cinema_room_id], [cinema_room_name], [cinema_image], [seat_quantity]) VALUES (3, N'room2', N'image 2 path', 50)
-INSERT [movie_theater].[cinema_room] ([cinema_room_id], [cinema_room_name], [cinema_image], [seat_quantity]) VALUES (4, N'room3', N'image 3 path', 60)
-INSERT [movie_theater].[cinema_room] ([cinema_room_id], [cinema_room_name], [cinema_image], [seat_quantity]) VALUES (5, N'room3', N'image 4 path', 50)
-INSERT [movie_theater].[cinema_room] ([cinema_room_id], [cinema_room_name], [cinema_image], [seat_quantity]) VALUES (6, N'room5', N'image 5 path', 60)
-INSERT [movie_theater].[cinema_room] ([cinema_room_id], [cinema_room_name], [cinema_image], [seat_quantity]) VALUES (7, N'room6', N'image 6 path', 50)
+INSERT [movie_theater].[cinema_room] ([cinema_room_id], [cinema_room_name], [cinema_image], [seat_quantity]) VALUES (2, N'Room 1', N'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_1fMl2BZ7OIpLPK5F9BHmqTa1aBIhXqtFpw&usqp=CAU', 50)
+INSERT [movie_theater].[cinema_room] ([cinema_room_id], [cinema_room_name], [cinema_image], [seat_quantity]) VALUES (3, N'Room 2', N'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_1fMl2BZ7OIpLPK5F9BHmqTa1aBIhXqtFpw&usqp=CAU', 50)
+INSERT [movie_theater].[cinema_room] ([cinema_room_id], [cinema_room_name], [cinema_image], [seat_quantity]) VALUES (4, N'Room 3', N'https://i.pinimg.com/474x/c1/3c/11/c13c11ec72e83fc8521893d53ec35623.jpg', 60)
+INSERT [movie_theater].[cinema_room] ([cinema_room_id], [cinema_room_name], [cinema_image], [seat_quantity]) VALUES (5, N'Room 4', N'https://i.pinimg.com/474x/c1/3c/11/c13c11ec72e83fc8521893d53ec35623.jpg', 50)
+INSERT [movie_theater].[cinema_room] ([cinema_room_id], [cinema_room_name], [cinema_image], [seat_quantity]) VALUES (6, N'Room 5', N'https://i.pinimg.com/474x/c1/3c/11/c13c11ec72e83fc8521893d53ec35623.jpg', 60)
+INSERT [movie_theater].[cinema_room] ([cinema_room_id], [cinema_room_name], [cinema_image], [seat_quantity]) VALUES (7, N'Room 6', N'https://i.pinimg.com/474x/c1/3c/11/c13c11ec72e83fc8521893d53ec35623.jpg', 50)
 SET IDENTITY_INSERT [movie_theater].[cinema_room] OFF
 GO
 SET IDENTITY_INSERT [movie_theater].[movie] ON 
 
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (1, N'Actor', N'
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (1, N'Actor', N'
 Shang-Chi Và Huyền Thoại Thập Luân', NULL, 1, CAST(N'2021-11-26' AS Date), N'poster_shangchi.jpg', N'Shang-Chi and The Legend of The Ten Rings', N'
-Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (2, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
-Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (3, N'Actor', N'
+Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (2, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
+Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (3, N'Actor', N'
 Shang-Chi Và Huyền Thoại Thập Luân', NULL, 1, CAST(N'2021-11-26' AS Date), N'poster_shangchi.jpg', N'Shang-Chi and The Legend of The Ten Rings', N'
-Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (4, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
-Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (5, N'Actor', N'
+Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (4, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
+Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (5, N'Actor', N'
 Shang-Chi Và Huyền Thoại Thập Luân', NULL, 1, CAST(N'2021-11-26' AS Date), N'poster_shangchi.jpg', N'Shang-Chi and The Legend of The Ten Rings', N'
-Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (6, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
-Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (7, N'Actor', N'
+Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (6, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
+Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (7, N'Actor', N'
 Shang-Chi Và Huyền Thoại Thập Luân', NULL, 1, CAST(N'2021-11-26' AS Date), N'poster_shangchi.jpg', N'Shang-Chi and The Legend of The Ten Rings', N'
-Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (8, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
-Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (9, N'Actor', N'
+Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (8, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
+Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (9, N'Actor', N'
 Shang-Chi Và Huyền Thoại Thập Luân', NULL, 1, CAST(N'2021-11-26' AS Date), N'poster_shangchi.jpg', N'Shang-Chi and The Legend of The Ten Rings', N'
-Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (10, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
-Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (11, N'Actor', N'
+Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (10, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
+Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (11, N'Actor', N'
 Shang-Chi Và Huyền Thoại Thập Luân', NULL, 1, CAST(N'2021-11-26' AS Date), N'poster_shangchi.jpg', N'Shang-Chi and The Legend of The Ten Rings', N'
-Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (12, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
-Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (13, N'Actor', N'
+Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (12, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
+Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (13, N'Actor', N'
 Shang-Chi Và Huyền Thoại Thập Luân', NULL, 1, CAST(N'2021-11-26' AS Date), N'poster_shangchi.jpg', N'Shang-Chi and The Legend of The Ten Rings', N'
-Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (14, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
-Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (15, N'Actor', N'
+Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (14, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
+Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (15, N'Actor', N'
 Shang-Chi Và Huyền Thoại Thập Luân', NULL, 1, CAST(N'2021-11-26' AS Date), N'poster_shangchi.jpg', N'Shang-Chi and The Legend of The Ten Rings', N'
-Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (16, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
-Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (17, N'Actor', N'
+Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (16, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
+Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (17, N'Actor', N'
 Shang-Chi Và Huyền Thoại Thập Luân', NULL, 1, CAST(N'2021-11-26' AS Date), N'poster_shangchi.jpg', N'Shang-Chi and The Legend of The Ten Rings', N'
-Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (18, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
-Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (19, N'Actor', N'
+Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (18, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
+Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (19, N'Actor', N'
 Shang-Chi Và Huyền Thoại Thập Luân', NULL, 1, CAST(N'2021-11-26' AS Date), N'poster_shangchi.jpg', N'Shang-Chi and The Legend of The Ten Rings', N'
-Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (20, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
-Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (21, N'Actor', N'
+Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (20, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
+Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (21, N'Actor', N'
 Shang-Chi Và Huyền Thoại Thập Luân', NULL, 1, CAST(N'2021-11-26' AS Date), N'poster_shangchi.jpg', N'Shang-Chi and The Legend of The Ten Rings', N'
-Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (22, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
-Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (23, N'Actor', N'
+Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (22, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
+Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (23, N'Actor', N'
 Shang-Chi Và Huyền Thoại Thập Luân', NULL, 1, CAST(N'2021-11-26' AS Date), N'poster_shangchi.jpg', N'Shang-Chi and The Legend of The Ten Rings', N'
-Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (24, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
-Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
-INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version]) VALUES (25, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
-Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1')
+Shang-Chi Và Huyền Thoại Thập Luân', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (24, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
+Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
+INSERT [movie_theater].[movie] ([movie_id], [actor], [content], [director], [duration], [from_date], [large_image], [movie_name_english], [movie_name_vn], [movie_product_company], [small_image], [to_date], [version], [release_date]) VALUES (25, N'Actor', N'Black Window: Goá Phụ Đen', NULL, 1, CAST(N'2021-11-26' AS Date), N'black_widow.jpg', N'Black Window', N'
+Black Window: Goá Phụ Đen', N'Movie Theater', NULL, CAST(N'2021-12-02' AS Date), N'1', NULL)
 SET IDENTITY_INSERT [movie_theater].[movie] OFF
 GO
 SET IDENTITY_INSERT [movie_theater].[show_dates] ON 

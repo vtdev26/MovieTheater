@@ -27,6 +27,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
 			+ "FROM Employee e JOIN e.account a")
 	Page<EmployeeVo> findAllEmployee(Pageable pageable);
 
+	
 	@Query("SELECT new fa.appcode.web.vo.EmployeeVo"
 			+ "(e.employeeId, a.accountId, a.address, a.dateOfBirth, a.email, a.fullName, a.gender, a.identityCard, a.image, a.password, a.phoneNumber,a.registerDate, a.status, a.userName  ) "
 			+ "FROM Employee e JOIN e.account a " + "WHERE a.address LIKE %:dataSearch% "

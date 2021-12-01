@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import fa.appcode.common.logging.LogUtils;
+import fa.appcode.config.PageConfig;
 import fa.appcode.services.AccountService;
 import fa.appcode.web.entities.Account;
 
@@ -23,10 +24,35 @@ import fa.appcode.web.entities.Account;
 public class InitController {
 
 	@Autowired
+	private PageConfig pageConfig;
+
+	@Autowired
 	private AccountService accountService;
+
+	@GetMapping("403")
+	public String accessDenied(Model model, Principal principal) {
+		if (principal != null) {
+			User loginedUser = (User) ((Authentication) principal).getPrincipal();
+
+			String userInfo = loginedUser.getUsername();
+			model.addAttribute("userInfo", userInfo);
+			String message = "Hi " + principal.getName() + "," //
+					+ "<br> You do not have permission to access this page!";
+			model.addAttribute("message", message);
+
+		}
+
+		return "403";
+	}
 
 	@GetMapping("login")
 	public String showLogin() {
+		return "login";
+	}
+
+	@GetMapping("login/error")
+	public String showLoginError(Model model) {
+		model.addAttribute("message", pageConfig.getIncorrect());
 		return "login";
 	}
 
@@ -35,7 +61,7 @@ public class InitController {
 		User account = (User) ((Authentication) principal).getPrincipal();
 		Account accountLogin = accountService.findAccountByUserName(account.getUsername());
 		LogUtils.getLogger().info(accountLogin.toString());
-		
+
 		model.addAttribute("accountLogin", accountLogin);
 		return "user-dashboard";
 	}
@@ -45,25 +71,10 @@ public class InitController {
 		User account = (User) ((Authentication) principal).getPrincipal();
 		Account accountLogin = accountService.findAccountByUserName(account.getUsername());
 		LogUtils.getLogger().info(accountLogin.toString());
-		
+
 		model.addAttribute("accountLogin", accountLogin);
-	
+
 		return "dashboard";
-	}
-
-	@GetMapping("403")
-	public String accessDenied(Model model, Principal principal) {
-		if (principal != null) {
-			User loginedUser = (User) ((Authentication) principal).getPrincipal();
-			String userInfo = loginedUser.getUsername();
-			model.addAttribute("userInfo", userInfo);
-			String message = "Hi " + principal.getName() //
-					+ "<br> You do not have permission to access this page!";
-			model.addAttribute("message", message);
-
-		}
-
-		return "403";
 	}
 
 }

@@ -32,7 +32,7 @@ public class EmployeeController {
 	private PageConfig pageConfig;
 
 	@GetMapping("list-employee")
-	public String showListEmployee(Model model, HttpSession httpSession) throws Exception {
+	public String showListEmployee(Model model) throws Exception {
 		int pageIndexValue = pageConfig.getInitPage();
 		int pageSizeValue = pageConfig.getSizePage();
 		Page<EmployeeVo> page = employeeService.findAllEmployee(pageIndexValue - 1, pageSizeValue);
@@ -48,10 +48,9 @@ public class EmployeeController {
 			@RequestParam(name = "dataSearch", required = true, defaultValue = "") String dataSearch,
 			@RequestParam(name = "pageIndex", required = true) String pageIndex,
 			@RequestParam(name = "pageSize", required = true) String pageSize, Model model, HttpSession httpSession) {
-		int pageIndexValue = pageConfig.getInitPage();
-		int pageSizeValue = pageConfig.getSizePage();
-		pageIndexValue = ConvertUtils.convertStrToInt(pageIndex);
-		pageSizeValue = ConvertUtils.convertStrToInt(pageSize);
+
+		int pageIndexValue = ConvertUtils.convertStrToInt(pageIndex);
+		int pageSizeValue = ConvertUtils.convertStrToInt(pageSize);
 		Page<EmployeeVo> page = employeeService.findAllEmployee(pageIndexValue - 1, pageSizeValue, dataSearch);
 		model.addAttribute("employeeVos", page.toList());
 		model.addAttribute("numOfPages", page.getTotalPages());

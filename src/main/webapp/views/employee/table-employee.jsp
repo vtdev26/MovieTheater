@@ -65,5 +65,3 @@
 	</div>
 </div>
 
-<script
-	src="${pageContext.servletContext.contextPath}/resources/js/list-employee.js"></script>

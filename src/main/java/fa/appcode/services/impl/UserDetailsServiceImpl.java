@@ -29,10 +29,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
 	private AccountRepository accountRepository;
-	
+
 	@Autowired
 	private RoleRepository roleRepository;
-
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -55,10 +54,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			}
 		}
 
-		UserDetails userDetails = (UserDetails) new User(account.getUserName(), account.getPassword(), grantList);
-		LogUtils.getLogger().info("userDetail " + userDetails.getUsername() + " " + userDetails.getPassword() + " "
-				+ userDetails.getAuthorities().toString());
-		return userDetails;
+		if (account.getStatus() == 0) {
+			return new User(account.getUserName(), account.getPassword(), true, true, true, false, grantList);
+		}
+		else
+			return new User(account.getUserName(), account.getPassword(), grantList);
 
 	}
 

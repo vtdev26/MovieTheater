@@ -29,4 +29,11 @@ public class PageConfig {
 	@Value("${login.fail.no.permit}")
 	private String noPermit;
 	
+	@Value("${login.fail.locked}")
+	private String locked;
+	
+	@Value("${login.fail.incorrect}")
+	private String incorrect;
+	
+	
 }
