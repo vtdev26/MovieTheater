@@ -2,7 +2,6 @@
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 					<hr>
-                            <h5 class="row justify-content-center text-info" ${totalPage==0?'':'hidden'}>List empty!</h5>
                             <div class="row card-body">
                                 <table class="table table-bordered table-striped">
                                     <thead>

@@ -17,7 +17,7 @@
                             <div class="col-lg-3">
                                 <div class="row">
                                     <div class="input-group rounded mr-3">
-                                        <input id="searchInput"
+                                        <input id="searchInputMovie"
                                             type="search" class="form-control rounded" placeholder="Search"
                                             aria-label="Search" aria-describedby="search-addon" value="${searchData}"/>
                                             
@@ -28,7 +28,6 @@
 
                         <div class="card mt-3" id="table-movie">
                             <hr>
-                            <h5 class="row justify-content-center text-info" ${totalPage==0?'':'hidden'}>List empty!</h5>
                             <div class="row card-body">
                                 <table class="table table-bordered table-striped">
                                     <thead>

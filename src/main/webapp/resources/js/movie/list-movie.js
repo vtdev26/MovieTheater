@@ -53,8 +53,8 @@ $(document).ready(function() {
 		});
 
 	});
-	$("body").on("input", "input#searchInput", function() {
-		var searchData = $("#searchInput").val();
+	$("body").on("input", "input#searchInputMovie", function() {
+		var searchData = $("#searchInputMovie").val();
 		$.get({
 			url: "/admin/movie/search",
 			data:{
