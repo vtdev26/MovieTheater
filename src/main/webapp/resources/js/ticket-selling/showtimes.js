@@ -33,8 +33,8 @@ $(document).ready(function() {
 	});
 
 	$("body").on("click", ".time", function(){
-		var timeId = $(this).data("id-time");
-		var movieId = $(this).data("id-movie");
+		var timeId = $(this).data("time-id");
+		var movieId = $(this).data("movie-id");
 		var pageIndex = $(".pagination .active .showtimes").attr("value");
 		$.get({
 			url: "/admin/selecting-seat",

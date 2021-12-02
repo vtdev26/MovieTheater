@@ -21,7 +21,7 @@ h1, h2, h3, h5, body .table {
 }
 
 .content .content__title span {
-    color: rgb(255, 120, 0);
+    color: rgb(82, 82, 82);
     font-size: 2rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -58,7 +58,7 @@ h1, h2, h3, h5, body .table {
 
 .content__movie {
     position: relative;
-    background-color: rgb(226, 226, 226);
+    background-color: rgb(255, 255, 255);
     border-radius: 10px;
 }
 
