@@ -8,10 +8,13 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,8 +29,12 @@ import lombok.Setter;
 @Table(name = "invoice", schema = "movie_theater")
 public class Invoice {
 
+	
+	
 	@Id
-	@Column(name = "invoice_id")
+	@GenericGenerator(name = "sequence_string_id", strategy = "fa.appcode.common.utils.StringGenerator")
+	@GeneratedValue(generator = "sequence_string_id")
+	@Column(name = "invoice_id", columnDefinition = "VARCHAR(10)")
 	private String invoiceId;
 
 	@Column(name = "add_score")

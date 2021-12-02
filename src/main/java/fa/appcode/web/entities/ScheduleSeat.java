@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,9 +23,10 @@ import lombok.Setter;
 public class ScheduleSeat {
 	
 	@Id
-	@Column(name = "cinema_room_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer cinemaRoomId;
+	@Column(name = "cinema_room_id", columnDefinition = "NVARCHAR(10)")
+	@GenericGenerator(name = "sequence_string_id", strategy = "fa.appcode.common.utils.StringGenerator")
+	@GeneratedValue(generator = "sequence_string_id")
+	private String cinemaRoomId;
 	
 	@Column(name = "movie_id")
 	private Integer movieId;

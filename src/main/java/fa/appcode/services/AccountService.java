@@ -11,5 +11,9 @@ import fa.appcode.web.entities.Account;
 public interface AccountService {
 
 	Account findAccountByUserName(String userName);
+	
+	boolean save(Account account);
+	
+	
 
 }

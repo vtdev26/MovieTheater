@@ -9,11 +9,14 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,6 +32,8 @@ import lombok.Setter;
 public class Account {
 
 	@Id
+	@GenericGenerator(name = "sequence_string_id", strategy = "fa.appcode.common.utils.StringGenerator")
+	@GeneratedValue(generator = "sequence_string_id")
 	@Column(name = "account_id", columnDefinition = "VARCHAR(10)")
 	private String accountId;
 
