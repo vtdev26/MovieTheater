@@ -60,7 +60,7 @@ public class EmployeeController {
 
 	@GetMapping("add-employee")
 	public String addEmployeeShow() {
-		return "employee/add-employee";
+		return "employee/detail-employee";
 	}
 
 }

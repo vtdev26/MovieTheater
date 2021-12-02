@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,10 +28,12 @@ import lombok.Setter;
 @Table(name = "movie",schema = "movie_theater")
 public class Movie {
 	@Id
-	@Column(name = "movie_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "movie_id", columnDefinition = "NVARCHAR(10)")
+	@GenericGenerator(name = "sequence_string_id", strategy = "fa.appcode.common.utils.StringGenerator")
+	@GeneratedValue(generator = "sequence_string_id")
+	private String movieId;
 	
-	private Integer movieId;
+	
 	@Column(name = "actor", columnDefinition = "NVARCHAR(255)")
 	private String actor;
 
