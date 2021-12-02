@@ -1,5 +1,5 @@
 package fa.appcode.web.entities;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,6 +37,6 @@ public class CinemaRoom {
     private String image;
     
     @OneToMany(mappedBy = "cinemaRoom", cascade = CascadeType.ALL)
-    private Set<Seat> seats;
+    private List<Seat> seats;
     
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fa.appcode.config.PageConfig;
+import fa.appcode.services.CinemaRoomService;
 import fa.appcode.services.ShowtimesService;
 import fa.appcode.web.entities.MovieDate;
 import fa.appcode.web.vo.PageVo;
@@ -21,6 +22,9 @@ public class TicketSellingController {
 	
 	@Autowired
 	private ShowtimesService showtimesService;
+	
+	@Autowired
+	private CinemaRoomService cinemaRoomService;
 	
 	@Autowired
 	private PageConfig pageConfig;
@@ -46,5 +50,11 @@ public class TicketSellingController {
 		}
 		
 		return "ticket-selling/showtimes";
+	}
+	
+	@GetMapping("/selecting-seat")
+	public String showSelectingSeat(ModelMap modelMap, @RequestParam(required = false) String movieId) {	
+//		modelMap.addAttribute("cinemaRoom", cinemaRoomService.findByMovieId(movieId));
+		return "ticket-selling/selecting-seat";
 	}
 }

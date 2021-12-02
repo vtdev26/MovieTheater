@@ -31,4 +31,29 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+	$("body").on("click", ".time", function(){
+		var timeId = $(this).data("id-time");
+		var movieId = $(this).data("id-movie");
+		var pageIndex = $(".pagination .active .showtimes").attr("value");
+		$.get({
+			url: "/admin/selecting-seat",
+			data: {
+				timeId: timeId,
+				movieId: movieId,
+				pageIndex: pageIndex,
+				dateSelecting: dateSelecting
+			},
+			success: function (response){
+				$(".container-fluid").html(response);
+				$(".btnContinue").data("id-movie", movieId);
+				$(".btnContinue").data("id-time", timeId);
+				$(".btnBack").data("page", pageIndex);
+				$(".btnBack").data("date", dateSelecting);
+			},
+			error: function(error) {
+				alert("Falied!" + error);
+			}
+		});
+	});
 });

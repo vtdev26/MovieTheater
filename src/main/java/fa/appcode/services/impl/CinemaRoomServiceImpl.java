@@ -48,5 +48,10 @@ public class CinemaRoomServiceImpl implements CinemaRoomService{
 		int roomIdVal = Integer.parseInt(roomId);
 		return cinemaRoomRepository.findById(roomIdVal).orElse(null);
 	}
+
+	@Override
+	public CinemaRoom findByMovieId(String movieId) {
+		return cinemaRoomRepository.findRoomByMovieId(movieId);
+	}
 	
 }
