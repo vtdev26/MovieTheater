@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fa.appcode.common.utils.Constants;
 import fa.appcode.config.PageConfig;
 import fa.appcode.services.MovieService;
 import fa.appcode.web.entities.Movie;
@@ -44,7 +45,7 @@ public class MovieController {
 	}
 	@GetMapping("/search")
 	public String searchMovie(Model model,@RequestParam(value = "pageIndex", required = false) String pageIndex,
-			@RequestParam(defaultValue = "",name = "searchData")String searchData ) {
+			@RequestParam(defaultValue = Constants.DEFAULT_WORD,name = "searchData")String searchData ) {
 		int pageIndexVal = pageConfig.getInitPage();
 		
 		if (pageIndex !=null) {
@@ -52,7 +53,7 @@ public class MovieController {
 		}
 		
 		Page<Movie> page;
-		if ("".equals(searchData)) {
+		if (Constants.DEFAULT_WORD.equals(searchData)) {
 			page=movieServices.findAll(pageIndexVal, pageConfig.getSizePage());
 		}else {
 			page=movieServices.searchAll(searchData, pageIndexVal, pageConfig.getSizePage());
@@ -64,5 +65,9 @@ public class MovieController {
 		model.addAttribute("currentPage", pageIndexVal);
 		
 		return "movie/list-table-movie";
+	}
+	@GetMapping("/add-movie")
+	public String showAddMovie() {
+		return "movie/detail-movie";
 	}
 }

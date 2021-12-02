@@ -25,6 +25,9 @@
 
 <link rel="stylesheet" href="/resources/css/styles.css">
 
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"
+        type="text/javascript"></script>
+
 </head>
 
 <body id="page-top">
@@ -243,9 +246,18 @@
 
 	<!-- Dashboard scripts -->
 	<script src="/resources/js/dashboard.js"></script>
+	
+	<!-- Ticket-selling scripts -->
 	<script src="/resources/js/ticket-selling/showtimes.js"></script>
+	
+	<!-- Movie scripts -->
 	<script src="/resources/js/movie/list-movie.js"></script>
+	
+	<!-- Promotion scripts -->
 	<script src="/resources/js/promotion/list-promotion.js"></script>
+	<script src="/resources/js/promotion/detail-promotion.js"></script>
+	
+	<!-- Cinema room scripts -->
 	<script src="/resources/js/cinema-room/list-room.js"></script>
 
 </body>
