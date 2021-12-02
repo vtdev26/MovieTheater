@@ -2,10 +2,10 @@
 h1, h2, h3, h5, body .table {
 	color: black !important;
 }
-
 .wrapper {
     background-color: #ccc;
-    background-image: url("../img/ticket-selling/background.jpg");
+    background-image: url("../img/ticket-selling/background1.jpg");
+    background-repeat: no-repeat;
     width: 100%;
     height: 100%;
 }
@@ -127,3 +127,22 @@ h1, h2, h3, h5, body .table {
     justify-content: flex-end;
     padding: 12px 12px 12px 0px;
 }
+
+#tableSeat {
+    border: unset;
+    width: 450px;
+    text-align: center;
+}
+
+#tableSeat td {
+    border: unset;
+}
+
+
+.time:hover {
+    background-color: #ffc107;
+    border: unset;
+    box-shadow: 0 0 0 0.2rem rgb(255 193 7 / 25%);
+}
+
+

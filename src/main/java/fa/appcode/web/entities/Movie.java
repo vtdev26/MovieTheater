@@ -42,6 +42,9 @@ public class Movie {
 
 	@Column(name = "duration")
 	private int duration;
+	
+	@Column(name = "cinema_room_id")
+	private int cinemaRoomId;
 
 	@Column(name = "from_date", columnDefinition = "DATETIME")
 	private Date fromDate;

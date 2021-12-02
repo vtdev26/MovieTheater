@@ -10,4 +10,6 @@ public interface CinemaRoomService {
 	Page<CinemaRoom> findAllBySearchKey(String roomName, int pageIndex, int pageSize) throws Exception;
 	
 	CinemaRoom findById(String roomId);
+	
+	CinemaRoom findByMovieId(String movieId);
 }
