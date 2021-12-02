@@ -6,7 +6,7 @@
 
                         <div class="row mt-5">
                             <div class="form-input ml-3">
-                                <button type="button" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i><span class="ml-2">Add new</span> </button>
+                                <button type="button" class="btn btn-primary" id="addMovie"><i class="fa fa-plus" aria-hidden="true"></i><span class="ml-2">Add new</span> </button>
                             </div>
                         </div>
 
