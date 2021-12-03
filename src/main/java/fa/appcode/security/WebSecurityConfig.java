@@ -16,17 +16,23 @@ import fa.appcode.services.impl.UserDetailsServiceImpl;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	@Autowired
 	private CustomAuthenticationSuccessHandler loginSuccessHandler;
 
+	@Autowired
 	private CustomAuthenticationFailureHandler loginFailureHandler;
 
-	public WebSecurityConfig(CustomAuthenticationSuccessHandler loginSuccessHandler,
+	@Autowired
+	private CustomLogoutSuccessHandler logoutSuccessHandler;
 
-			CustomAuthenticationFailureHandler loginFailureHandler) {
-		super();
-		this.loginSuccessHandler = loginSuccessHandler;
-		this.loginFailureHandler = loginFailureHandler;
-	}
+//	public WebSecurityConfig(CustomAuthenticationSuccessHandler loginSuccessHandler,
+//
+//			CustomAuthenticationFailureHandler loginFailureHandler, CustomLogoutSuccessHandler logoutSuccessHandler) {
+//		super();
+//		this.loginSuccessHandler = loginSuccessHandler;
+//		this.loginFailureHandler = loginFailureHandler;
+//		this.logoutSuccessHandler = logoutSuccessHandler;
+//	}
 
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
@@ -38,30 +44,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return bCryptPasswordEncoder;
 	}
 
-//	@Bean
-//	public AuthenticationManager authenticationManagerBean() throws Exception {
-//		return super.authenticationManagerBean();
-//	}
-//
-//	@Bean
-//	public DaoAuthenticationProvider authenticationProvider() {
-//		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-//		authenticationProvider.setUserDetailsService(userDetailsService);
-//		authenticationProvider.setPasswordEncoder(passwordEncoder());
-//		return authenticationProvider;
-//	}
-
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
 
-//	@Autowired
-//	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//		// Setting Service to find User in the database.
-//		// And Setting PassswordEncoder
-//		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-//	}
+	// @Autowired - not work
+	// public void configureGlobal(AuthenticationManagerBuilder auth) throws
+	// Exception {
+	// // Setting Service to find User in the database.
+	// // And Setting PassswordEncoder
+	// auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+	// }
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -73,26 +67,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.csrf().disable();
 
-		http.authorizeRequests().antMatchers("/login").permitAll();
-
-		// http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('ROLE_USER',
-		// 'ROLE_ADMIN')");
+		http.authorizeRequests().antMatchers("/user/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')");
 
 		http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
 
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 
-		http.authorizeRequests().and().formLogin()//
-				.loginProcessingUrl("/j_spring_security_check") // Submit URL
-				.loginPage("/login")//
-				.successHandler(loginSuccessHandler)//
-				.failureHandler(loginFailureHandler)//
-				.usernameParameter("username")//
-				.passwordParameter("password")
-				// Cấu hình cho Logout Page.
-				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
+		http.authorizeRequests()
+			.and()//
+				.formLogin()//
+					.loginProcessingUrl("/j_spring_security_check") // Submit URL
+					.loginPage("/login")//
+					.successHandler(loginSuccessHandler)//
+					.failureHandler(loginFailureHandler)//
+					.usernameParameter("username")//
+					.passwordParameter("password")//
+					.permitAll() //
+			.and()//
+				.logout()//
+					.logoutSuccessHandler(logoutSuccessHandler)//
+					.permitAll();
+				
 
-		super.configure(http); // Very important!
+		//	super.configure(http); 
 
 	}
 

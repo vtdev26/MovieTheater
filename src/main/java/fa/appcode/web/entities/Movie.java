@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -46,8 +48,8 @@ public class Movie {
 	@Column(name = "duration")
 	private Double duration;
 	
-	@Column(name = "cinema_room_id")
-	private Double cinemaRoomId;
+	
+	
 
 	@Column(name = "from_date", columnDefinition = "DATETIME")
 	private Date fromDate;
@@ -76,6 +78,10 @@ public class Movie {
 	@Column(name = "small_image", columnDefinition = "VARCHAR(255)")
 	private String smallImage;
 
+	@ManyToOne
+	@JoinColumn(name = "cinema_room_id", referencedColumnName = "cinema_room_id")
+	private CinemaRoom cinemaRoom;
+		
 	@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
 	private Set<MovieDate> movieDates;
 

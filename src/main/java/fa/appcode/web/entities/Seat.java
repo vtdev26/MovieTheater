@@ -41,7 +41,7 @@ public class Seat {
     @Column(name = "seat_price")
     private Double price;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "cinema_room_id", referencedColumnName = "cinema_room_id")
     private CinemaRoom cinemaRoom;
 
