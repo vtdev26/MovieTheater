@@ -10,7 +10,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import fa.appcode.common.logging.LogUtils;
-import fa.appcode.common.utils.LibraryCustomize;
 import fa.appcode.repositories.CinemaRoomRepository;
 import fa.appcode.services.CinemaRoomService;
 import fa.appcode.web.entities.CinemaRoom;
@@ -52,10 +51,7 @@ public class CinemaRoomServiceImpl implements CinemaRoomService{
 
 	@Override
 	public CinemaRoom findByMovieId(String movieId) {
-		if(!LibraryCustomize.isNumber(movieId)) {
-			return null;
-		}
-		return cinemaRoomRepository.findRoomByMovieId(Integer.parseInt(movieId));
+		return cinemaRoomRepository.findRoomByMovieId(movieId);
 	}
 	
 }
