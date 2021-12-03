@@ -68,7 +68,7 @@ public class Account {
 	private Date registerDate;
 
 	@Column(name = "status")
-	private int status;
+	private Integer status;
 
 	@Column(name = "username")
 	private String userName;

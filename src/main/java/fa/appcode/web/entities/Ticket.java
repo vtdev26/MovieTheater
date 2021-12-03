@@ -23,12 +23,12 @@ public class Ticket {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ticket_id")
-	private int ticketId;
+	private Integer ticketId;
 	
-	@Column(name = "price")
-	private long price;
+	@Column(name = "price", columnDefinition = "MONEY")
+	private Double price;
 	
 	@Column(name = "ticket_type")
-	private long ticketType;
+	private Integer ticketType;
 }
 

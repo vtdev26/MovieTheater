@@ -39,7 +39,7 @@ public class Seat {
     private Integer seatType;
     
     @Column(name = "seat_price")
-    private Float seatPrice;
+    private Double price;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cinema_room_id", referencedColumnName = "cinema_room_id")

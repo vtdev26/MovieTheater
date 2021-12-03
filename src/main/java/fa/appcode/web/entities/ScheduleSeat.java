@@ -3,8 +3,9 @@ package fa.appcode.web.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -48,4 +49,8 @@ public class ScheduleSeat {
     
     @Column(name = "seat_type")
     private Integer seatType;
+    
+    @ManyToOne
+    @JoinColumn(name = "invoice_id", referencedColumnName = "invoice_id")
+    private Invoice invoice;
 }

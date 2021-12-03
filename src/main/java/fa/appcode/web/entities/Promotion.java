@@ -27,7 +27,7 @@ public class Promotion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "promotion_id")
-	private int promotionId;
+	private Integer promotionId;
 	
 	@Column(name = "detail", columnDefinition = "NVARCHAR(255)")
 	@NotEmpty(message = "{promotion.detail.empty}")
@@ -36,7 +36,7 @@ public class Promotion {
 	@Column(name = "discount_level")
 	@NotEmpty(message = "{promotion.discountLevel.empty}")
 	@Pattern(regexp = "\\d+", message = "{promotion.discountLevel.invalid}")
-	private int discountLevel;
+	private Integer discountLevel;
 	
 	@Column(name = "end_time", columnDefinition = "DATETIME")
 	@NotEmpty(message = "{promotion.endTime.empty}")

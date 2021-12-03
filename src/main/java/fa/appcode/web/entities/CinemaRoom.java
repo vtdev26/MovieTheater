@@ -25,13 +25,13 @@ public class CinemaRoom {
 	@Id
     @Column(name = "cinema_room_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cinemaRoomId;
+    private Integer cinemaRoomId;
     
     @Column(name = "cinema_room_name", columnDefinition = "NVARCHAR(255)")
     private String cinemaRoomName;
     
     @Column(name = "seat_quantity")
-    private int seatQuantity;
+    private Integer seatQuantity;
     
     @Column(name = "cinema_image")
     private String image;

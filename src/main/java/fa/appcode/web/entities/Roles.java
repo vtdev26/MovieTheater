@@ -30,11 +30,11 @@ public class Roles {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "role_id")
-	private int role_id;
+	private Integer role_id;
 	
 	@Column(name = "role_name")
 	private String roleName;
 	
 	@OneToMany(mappedBy = "roles")
-	Set<Account> accounts;
+	private Set<Account> accounts;
 }
