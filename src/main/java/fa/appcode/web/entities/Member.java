@@ -34,7 +34,7 @@ public class Member {
 	private String memberId;
 
 	@Column(name = "score")
-	private int score;
+	private Double score;
 
 	@OneToOne()
 	@JoinColumn(name = "account_id", referencedColumnName = "account_id")

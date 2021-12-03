@@ -89,13 +89,9 @@ $(document).ready(function () {
 			}
 		});
 	});
-	$("body").on("click", "#btnBack", function () {
+	$("body").on("click", "#btnContinue", function () {
 		$.get({
-			url: "/admin/showtimes",
-			data: {
-				pageIndex: pageIndex,
-				dateSelecting: dateSelecting
-			},
+			url: "/admin/confirm-ticket",
 			success: function (response) {
 				$(".container-fluid").html(response);
 			},

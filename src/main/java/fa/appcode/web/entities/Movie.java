@@ -8,7 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -45,10 +44,10 @@ public class Movie {
 	private String director;
 
 	@Column(name = "duration")
-	private int duration;
+	private Double duration;
 	
 	@Column(name = "cinema_room_id")
-	private int cinemaRoomId;
+	private Double cinemaRoomId;
 
 	@Column(name = "from_date", columnDefinition = "DATETIME")
 	private Date fromDate;
