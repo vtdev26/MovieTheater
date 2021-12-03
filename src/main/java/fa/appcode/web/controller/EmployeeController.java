@@ -21,6 +21,8 @@ import fa.appcode.config.PageConfig;
 import fa.appcode.services.EmployeeService;
 import fa.appcode.web.vo.EmployeeVo;
 
+
+
 @Controller
 @RequestMapping("/admin/employee/")
 public class EmployeeController {
@@ -31,6 +33,11 @@ public class EmployeeController {
 	@Autowired
 	private PageConfig pageConfig;
 
+	/**
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@GetMapping("list-employee")
 	public String showListEmployee(Model model) throws Exception {
 		int pageIndexValue = pageConfig.getInitPage();
@@ -43,6 +50,15 @@ public class EmployeeController {
 		return "employee/list-employee";
 	}
 
+	
+	/**
+	 * @param dataSearch
+	 * @param pageIndex
+	 * @param pageSize
+	 * @param model
+	 * @param httpSession
+	 * @return
+	 */
 	@GetMapping("list-employee/filter")
 	public String showListEmployeeSearch(
 			@RequestParam(name = "dataSearch", required = true, defaultValue = "") String dataSearch,
@@ -58,6 +74,9 @@ public class EmployeeController {
 		return "employee/table-employee";
 	}
 
+	/**
+	 * @return
+	 */
 	@GetMapping("add-employee")
 	public String addEmployeeShow() {
 		return "employee/detail-employee";

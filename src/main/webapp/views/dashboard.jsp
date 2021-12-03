@@ -25,6 +25,9 @@
 
 <link rel="stylesheet" href="/resources/css/styles.css">
 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"
         type="text/javascript"></script>
 
@@ -229,6 +232,7 @@
 
 	<!-- Bootstrap core JavaScript-->
 	<script src="/resources/vendor/jquery/jquery.min.js"></script>
+	
 	<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<!-- Core plugin JavaScript-->
@@ -256,6 +260,11 @@
 	<!-- Promotion scripts -->
 	<script src="/resources/js/promotion/list-promotion.js"></script>
 	<script src="/resources/js/promotion/detail-promotion.js"></script>
+	
+	
+	<!-- Employee scripts -->
+	<script src="/resources/js/employee/list-employee.js"></script>
+	<script src="/resources/js/employee/detail-employee.js"></script>
 	
 	<!-- Cinema room scripts -->
 	<script src="/resources/js/cinema-room/list-room.js"></script>
