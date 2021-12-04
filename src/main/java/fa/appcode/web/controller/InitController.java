@@ -24,9 +24,6 @@ import fa.appcode.web.entities.Account;
 public class InitController {
 
 	@Autowired
-	private PageConfig pageConfig;
-
-	@Autowired
 	private AccountService accountService;
 
 	@GetMapping("403")
@@ -50,12 +47,10 @@ public class InitController {
 		return "login";
 	}
 
-		
 	@GetMapping("logout")
 	public String logout() {
 		return "login";
 	}
-	
 
 	@GetMapping("user/dashboard")
 	public String showUserDashboard(Model model, Principal principal) {

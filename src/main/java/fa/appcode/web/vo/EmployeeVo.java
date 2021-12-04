@@ -42,18 +42,8 @@ public class EmployeeVo {
 
 	private Date registerDate;
 
-	private int status;
+	private Integer status;
 
 	private String userName;
 
-	@Override
-	public String toString() {
-		return "EmployeeVo [employeeId=" + employeeId + ", accountId=" + accountId + ", address=" + address
-				+ ", dateOfBirth=" + dateOfBirth + ", email=" + email + ", fullName=" + fullName + ", gender=" + gender
-				+ ", identityCard=" + identityCard + ", image=" + image + ", password=" + password + ", phoneNumber="
-				+ phoneNumber + ", registerDate=" + registerDate + ", status=" + status + ", userName=" + userName
-				+ "]";
-	}
-	
-	
 }

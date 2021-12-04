@@ -26,19 +26,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-@Table(name = "movie",schema = "movie_theater")
+@Table(name = "movie", schema = "movie_theater")
 public class Movie {
 	@Id
 	@Column(name = "movie_id", columnDefinition = "NVARCHAR(10)")
 	@GenericGenerator(name = "sequence_string_id", strategy = "fa.appcode.common.utils.StringGenerator")
 	@GeneratedValue(generator = "sequence_string_id")
 	private String movieId;
-	
-	
+
 	@Column(name = "actor", columnDefinition = "NVARCHAR(255)")
 	private String actor;
 
-	
 	@Column(name = "content", columnDefinition = "NVARCHAR(1000)")
 	private String content;
 
@@ -47,9 +45,6 @@ public class Movie {
 
 	@Column(name = "duration")
 	private Double duration;
-	
-	
-	
 
 	@Column(name = "from_date", columnDefinition = "DATETIME")
 	private Date fromDate;
@@ -57,9 +52,9 @@ public class Movie {
 	@Column(name = "movie_product_company", columnDefinition = "NVARCHAR(255)")
 	private String movieProductCompany;
 
-	@Column(name = "to_date",  columnDefinition = "DATETIME")
+	@Column(name = "to_date", columnDefinition = "DATETIME")
 	private Date toDate;
-	
+
 	@Column(name = "release_date", columnDefinition = "DATETIME")
 	private Date releaseDate;
 
@@ -81,7 +76,7 @@ public class Movie {
 	@ManyToOne
 	@JoinColumn(name = "cinema_room_id", referencedColumnName = "cinema_room_id")
 	private CinemaRoom cinemaRoom;
-		
+
 	@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
 	private Set<MovieDate> movieDates;
 
