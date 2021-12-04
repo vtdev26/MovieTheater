@@ -4,7 +4,7 @@ $(document).ready(function() {
 	$("body").on("click", "#addEmployee", function(e) {
 		e.preventDefault();
 		$.get({
-			url: "/admin/employee/add-employee",
+			url: "/admin/employee/detail-employee",
 			async: false,
 			success: function(response) {
 				$("#content-page").html(response);

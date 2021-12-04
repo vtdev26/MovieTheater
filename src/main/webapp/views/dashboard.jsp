@@ -243,7 +243,7 @@
 	
 	<!-- Employee scripts -->
 	<script src="/resources/js/employee/list-employee.js"></script>
-	
+	<script src="/resources/js/employee/detail-employee.js"></script>
 	
 	<!-- Movie scripts -->
 	<script src="/resources/js/movie/list-movie.js"></script>

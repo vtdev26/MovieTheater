@@ -14,6 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +28,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Table(name = "roles", schema = "movie_theater")
+//@JsonIgnoreProperties({ "hibernateLazyInitializer" })
 public class Roles {
 	
 	@Id
@@ -36,5 +40,8 @@ public class Roles {
 	private String roleName;
 	
 	@OneToMany(mappedBy = "roles")
+	@JsonBackReference
 	private Set<Account> accounts;
+
+	
 }

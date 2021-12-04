@@ -35,5 +35,9 @@ public class PageConfig {
 	@Value("${login.fail.incorrect}")
 	private String incorrect;
 	
+	@Value("${save.success}")
+	private String saveSuccess;
 	
+	@Value("${save.fail}")
+	private String saveFail;
 }
