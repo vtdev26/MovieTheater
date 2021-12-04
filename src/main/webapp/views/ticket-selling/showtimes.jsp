@@ -45,7 +45,7 @@
 								<div class="movie__detail--time">
 									<c:forEach var="schedule"
 										items="${movieDate.movie.movieSchedules}">
-										<div class="time" data-time-id="${schedule.schedule.scheduleId}"
+										<div class="time" data-schedule-id="${schedule.schedule.scheduleId}"
 										data-movie-id="${movieDate.movie.movieId}" data-time-name="${schedule.schedule.scheduleTime}"
 										>${schedule.schedule.scheduleTime}</div>
 									</c:forEach>

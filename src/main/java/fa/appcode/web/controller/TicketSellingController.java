@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import fa.appcode.config.PageConfig;
 import fa.appcode.services.CinemaRoomService;
+import fa.appcode.services.ScheduleSeatService;
 import fa.appcode.services.ShowtimesService;
+import fa.appcode.web.entities.CinemaRoom;
 import fa.appcode.web.entities.MovieDate;
+import fa.appcode.web.entities.ScheduleSeat;
 import fa.appcode.web.vo.PageVo;
 
 @Controller
@@ -25,6 +28,9 @@ public class TicketSellingController {
 	
 	@Autowired
 	private CinemaRoomService cinemaRoomService;
+	
+	@Autowired
+	private ScheduleSeatService scheduleSeatService;
 	
 	@Autowired
 	private PageConfig pageConfig;
@@ -53,8 +59,12 @@ public class TicketSellingController {
 	}
 	
 	@GetMapping("/selecting-seat")
-	public String showSelectingSeat(ModelMap modelMap, @RequestParam String movieId) {
-		modelMap.addAttribute("cinemaRoom", cinemaRoomService.findByMovieId(movieId));
+	public String showSelectingSeat(ModelMap modelMap, 
+			@RequestParam String movieId, @RequestParam String scheduleId) {
+		
+		List<ScheduleSeat> scheduleSeats = scheduleSeatService.findByMovieIdAndScheduleId(movieId, scheduleId);
+		CinemaRoom cinemaRoom = cinemaRoomService.seatSoldsHanlder(cinemaRoomService.findByMovieId(movieId), scheduleSeats);		
+		modelMap.addAttribute("cinemaRoom", cinemaRoom);	
 		return "ticket-selling/selecting-seat";
 	}
 	
