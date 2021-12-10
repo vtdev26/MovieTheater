@@ -37,7 +37,8 @@ public class ShowtimesServiceImpl implements ShowtimesService {
 		} else {
 			startDate = LocalDate.parse(date);
 		}
-		return startDate.datesUntil(startDate.plusDays(6)).collect(Collectors.toList());
+//
+		return null;
 	}
 
 	@Override

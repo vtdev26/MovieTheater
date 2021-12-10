@@ -18,32 +18,51 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmployeeVo {
-	private String employeeId;
+    private String employeeId;
 
-	private String accountId;
+    private String accountId;
 
-	private String address;
+    private String address;
 
-	private Date dateOfBirth;
+    private Date dateOfBirth;
 
-	private String email;
+    private String email;
 
-	private String fullName;
+    private String fullName;
 
-	private String gender;
+    private String gender;
 
-	private String identityCard;
+    private String identityCard;
 
-	private String image;
+    private String image;
 
-	private String password;
+    private String password;
 
-	private String phoneNumber;
+    private String phoneNumber;
 
-	private Date registerDate;
+    private Date registerDate;
 
-	private Integer status;
+    private Integer status;
 
-	private String userName;
+    private String userName;
 
+    @Override
+    public String toString() {
+        return "EmployeeVo{" +
+                "employeeId='" + employeeId + '\'' +
+                ", accountId='" + accountId + '\'' +
+                ", address='" + address + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", email='" + email + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", identityCard='" + identityCard + '\'' +
+                ", image='" + image + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", registerDate=" + registerDate +
+                ", status=" + status +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
 }

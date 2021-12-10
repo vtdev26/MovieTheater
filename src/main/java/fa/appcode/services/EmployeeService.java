@@ -19,7 +19,11 @@ public interface EmployeeService {
 
 	Page<EmployeeVo> findAllEmployee(int pageIndex, int pageSize, String dataSearch);
 
-	Employee save(Employee employee);
+	boolean save(Employee employee);
 
 	Optional<Employee> findById(String id);
+
+	boolean deleteById(String id);
+
+	Employee findEmployeeById(String id);
 }

@@ -30,7 +30,7 @@ public class ScheduleSeat {
 	private String cinemaRoomId;
 	
 	@Column(name = "movie_id")
-	private String movieId;
+	private Integer movieId;
 	
 	@Column(name = "schedule_id")
 	private Integer scheduleId;

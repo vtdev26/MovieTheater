@@ -6,6 +6,9 @@ h1, h2, h3, h5, label, body .table {
     border-color: #f33a58;
 }
 
+a{
+	pointer-events: auto !important;
+}
 .error {
 	font-size: 15px;
 	color: red !important;

@@ -47,12 +47,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		LogUtils.getLogger().info("ROLESSS " + roles.get(0).getRoleName());
 
 		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
-		if (roles != null) {
-			for (Roles role : roles) {
-				GrantedAuthority authority = new SimpleGrantedAuthority(role.getRoleName());
-				grantList.add(authority);
-			}
+		for (Roles role : roles) {
+			GrantedAuthority authority = new SimpleGrantedAuthority(role.getRoleName());
+			grantList.add(authority);
 		}
+
+
 
 		if (account.getStatus() == 0) {
 			return new User(account.getUserName(), account.getPassword(), true, true, true, false, grantList);

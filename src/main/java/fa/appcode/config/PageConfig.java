@@ -9,8 +9,7 @@ import lombok.Getter;
 
 @Component
 @PropertySource("classpath:messages.properties")
-@PropertySource("classpath:webconfig.properties")
-@ConfigurationProperties
+@PropertySource("classpath:webConfig.properties")
 @Getter
 public class PageConfig {
 	
@@ -25,19 +24,15 @@ public class PageConfig {
 	
 	@Value("${login.fail.no.author}")
 	private String noAuthor;
-	
+
 	@Value("${login.fail.no.permit}")
 	private String noPermit;
-	
+
 	@Value("${login.fail.locked}")
 	private String locked;
-	
+
 	@Value("${login.fail.incorrect}")
 	private String incorrect;
-	
-	@Value("${save.success}")
-	private String saveSuccess;
-	
-	@Value("${save.fail}")
-	private String saveFail;
+
+
 }

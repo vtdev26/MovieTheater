@@ -13,6 +13,8 @@ public interface AccountService {
 	Account findAccountByUserName(String userName);
 	
 	boolean save(Account account);
+
+	Account findAccountByAccountId(String accountId);
 	
 	
 
