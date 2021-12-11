@@ -1,6 +1,6 @@
 package fa.appcode.services.impl;
 
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,10 +13,10 @@ import fa.appcode.common.logging.LogUtils;
 import fa.appcode.repositories.CinemaRoomRepository;
 import fa.appcode.services.CinemaRoomService;
 import fa.appcode.web.entities.CinemaRoom;
-import fa.appcode.web.entities.ScheduleSeat;
+
 
 @Service("cinemaRoomService")
-public class CinemaRoomServiceImpl implements CinemaRoomService {
+public class CinemaRoomServiceImpl implements CinemaRoomService{
 
 	@Autowired
 	private CinemaRoomRepository cinemaRoomRepository;
@@ -41,7 +41,8 @@ public class CinemaRoomServiceImpl implements CinemaRoomService {
 		LogUtils.getLogger().info("Room list found size: " + rs.toList().size());
 		return rs;
 	}
-
+	
+	
 	@Override
 	public CinemaRoom findById(String roomId) {
 		int roomIdVal = Integer.parseInt(roomId);
@@ -52,17 +53,5 @@ public class CinemaRoomServiceImpl implements CinemaRoomService {
 	public CinemaRoom findByMovieId(String movieId) {
 		return cinemaRoomRepository.findRoomByMovieId(movieId);
 	}
-
-	@Override
-	public CinemaRoom seatSoldsHanlder(CinemaRoom cinemaRoom, List<ScheduleSeat> scheduleSeats) {
-		cinemaRoom.getSeats().forEach(s -> {
-			scheduleSeats.forEach(sc -> {
-				if (sc.getSeatId() == s.getSeatId()) {
-					s.setStatus(1);
-				}
-			});
-		});
-		return cinemaRoom;
-	}
-
+	
 }

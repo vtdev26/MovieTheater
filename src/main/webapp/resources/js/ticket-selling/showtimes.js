@@ -1,7 +1,7 @@
 $(document).ready(function () {
 	var dateSelecting = '';
 	var pageIndex = 0;
-	var scheduleId = 0;
+	var timeId = 0;
 	var movieId = '';
 	var seatQuantity = 0;
 	
@@ -38,7 +38,7 @@ $(document).ready(function () {
 	});
 
 	$("body").on("click", ".time", function () {
-		scheduleId = $(this).data("schedule-id");
+		timeId = $(this).data("time-id");
 		movieId = $(this).data("movie-id");
 		pageIndex = $(".pagination .active .showtimes").attr("value");
 		timeName = $(this).data("time-name");
@@ -47,7 +47,6 @@ $(document).ready(function () {
 			url: "/admin/selecting-seat",
 			data: {
 				movieId: movieId,
-				scheduleId: scheduleId
 			},
 			success: function (response) {
 				$(".container-fluid").html(response);

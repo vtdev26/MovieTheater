@@ -22,6 +22,8 @@ import fa.appcode.web.vo.EmployeeVo;
 @Transactional
 public interface EmployeeRepository extends JpaRepository<Employee, String> {
 
+	Employee findEmployeeByEmployeeId(String employeeId);
+
 	@Query("SELECT new fa.appcode.web.vo.EmployeeVo"
 			+ "(e.employeeId, a.accountId, a.address, a.dateOfBirth, a.email, a.fullName, a.gender, a.identityCard, a.image, a.password, a.phoneNumber,a.registerDate, a.status, a.userName  ) "
 			+ "FROM Employee e JOIN e.account a")

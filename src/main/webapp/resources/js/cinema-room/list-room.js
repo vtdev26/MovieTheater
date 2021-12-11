@@ -1,6 +1,6 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
-	$("body").on("change keydown", "#searchInput", function() {
+	$("body").on("change keydown", "#searchInput", function () {
 		console.log("pressed key");
 		var searchField = $(this).val();
 		$.ajax({
@@ -10,7 +10,7 @@ $(document).ready(function() {
 				searchField: searchField,
 			},
 			dataType: "text",
-			success: function(response) {
+			success: function (response) {
 				$(".container-fluid").html(response);
 
 				// set mouse input pointer to the end of text
@@ -19,14 +19,14 @@ $(document).ready(function() {
 				searchInput.focus();
 				searchInput[0].setSelectionRange(strLength, strLength);
 			},
-			error: function(responseData) {
+			error: function (responseData) {
 				alert(responseData);
 			}
 		})
 	});
 
 	// Click in a page with number
-	$("body").on("click", ".page-link.pageWithNum", function(e) {
+	$("body").on("click", ".page-link.pageWithNum", function (e) {
 		e.preventDefault();
 		var pageIndex = $(this).attr("id");
 		var searchField = $("#searchData").val();
@@ -36,17 +36,17 @@ $(document).ready(function() {
 				pageIndex: pageIndex,
 				searchField: searchField,
 			},
-			success: function(responseData) {
+			success: function (responseData) {
 				$(".container-fluid").html(responseData);
 			},
-			error: function(responseError) {
+			error: function (responseError) {
 				alert(responseError);
 			}
 		});
 
 	});
 	// Click in Previous or Next button
-	$("body").on("click", ".page-link.pageWithoutNum", function(e) {
+	$("body").on("click", ".page-link.pageWithoutNum", function (e) {
 		e.preventDefault();
 		var pageIndex;
 		if ($(this).attr("value") == "Previous") {
@@ -62,35 +62,35 @@ $(document).ready(function() {
 				pageIndex: pageIndex,
 				searchField: searchField,
 			},
-			success: function(responseData) {
+			success: function (responseData) {
 				$(".container-fluid").html(responseData);
 			},
-			error: function(responseError) {
+			error: function (responseError) {
 				alert(responseError);
 			}
 		});
 
 	});
 
-	$("body").on("mouseenter", ".room-image", function() {
+	$("body").on("mouseenter", ".room-image", function () {
 		var roomId = $(this).attr("value");
 		$.get({
 			url: "/room/room-image",
 			data: {
 				roomId: roomId,
 			},
-			success: function(responseData) {
+			success: function (responseData) {
 				var roomNameImage = $(".room-image");
 				roomNameImage.attr("data-original-title", `<img class="imgToolTip" src='` + responseData + "' />");
 				console.log(responseData);
 			},
-			error: function(responseError) {
+			error: function (responseError) {
 				alert(responseError);
 			}
 		});
 	});
 
-	$(function() {
+	$(function () {
 		$('[data-toggle="tooltip"]').tooltip()
 	})
 
