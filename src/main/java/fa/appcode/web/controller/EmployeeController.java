@@ -133,8 +133,8 @@ public class EmployeeController {
             @RequestParam(name = "file", required = false) MultipartFile file, @Valid Account account,
             BindingResult bindingResult) throws IOException {
 
-
         Employee employeeSave = new Employee();
+
         // check validate data
         if (bindingResult.hasErrors()) {
             Map<String, String> errorList = new HashMap<>();
@@ -148,8 +148,10 @@ public class EmployeeController {
                             errorList));
         }
 
+
         // check file upload -set image for account
-        if (file != null) {
+        if (file != null && !file.isEmpty() ) {
+            LogUtils.getLogger().info("AAAAAAAAAAAAAA "+ file.getOriginalFilename());
             String storageFolder = Constants.PATH_EMPLOYEE_IMG;
             try {
                 String fileName = storageService.storeFile(file, storageFolder);
@@ -166,8 +168,8 @@ public class EmployeeController {
         //// check edit or add
         // edit employee
         if (!"".equals(employeeId) && !"".equals(account.getAccountId())) {
-            Employee employeeDb = employeeService.findEmployeeById(employeeId);
-           // LogUtils.getLogger().info("AAAAAAAAA"+employeeDb.getEmployeeId());
+            employeeSave.setEmployeeId(employeeId);
+
             Account accountDb = accountService.findAccountByAccountId(account.getAccountId());
             accountDb.setUserName(account.getUserName());
             accountDb.setFullName(account.getFullName());
@@ -175,9 +177,11 @@ public class EmployeeController {
             accountDb.setDateOfBirth(account.getDateOfBirth());
             accountDb.setAddress(account.getAddress());
             accountDb.setPhoneNumber(account.getPhoneNumber());
-            accountDb.setImage(account.getImage());
-            employeeDb.setAccount(accountDb);
-            employeeSave = employeeDb;
+            if (file != null && !file.isEmpty() ){
+                accountDb.setImage(account.getImage());
+            }
+            employeeSave.setAccount(accountDb);
+
         }
         //add new employee
         else {
@@ -224,7 +228,7 @@ public class EmployeeController {
                     .body(new ResponseObject(messageConfig.getStatusDeleteSuccess(), messageConfig.getMessageDeleteSuccess(), ""));
         }
 
-        return ResponseEntity.status(HttpStatus.OK)
+        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED)
                 .body(new ResponseObject(messageConfig.getStatusDeleteFail(), messageConfig.getMessageDeleteFail(), ""));
     }
 

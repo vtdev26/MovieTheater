@@ -309,4 +309,30 @@ class EmployeeControllerTest {
                 .andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
                 .andExpect(jsonPath("$.message").value(messageConfig.getMessageAddSuccess()));
     }
+
+    @Test
+    void delete() throws Exception {
+        final String id = "G3_T1uFFlz";
+        Mockito.when(employeeService.deleteById(id)).thenReturn(true);
+        mockMvc.perform(MockMvcRequestBuilders.delete("/admin/employee/"+id))
+                .andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
+                .andExpect(jsonPath("$.message").value(messageConfig.getMessageDeleteSuccess()));
+
+    }
+
+
+    @Test
+    void delete2() throws Exception {
+        final String id = "G3_T1uFFlz";
+        Mockito.when(employeeService.deleteById(id)).thenReturn(false);
+        mockMvc.perform(MockMvcRequestBuilders.delete("/admin/employee/"+id))
+                .andExpect(MockMvcResultMatchers.status().is(HttpStatus.NOT_IMPLEMENTED.value()))
+                .andExpect(jsonPath("$.message").value(messageConfig.getMessageDeleteFail()));
+
+    }
+
+
+
+
+
 }

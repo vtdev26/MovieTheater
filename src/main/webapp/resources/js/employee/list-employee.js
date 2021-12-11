@@ -55,8 +55,8 @@ $(document).ready(function () {
                         $('input[name=phoneNumber]').val(account.phoneNumber);
 
                         $('label[for=file]').addClass('d-block').text('Image (click for change)');
-
                         let fileImage = $('#file');
+
                         fileImage.hide();
                         let srcImage = `/resources/img/employee/${account.image}`;
 
@@ -64,7 +64,6 @@ $(document).ready(function () {
                             <embed src=${srcImage} class="rounded-circle" width="70" height="70">`
                         );
                         let reader = new FileReader();
-
                     }
                 },
                 error: function (response) {
@@ -77,7 +76,7 @@ $(document).ready(function () {
 
 
     body.on('click', 'embed', function (e) {
-        alert(1);
+        $('#file').click();
     });
 
     // Click delete icon  - employee management
