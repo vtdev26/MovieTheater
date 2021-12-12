@@ -9,5 +9,9 @@ public class Constants {
 	
     // Chuong
     public static final String PATH_EMPLOYEE_IMG = "src/main/webapp/resources/img/employee/";
+    
+    //Truong
+    public static final String SRC_PROMOTION_IMAGE = "src/main/webapp/resources/img/promotion/";
+	public static final String SRC_PROMOTION_IMAGE_2 = "/resources/img/promotion/";
 
 }
