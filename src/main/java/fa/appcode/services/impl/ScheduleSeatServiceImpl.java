@@ -10,12 +10,22 @@ import fa.appcode.repositories.ScheduleSeatRepository;
 import fa.appcode.services.ScheduleSeatService;
 import fa.appcode.web.entities.ScheduleSeat;
 
+/**
+ * The Class ScheduleSeatServiceImpl.
+ */
 @Service
 public class ScheduleSeatServiceImpl implements ScheduleSeatService {
 
 	@Autowired
 	private ScheduleSeatRepository scheduleSeatRepository;
 	
+	/**
+	 * Find list scheduleSeat by movie id and schedule id.
+	 *
+	 * @param movieId the movie id
+	 * @param scheduleId the schedule id
+	 * @return the list scheduleSeat
+	 */
 	@Override
 	public List<ScheduleSeat> findByMovieIdAndScheduleId(String movieId, String scheduleId) {
 		if(!LibraryCustomize.isNumber(scheduleId)) {

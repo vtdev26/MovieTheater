@@ -53,4 +53,20 @@ public class ScheduleSeat {
     @ManyToOne
     @JoinColumn(name = "invoice_id", referencedColumnName = "invoice_id")
     private Invoice invoice;
+
+	public ScheduleSeat(String movieId, Integer scheduleId, Integer seatId, Integer status, Integer seatType) {
+		super();
+		this.movieId = movieId;
+		this.scheduleId = scheduleId;
+		this.seatId = seatId;
+		this.status = status;
+		this.seatType = seatType;
+	}
+
+	public ScheduleSeat(String cinemaRoomId, Integer seatId, Integer status) {
+		super();
+		this.cinemaRoomId = cinemaRoomId;
+		this.seatId = seatId;
+		this.status = status;
+	}
 }

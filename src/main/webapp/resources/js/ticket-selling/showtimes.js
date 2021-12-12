@@ -4,6 +4,7 @@ $(document).ready(function () {
 	var scheduleId = 0;
 	var movieId = '';
 	var seatQuantity = 0;
+	var listSelectedSeat = [];
 	
 	$("body").on("click", ".content__time--label", function () {
 		dateSelecting = $(this).attr("value");
@@ -91,14 +92,30 @@ $(document).ready(function () {
 		});
 	});
 	$("body").on("click", "#btnContinue", function () {
-		$.get({
-			url: "/admin/confirm-ticket",
-			success: function (response) {
-				$(".container-fluid").html(response);
-			},
-			error: function (error) {
-				alert("Falied!" + error);
-			}
-		});
+		seatQuantity = $("#seatQuantity").val();
+		var seatSelectings = $(".pushable-selecting").length;
+		if(seatQuantity > seatSelectings) {
+			$(".messageInfor").html("Please select " + (seatQuantity - seatSelectings) + " seat more");
+		}else if(seatQuantity < seatSelectings) {
+			$(".messageInfor").html("Please select only " + seatQuantity + " seat");
+		}else{
+			$(".pushable-selecting").each(function () {
+				listSelectedSeat.push($(this).data("seat-id"));
+			});
+			$.get({
+				url: "/admin/confirm-ticket",
+				traditional: true,
+				data: {
+					listSelectedSeat: listSelectedSeat,
+					movieId: movieId
+				},
+				success: function (response) {
+					$(".container-fluid").html(response);
+				},
+				error: function (error) {
+					alert("Falied!" + error);
+				}
+			});
+		}
 	});
 });

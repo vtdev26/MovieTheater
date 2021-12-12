@@ -102,4 +102,12 @@ public class Movie {
 		Movie other = (Movie) obj;
 		return Objects.equals(movieId, other.movieId);
 	}
+
+	public Movie(String movieId, String actor, String movieNameVn, CinemaRoom cinemaRoom) {
+		super();
+		this.movieId = movieId;
+		this.actor = actor;
+		this.movieNameVn = movieNameVn;
+		this.cinemaRoom = cinemaRoom;
+	}
 }

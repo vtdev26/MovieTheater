@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -9,6 +10,7 @@
             <option value="1" selected>1</option>
             <option value="2">2</option>
             <option value="3">3</option>
+            <option value="4">4</option>
             <option value="5">5</option>
             <option value="6">6</option>
             <option value="7">7</option>
@@ -27,7 +29,7 @@
                                 <td>
                                     <button type="button"
                                         class="pushable ${(seat.status==1?'pushable-sold':(seat.seatType==1?'pushable-vip':''))}"
-                                        data-type="${(seat.seatType==1?'vip':'')} " data-id-seat="${(seat.seatId)}">
+                                        data-type="${(seat.seatType==1?'vip':'')}" data-seat-id="${(seat.seatId)}">
                                         <span class="front-button">${seat.seatRow}${seat.seatColumn}</span>
                                     </button>
                                 </td>
@@ -37,7 +39,7 @@
                             <td>
                                 <button type="button"
                                     class="pushable ${(seat.status==1?'pushable-sold':(seat.seatType==1?'pushable-vip':''))}"
-                                    data-type="${(seat.seatType==1?'vip':'')} " data-id-seat="${(seat.seatId)}">
+                                    data-type="${(seat.seatType==1?'vip':'')}" data-seat-id="${(seat.seatId)}">
                                     <span class="front-button">${seat.seatRow}${seat.seatColumn}</span>
                                 </button>
                             </td>
@@ -46,7 +48,7 @@
                             <td>
                                 <button type="button"
                                     class="pushable ${(seat.status==1?'pushable-sold':(seat.seatType==1?'pushable-vip':''))}"
-                                    data-type="${(seat.seatType==1?'vip':'')} " data-id-seat="${(seat.seatId)}">
+                                    data-type="${(seat.seatType==1?'vip':'')}" data-seat-id="${(seat.seatId)}">
                                     <span class="front-button">${seat.seatRow}${seat.seatColumn}</span>
                                 </button>
                             </td>
@@ -83,7 +85,7 @@
                     Seat can chose
                 </div>
                 <div class="col-3">
-                    <button class="btn-note-item btn btn-primary" style="background-color: #8c00ff"></button>
+                    <button class="btn-note-item btn btn-primary"></button>
                     Seat VIP
                 </div>
             </div>

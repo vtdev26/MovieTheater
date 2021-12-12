@@ -1,44 +1,59 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<link rel="stylesheet" href="/resources/css/ticket-selling/selecting-seat.css">
 <div class="container-fluid bg-white mt-5 p-5 rounded-lg">
     <div class="row">
         <div class="col-2">
-            <img class="img-responsive poster" src="/src/main/webapp/resources/img/ticket-selling/poster_shangchi.jpg">
+            <img class="img-responsive poster" src="/resources/img/ticket-selling/poster_shangchi.jpg">
         </div>
         <div class="col-10">
             <div class="ticket-infor">
                 <p class="film-title text-primary">
-                    Doctor Strange: Phù Thủy Tối Thượng
+                    ${movie.movieNameVn}
                 </p>
                 <table class="table table-hover">
                     <tbody>
                         <tr>
                             <th scope="row">Screen:</th>
-                            <td>Scm02</td>
+                            <td>${seats[0].cinemaRoom.cinemaRoomName}</td>
                         </tr>
                         <tr>
                             <th scope="row">Date:</th>
-                            <td>01/12/2021</td>
+                            <td id="dateConfirm">01/12/2021</td>
                         </tr>
                         <tr>
                             <th scope="row">Time:</th>
-                            <td>21:00</td>
+                            <td id="timeConfirm">21:00</td>
                         </tr>
                         <tr>
                             <th scope="row">Seat:</th>
                             <td>
-                                1D 1E 1F
+                                <c:forEach var="seat" items="${seats}">
+                                    ${seat.seatRow}${seat.seatColumn}
+                                </c:forEach>
                             </td>
                         </tr>
                         <tr>
                             <th scope="row">Price:</th>
+                            <c:set var="totalPrice" value="0"/>
                             <td>
-                                <p>1D: 45000</p>
-                                <p>1E: 45000</p>
-                                <p>1F: 45000</p>
+                                <c:forEach var="seat" items="${seats}">
+                                    <p>${seat.seatRow}${seat.seatColumn}: 
+                                    <fmt:formatNumber value="${seat.price}" type="number"
+                                    minFractionDigits="0"/>₫
+                                </p>
+                                <c:set var="totalPrice" value="${totalPrice + seat.price}" />
+                                </c:forEach>
                             </td>
                         </tr>
                         <tr>
                             <th scope="row">Total:</th>
-                            <td class="text-success font-weight-bold">135.000đ</td>
+                            <td class="text-success font-weight-bold">
+                                <fmt:formatNumber type="number" minFractionDigits="0" value="${totalPrice}" />₫
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -110,7 +125,7 @@
                                     <input class="form-check-input" type="radio" name="exampleRadios" id="radDeo"
                                         value="option2">
                                     <label class="form-check-label" for="exampleRadios2">
-                                        Đéo
+                                        No
                                     </label>
                                 </div>
                             </td>

@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import fa.appcode.common.utils.Constants;
 import fa.appcode.repositories.MovieRepository;
 import fa.appcode.services.MovieService;
 import fa.appcode.web.entities.Movie;
@@ -43,6 +44,13 @@ public class MovieServiceImpl implements MovieService{
 		Page<Movie> movies;
 		movies=movieRepository.findAll(pageable);
 		return movies;
+	}
+	@Override
+	public Movie findByMovieId(String movieId) {
+		if(movieId == null || Constants.DEFAULT_WORD.equals(movieId)) {
+			return null;
+		}
+		return movieRepository.findByMovieId(movieId);
 	}
 
 }
