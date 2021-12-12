@@ -9,7 +9,7 @@
 }
 
 .pushable {
-	background: #94aad3;
+	background: #c9cbd1;
 	border-radius: 12px;
 	border: none;
 	padding: 0;
@@ -24,7 +24,7 @@
 	padding: 9px 12px;
 	border-radius: 12px;
 	font-size: 1.25rem;
-	background: #0689fc;
+	background: #a7acaf;
 	color: white;
 	transform: translateY(-6px);
 }
@@ -38,11 +38,11 @@
 }
 
 .pushable-selecting {
-	background: #829787;
+	background: #92c49e;
 }
 
 .pushable-selecting .front-button {
-	background: #28a745;
+	background: #17b13e;
 }
 
 .pushable-sold {
@@ -54,13 +54,32 @@
 }
 
 .pushable-vip {
-	background: #85668a;
+	background: #85a8dd;
 }
 
 .pushable-vip .front-button {
-	background: #8c00ff;
+	background: #1e5dd3;
 }
 
 .btnControlConfirm {
 	width: 250px !important;
+}
+
+.poster {
+    width: 155px !important;
+    height: 228.5px !important;
+}
+
+@media (min-width: 1200px) {
+    .container--fix {
+        max-width: 1300px !important;
+    }
+}
+
+.film-title {
+    font-size: 25px;
+}
+
+.film-infor {
+    font-size: 18px;
 }

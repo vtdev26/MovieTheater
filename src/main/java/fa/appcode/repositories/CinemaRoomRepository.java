@@ -14,8 +14,7 @@ import fa.appcode.web.entities.CinemaRoom;
 public interface CinemaRoomRepository extends JpaRepository<CinemaRoom, Integer>{
 	Page<CinemaRoom> findAllByCinemaRoomNameContaining(String roomName, Pageable pageable);
 	
-//	@Query("SELECT c FROM CinemaRoom c WHERE c.cinemaRoomId IN (SELECT m.cinemaRoomId FROM "
-//			+ "Movie m WHERE m.movieId = ?1)")
-	@Query("SELECT c FROM CinemaRoom c")
+	@Query("SELECT c FROM CinemaRoom c WHERE c.cinemaRoomId IN (SELECT m.cinemaRoom.cinemaRoomId FROM "
+			+ "Movie m WHERE m.movieId = ?1)")
 	CinemaRoom findRoomByMovieId(String movieId);
 }

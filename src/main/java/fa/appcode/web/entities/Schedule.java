@@ -50,4 +50,10 @@ public class Schedule {
 		Schedule other = (Schedule) obj;
 		return Objects.equals(scheduleId, other.scheduleId);
 	}
+
+	public Schedule(Integer scheduleId, String scheduleTime) {
+		super();
+		this.scheduleId = scheduleId;
+		this.scheduleTime = scheduleTime;
+	}
 }

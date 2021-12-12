@@ -26,4 +26,6 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 	
 	@Query("SELECT m FROM Movie m WHERE m.releaseDate = :searchData")
 	Page<Movie> searchDate(@Param("searchData") Date searchData, Pageable pageable);
+	
+	Movie findByMovieId(String movieId);
 }

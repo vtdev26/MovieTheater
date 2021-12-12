@@ -1,4 +1,5 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -45,7 +46,7 @@
 								<div class="movie__detail--time">
 									<c:forEach var="schedule"
 										items="${movieDate.movie.movieSchedules}">
-										<div class="time" data-time-id="${schedule.schedule.scheduleId}"
+										<div class="time" data-schedule-id="${schedule.schedule.scheduleId}"
 										data-movie-id="${movieDate.movie.movieId}" data-time-name="${schedule.schedule.scheduleTime}"
 										>${schedule.schedule.scheduleTime}</div>
 									</c:forEach>

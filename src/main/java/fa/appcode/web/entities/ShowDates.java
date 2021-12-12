@@ -54,4 +54,11 @@ public class ShowDates {
 		ShowDates other = (ShowDates) obj;
 		return Objects.equals(showDateId, other.showDateId);
 	}
+
+	public ShowDates(Integer showDateId, Date showDate, String dateName) {
+		super();
+		this.showDateId = showDateId;
+		this.showDate = showDate;
+		this.dateName = dateName;
+	}
 }
