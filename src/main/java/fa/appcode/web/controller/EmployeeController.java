@@ -6,7 +6,33 @@
 
 package fa.appcode.web.controller;
 
-import fa.appcode.common.logging.LogUtils;
+import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
 import fa.appcode.common.utils.Constants;
 import fa.appcode.config.MessageConfig;
 import fa.appcode.config.PageConfig;
@@ -18,21 +44,6 @@ import fa.appcode.web.entities.Employee;
 import fa.appcode.web.entities.Roles;
 import fa.appcode.web.vo.EmployeeVo;
 import fa.appcode.web.vo.ResponseObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.validation.Valid;
-import java.io.IOException;
-import java.util.*;
 
 @RestController
 @RequestMapping("/admin/employee/")
@@ -107,7 +118,6 @@ public class EmployeeController {
     public ResponseEntity<ResponseObject> getById(@PathVariable String id) {
         Optional<Employee> employee = employeeService.findById(id);
         if (employee.isPresent()) {
-            Employee employeeResult = employee.get();
             return ResponseEntity.ok()
                     .body(new ResponseObject(messageConfig.getStatusFindSuccess(),
                             messageConfig.getMessageFindSuccess(),

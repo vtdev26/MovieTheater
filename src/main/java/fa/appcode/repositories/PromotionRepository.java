@@ -31,4 +31,9 @@ public interface PromotionRepository extends JpaRepository<Promotion, Integer> {
 	
 	@Query("SELECT p FROM Promotion p WHERE p.startTime <= :searchData AND p.endTime >= :searchData")
 	Page<Promotion> searchDate(@Param("searchData") Date searchData, Pageable pageable);
+
+	Promotion findByTitle(String title);
+
+	@Query("SELECT p FROM Promotion p WHERE p.promotionId <> :promotionId AND p.title = :title")
+	Promotion checkByIdAndTitle(Integer promotionId, String title);
 }
