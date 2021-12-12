@@ -62,11 +62,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee findEmployeeById(String id){
-        return  employeeRepository.findEmployeeByEmployeeId(id);
-    }
-
-    @Override
     public  boolean deleteById(String id){
         boolean exists = employeeRepository.existsById(id);
         LogUtils.getLogger().info("Check exits "+ exists);

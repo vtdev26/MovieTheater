@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -61,7 +62,7 @@ class EmployeeServiceImplTest {
         Page<EmployeeVo> page = new PageImpl<>(employeeVos);
         Mockito.when(employeeRepository.findAllEmployee(pageable)).thenReturn(page);
 
-        Page<EmployeeVo> actual = employeeService.findAllEmployee(pageIndex, 5);
+        Page<EmployeeVo> actual = employeeService.findAllEmployee(pageIndex, pageSize);
         LogUtils.getLogger().info(actual.toList().get(0).toString());
         assertEquals(page,actual);
 
@@ -180,4 +181,49 @@ class EmployeeServiceImplTest {
         boolean actual = employeeService.save(employee);
         assertTrue(actual);
     }
+
+
+
+    /*Test get employee by id
+     * Case 1
+     */
+    @Test
+    void findEmployeeById() {
+        final String id = "G3_0000001";
+        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        try {
+            date = DateFor.parse("08/07/2021");
+        } catch (ParseException e) {
+            LogUtils.getLogger().info("Convert date fail !!!");
+        }
+        Account account = new Account("G3_0000001", "ha noi", date, "chuong@gmail.com", "hoang van chuong", "M", "123456", "image", "123", "0983012606", date, 1, "chuong1");
+        Employee employee = new Employee("G3_0000011", account);
+        Mockito.when(employeeRepository.findById(id)).thenReturn(Optional.of(employee));
+        Optional<Employee> actual = employeeService.findById(id);
+        assertTrue(actual.isPresent());
+    }
+
+
+    /*Test get employee by id
+     * Case 2 with id null
+     */
+    @Test
+    void findEmployeeById2() {
+        final String id = "G3_0000001";
+        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        try {
+            date = DateFor.parse("08/07/2021");
+        } catch (ParseException e) {
+            LogUtils.getLogger().info("Convert date fail !!!");
+        }
+        Account account = new Account("G3_0000001", "ha noi", date, "chuong@gmail.com", "hoang van chuong", "M", "123456", "image", "123", "0983012606", date, 1, "chuong1");
+        Employee employee = new Employee("G3_0000011", account);
+        Mockito.when(employeeRepository.findById(id)).thenReturn(Optional.of(employee));
+        Optional<Employee> actual = employeeService.findById(null);
+        assertTrue(actual.isEmpty());
+    }
+
+
 }

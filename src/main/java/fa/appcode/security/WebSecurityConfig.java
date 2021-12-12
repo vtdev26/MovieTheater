@@ -25,15 +25,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private CustomLogoutSuccessHandler logoutSuccessHandler;
 
-//	public WebSecurityConfig(CustomAuthenticationSuccessHandler loginSuccessHandler,
-//
-//			CustomAuthenticationFailureHandler loginFailureHandler, CustomLogoutSuccessHandler logoutSuccessHandler) {
-//		super();
-//		this.loginSuccessHandler = loginSuccessHandler;
-//		this.loginFailureHandler = loginFailureHandler;
-//		this.logoutSuccessHandler = logoutSuccessHandler;
-//	}
-
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
 
@@ -54,7 +45,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	// // And Setting PassswordEncoder
 	// auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	// }
-
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/resources/**");

@@ -99,7 +99,6 @@ public class EmployeeController {
     public ModelAndView detailEmployeeShow() {
         return new ModelAndView("employee/detail-employee");
     }
-
     /**
      * @param id id of employee
      * @return find employee by id
@@ -107,14 +106,17 @@ public class EmployeeController {
     @GetMapping("/{id}")
     public ResponseEntity<ResponseObject> getById(@PathVariable String id) {
         Optional<Employee> employee = employeeService.findById(id);
-
         if (employee.isPresent()) {
             Employee employeeResult = employee.get();
             return ResponseEntity.ok()
-                    .body(new ResponseObject(messageConfig.getStatusFindSuccess(), messageConfig.getMessageFindSuccess(), employee));
+                    .body(new ResponseObject(messageConfig.getStatusFindSuccess(),
+                            messageConfig.getMessageFindSuccess(),
+                            employee));
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ResponseObject(messageConfig.getStatusFindFail(), messageConfig.getMessageFindFail(), employee));
+                    .body(new ResponseObject(messageConfig.getStatusFindFail(),
+                            messageConfig.getMessageFindFail(),
+                            employee));
         }
     }
 
@@ -151,7 +153,6 @@ public class EmployeeController {
 
         // check file upload -set image for account
         if (file != null && !file.isEmpty() ) {
-            LogUtils.getLogger().info("AAAAAAAAAAAAAA "+ file.getOriginalFilename());
             String storageFolder = Constants.PATH_EMPLOYEE_IMG;
             try {
                 String fileName = storageService.storeFile(file, storageFolder);
@@ -168,8 +169,8 @@ public class EmployeeController {
         //// check edit or add
         // edit employee
         if (!"".equals(employeeId) && !"".equals(account.getAccountId())) {
+//            if (employeeId !=null) {
             employeeSave.setEmployeeId(employeeId);
-
             Account accountDb = accountService.findAccountByAccountId(account.getAccountId());
             accountDb.setUserName(account.getUserName());
             accountDb.setFullName(account.getFullName());
@@ -192,7 +193,6 @@ public class EmployeeController {
                         .body(new ResponseObject(messageConfig.getStatusAddAccountExists(),
                                 messageConfig.getMessageAddAccountExists(),
                                 ""));
-
             }
 
             String password = account.getPassword();
@@ -218,11 +218,9 @@ public class EmployeeController {
                         employeeSave));
     }
 
-
     @DeleteMapping("/{id}")
     ResponseEntity<ResponseObject> delete(@PathVariable String id) {
         boolean result = employeeService.deleteById(id);
-
         if (result) {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new ResponseObject(messageConfig.getStatusDeleteSuccess(), messageConfig.getMessageDeleteSuccess(), ""));
