@@ -1,5 +1,7 @@
 package fa.appcode.services.impl;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +18,12 @@ import fa.appcode.services.CinemaRoomService;
 import fa.appcode.web.entities.CinemaRoom;
 import fa.appcode.web.entities.ScheduleSeat;
 
+
 /**
  * The Class CinemaRoomServiceImpl.
  */
 @Service("cinemaRoomService")
-public class CinemaRoomServiceImpl implements CinemaRoomService {
+public class CinemaRoomServiceImpl implements CinemaRoomService{
 
 	@Autowired
 	private CinemaRoomRepository cinemaRoomRepository;
@@ -68,6 +71,7 @@ public class CinemaRoomServiceImpl implements CinemaRoomService {
 	 * @param roomId the room id
 	 * @return the cinema room
 	 */
+
 	@Override
 	public CinemaRoom findById(String roomId) {
 		int roomIdVal = Integer.parseInt(roomId);

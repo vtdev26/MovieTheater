@@ -15,7 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,13 +27,12 @@ import lombok.Setter;
 @Setter
 @Getter
 @Table(name = "roles", schema = "movie_theater")
-//@JsonIgnoreProperties({ "hibernateLazyInitializer" })
 public class Roles {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "role_id")
-	private Integer role_id;
+	private Integer roleId;
 	
 	@Column(name = "role_name")
 	private String roleName;
@@ -43,5 +41,7 @@ public class Roles {
 	@JsonBackReference
 	private Set<Account> accounts;
 
-	
+	public Roles(Integer roleId) {
+		this.roleId = roleId;
+	}
 }

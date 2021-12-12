@@ -16,7 +16,8 @@ public class StringGenerator implements IdentifierGenerator {
 	private String prefix = "G3_";
 
 	@Override
-	public Serializable generate(SharedSessionContractImplementor session, Object obj) throws HibernateException {
+	public Serializable generate(SharedSessionContractImplementor session, Object obj)
+			throws HibernateException {
 		return (prefix + RandomString.getAlphaNumericString(7));
 
 	}

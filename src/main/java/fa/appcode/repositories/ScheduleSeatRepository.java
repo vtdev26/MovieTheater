@@ -15,3 +15,4 @@ public interface ScheduleSeatRepository extends JpaRepository<ScheduleSeat, Stri
 	
 	List<ScheduleSeat> findByMovieIdAndScheduleId(String movieId, Integer scheduleId);
 }
+

@@ -53,25 +53,23 @@ $(document).ready(function() {
 	});
 
 
-
 	// chuonghv99
 	$("body").on("click", "#employee, #btnBackEmployee", function(e) {
 		e.preventDefault();
 		document.title = "Employee Management";
-		$.ajax({
+		$.get({
 			url: "/admin/employee/list-employee",
 			success: function(response) {
 				$("#content-page").html(response);
-				pageIndex = $('ul.pagination').attr('pageIndex');
-				var numOfPages = $('ul.pagination').attr('numOfPages');
+				let pagination = $('ul.pagination');
+				let pageIndex = pagination.attr('pageIndex');
+				let numOfPages = pagination.attr('numOfPages');
 				$('li.page-item').eq(pageIndex).addClass("active");
-				if (pageIndex == 1) {
-					$("a#previous").css("opacity", "0.4");
-					$("a#previous").prop("disabled", true);
+				if (pageIndex === 1) {
+					$("a#previous").css("opacity", "0.6").prop("disabled", true);
 				}
-				if (pageIndex == numOfPages) {
-					$("a#next").css("opacity", "0.4");
-					$("a#next").prop("disabled", true);
+				if (pageIndex === numOfPages) {
+					$("a#next").css("opacity", "0.6").prop("disabled", true);
 				}
 			},
 
