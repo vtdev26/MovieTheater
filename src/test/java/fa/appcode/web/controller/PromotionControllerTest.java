@@ -18,6 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -47,6 +48,7 @@ class PromotionControllerTest {
      * Test list promotion controller
      */
     @Test
+    @WithMockUser(roles = "ADMIN", username = "admin")
     void testListPromotion() throws Exception {
 
         final Integer pageIndexVal = 1;
@@ -80,6 +82,7 @@ class PromotionControllerTest {
      * Test search promotion search promotion with text
      */
     @Test
+    @WithMockUser(roles = "ADMIN", username = "admin")
     void testSearchPromotion1() throws Exception {
         final Integer pageIndexVal = 1;
         final Integer pageSize = 5;
@@ -111,6 +114,7 @@ class PromotionControllerTest {
      * Test search promotion search promotion when change page size
      */
     @Test
+    @WithMockUser(roles = "ADMIN", username = "admin")
     void testSearchPromotion2() throws Exception {
         final Integer pageIndexVal = 1;
         final Integer pageSize = 7;
@@ -142,6 +146,7 @@ class PromotionControllerTest {
      * Test search promotion search promotion when change page index
      */
     @Test
+    @WithMockUser(roles = "ADMIN", username = "admin")
     void testSearchPromotion3() throws Exception {
         final Integer pageIndexVal = 3;
         final Integer pageSize = 5;
@@ -170,6 +175,7 @@ class PromotionControllerTest {
      * Test show form promotion when click add button
      */
     @Test
+    @WithMockUser(roles = "ADMIN", username = "admin")
     void testShowPromotionForm1() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/admin/promotion/showPromotionForm"))
@@ -180,6 +186,7 @@ class PromotionControllerTest {
      * Test show form promotion when click edit icon
      */
     @Test
+    @WithMockUser(roles = "ADMIN", username = "admin")
     void testShowPromotionForm2() throws Exception {
 
         Promotion promotion = new Promotion(1, "promotion 1");
@@ -195,6 +202,7 @@ class PromotionControllerTest {
      * Test save promotion in valid
      */
     @Test
+    @WithMockUser(roles = "ADMIN", username = "admin")
     void testSave1() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/admin/promotion/save").param("title", "")
@@ -210,6 +218,7 @@ class PromotionControllerTest {
      * Test save promotion has start time after end time
      */
     @Test
+    @WithMockUser(roles = "ADMIN", username = "admin")
     void testSave2() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/admin/promotion/save").param("title", "title test")
@@ -226,6 +235,7 @@ class PromotionControllerTest {
      * Test save promotion with title exist
      */
     @Test
+    @WithMockUser(roles = "ADMIN", username = "admin")
     void testSave3() throws Exception {
 
         Integer promotionId = 1;
@@ -248,6 +258,7 @@ class PromotionControllerTest {
      * Test add a promotion success
      */
     @Test
+    @WithMockUser(roles = "ADMIN", username = "admin")
     void testSave4() throws Exception {
 
         MockMultipartFile file = new MockMultipartFile("data", "filename.txt", "text/plain", "some xml".getBytes());
@@ -280,6 +291,7 @@ class PromotionControllerTest {
      * Test update a promotion success
      */
     @Test
+    @WithMockUser(roles = "ADMIN", username = "admin")
     void testSave5() throws Exception {
 
         MockMultipartFile file = new MockMultipartFile("data", "filename.txt", "text/plain", "some xml".getBytes());
@@ -312,6 +324,7 @@ class PromotionControllerTest {
      * Test save a promotion failed
      */
     @Test
+    @WithMockUser(roles = "ADMIN", username = "admin")
     void testSave6() throws Exception {
 
         MultipartFile file = new MockMultipartFile("test", "filename.png", "image", "some xml".getBytes());
@@ -344,6 +357,7 @@ class PromotionControllerTest {
      * Test method delete with promotion id is not a number
      */
     @Test
+    @WithMockUser(roles = "ADMIN", username = "admin")
     void testDelete1() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/admin/promotion/delete/abc"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
@@ -354,6 +368,7 @@ class PromotionControllerTest {
      * Test method delete a promotion failed
      */
     @Test
+    @WithMockUser(roles = "ADMIN", username = "admin")
     void testDelete2() throws Exception {
 
         Integer promotionId = 1;
@@ -369,6 +384,7 @@ class PromotionControllerTest {
      * Test method delete a promotion success
      */
     @Test
+    @WithMockUser(roles = "ADMIN", username = "admin")
     void testDelete3() throws Exception {
 
         Integer promotionId = 1;
