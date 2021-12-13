@@ -33,25 +33,4 @@ public class PageConfig {
 	@Value("${login.fail.incorrect}")
 	private String incorrect;
 
-	@Value("${promotion.save.success}")
-	private String savePromotionSuccess;
-
-	@Value("${promotion.add.failed}")
-	private String savePromotionFailed;
-
-	@Value("${promotion.startTime.invalid}")
-	private String startTimeInvalid;
-
-	@Value("${promotion.endTime.invalid}")
-	private String endTimeInvalid;
-
-	@Value("${promotion.delete.success}")
-	private String deletePromotionSuccess;
-
-	@Value("${promotion.delete.failed}")
-	private String deletePromotionFailed;
-
-	@Value("${promotion.title.exist}")
-	private String titlePromotionExisted;
-
 }
