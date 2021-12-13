@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import fa.appcode.common.logging.LogUtils;
 import fa.appcode.common.utils.Constants;
 import fa.appcode.common.utils.FileUploadUtils;
+import fa.appcode.config.MessageConfig;
 import fa.appcode.config.PageConfig;
 import fa.appcode.services.PromotionService;
 import fa.appcode.web.entities.Promotion;
@@ -34,6 +35,9 @@ public class PromotionController {
 
 	@Autowired
 	private PageConfig pageConfig;
+
+	@Autowired
+	private MessageConfig messageConfig;
 
 	@Autowired
 	private PromotionService promotionService;
@@ -135,7 +139,7 @@ public class PromotionController {
 		Map<String, String> errorList = new HashMap<>();
 
 		/*
-		 * Validator a promotion
+		 * Validate a promotion
 		 */
 		if (result.hasErrors()) {
 			check = false;
@@ -151,13 +155,16 @@ public class PromotionController {
 		if (promotion.getStartTime() != null && promotion.getEndTime() != null
 				&& promotion.getEndTime().compareTo(promotion.getStartTime()) < 0) {
 			check = false;
-			errorList.put("startTime", pageConfig.getStartTimeInvalid());
-			errorList.put("endTime", pageConfig.getEndTimeInvalid());
+			errorList.put("startTime", messageConfig.getStartTimeInvalid());
+			errorList.put("endTime", messageConfig.getEndTimeInvalid());
 		}
 
+		/*
+		 * Check title exist
+		 */
 		if (promotionService.checkTitleExist(promotion.getPromotionId(), promotion.getTitle())) {
 			check = false;
-			errorList.put("title", pageConfig.getTitlePromotionExisted());
+			errorList.put("title", messageConfig.getTitlePromotionExisted());
 		}
 		/*
 		 * Handle return
@@ -176,7 +183,7 @@ public class PromotionController {
 					promotion.setImage(Constants.SRC_PROMOTION_IMAGE_2 + file.getOriginalFilename());
 					LogUtils.getLogger().info(promotion);
 				} catch (IOException e) {
-					message.put("messageFailed", pageConfig.getSavePromotionFailed());
+					message.put("messageFailed", messageConfig.getSavePromotionFailed());
 					return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 				}
 			}
@@ -187,29 +194,35 @@ public class PromotionController {
 			 * Save a promotion into database
 			 */
 			if (promotionService.saveOrUpdate(promotion)) {
-				message.put("messageSuccess", pageConfig.getSavePromotionSuccess());
+				message.put("messageSuccess", messageConfig.getSavePromotionSuccess());
 				return new ResponseEntity<>(message, HttpStatus.OK);
 			} else {
-				message.put("messageFailed", pageConfig.getSavePromotionFailed());
+				message.put("messageFailed", messageConfig.getSavePromotionFailed());
 				return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 			}
 		}
 	}
 
+	/**
+	 * Controller delete a promotion
+	 * 
+	 * @param promotionId
+	 * @return
+	 */
 	@DeleteMapping("delete/{promotionId}")
 	public ResponseEntity<String> delete(@PathVariable(name = "promotionId") String promotionId) {
 		try {
 			Integer idValue = Integer.parseInt(promotionId);
 
 			if (promotionService.deletePromotionById(idValue)) {
-				return new ResponseEntity<>(pageConfig.getDeletePromotionSuccess(), HttpStatus.OK);
+				return new ResponseEntity<>(messageConfig.getDeletePromotionSuccess(), HttpStatus.OK);
 
 			} else {
-				return new ResponseEntity<>(pageConfig.getDeletePromotionFailed(), HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>(messageConfig.getDeletePromotionFailed(), HttpStatus.BAD_REQUEST);
 			}
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(pageConfig.getDeletePromotionFailed(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(messageConfig.getDeletePromotionFailed(), HttpStatus.BAD_REQUEST);
 		}
 	}
 
