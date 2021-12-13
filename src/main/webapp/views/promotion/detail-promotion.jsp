@@ -19,9 +19,6 @@
             <label for="title">Title <span class="text-danger">(*)</span></label>
             <input type="text" class="form-control" id="title" name="title" value="${promotion.title}"
                    placeholder="Title">
-            <label class="error" ${errorList['title']==null?'hidden':''}>
-                <c:out value="${errorList['title']}"/>
-            </label>
             <p class="error" id="titlePromotionError" hidden="true"></p>
         </div>
 
@@ -43,9 +40,6 @@
             <label for="discountLevel">Discount Level <span class="text-danger">(*)</span></label>
             <input type="number" class="form-control" id="discountLevel" name="discountLevel"
                    placeholder="Discount Level" value="${promotion.discountLevel}">
-            <label class="error" ${errorList['discountLevel']==null?'hidden':''}>
-                <c:out value="${errorList['discountLevel']}"/>
-            </label>
             <p class="error" id="discountLevelError" hidden></p>
         </div>
 
@@ -53,9 +47,6 @@
             <label for="detail">Detail <span class="text-danger">(*)</span></label>
             <input type="text" class="form-control" id="detail" name="detail" placeholder="Detail"
                    value="${promotion.detail}">
-            <label class="error" ${errorList['detail']==null?'hidden':''}>
-                <c:out value="${errorList['detail']}"/>
-            </label>
             <p class="error" id="detailPromotionError" hidden></p>
         </div>
 
