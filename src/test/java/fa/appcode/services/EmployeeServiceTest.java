@@ -1,7 +1,8 @@
-package fa.appcode.services.impl;
+package fa.appcode.services;
 
 import fa.appcode.common.logging.LogUtils;
 import fa.appcode.repositories.EmployeeRepository;
+import fa.appcode.services.impl.EmployeeServiceImpl;
 import fa.appcode.web.entities.Account;
 import fa.appcode.web.entities.Employee;
 import fa.appcode.web.vo.EmployeeVo;
@@ -27,10 +28,11 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class EmployeeServiceImplTest {
+class EmployeeServiceTest {
 
     @InjectMocks
     private EmployeeServiceImpl employeeService;
+
     @Mock
     private EmployeeRepository employeeRepository;
 

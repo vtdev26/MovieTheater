@@ -6,33 +6,6 @@
 
 package fa.appcode.web.controller;
 
-import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
 import fa.appcode.common.utils.Constants;
 import fa.appcode.config.MessageConfig;
 import fa.appcode.config.PageConfig;
@@ -44,6 +17,21 @@ import fa.appcode.web.entities.Employee;
 import fa.appcode.web.entities.Roles;
 import fa.appcode.web.vo.EmployeeVo;
 import fa.appcode.web.vo.ResponseObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
+import java.io.IOException;
+import java.util.*;
 
 @RestController
 @RequestMapping("/admin/employee/")
@@ -110,6 +98,7 @@ public class EmployeeController {
     public ModelAndView detailEmployeeShow() {
         return new ModelAndView("employee/detail-employee");
     }
+
     /**
      * @param id id of employee
      * @return find employee by id
@@ -162,7 +151,7 @@ public class EmployeeController {
 
 
         // check file upload -set image for account
-        if (file != null && !file.isEmpty() ) {
+        if (file != null && !file.isEmpty()) {
             String storageFolder = Constants.PATH_EMPLOYEE_IMG;
             try {
                 String fileName = storageService.storeFile(file, storageFolder);
@@ -188,7 +177,7 @@ public class EmployeeController {
             accountDb.setDateOfBirth(account.getDateOfBirth());
             accountDb.setAddress(account.getAddress());
             accountDb.setPhoneNumber(account.getPhoneNumber());
-            if (file != null && !file.isEmpty() ){
+            if (file != null && !file.isEmpty()) {
                 accountDb.setImage(account.getImage());
             }
             employeeSave.setAccount(accountDb);
@@ -232,12 +221,16 @@ public class EmployeeController {
     ResponseEntity<ResponseObject> delete(@PathVariable String id) {
         boolean result = employeeService.deleteById(id);
         if (result) {
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseObject(messageConfig.getStatusDeleteSuccess(), messageConfig.getMessageDeleteSuccess(), ""));
+            return ResponseEntity.ok()
+                    .body(new ResponseObject(messageConfig.getStatusDeleteSuccess(),
+                            messageConfig.getMessageDeleteSuccess(),
+                            ""));
         }
 
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED)
-                .body(new ResponseObject(messageConfig.getStatusDeleteFail(), messageConfig.getMessageDeleteFail(), ""));
+                .body(new ResponseObject(messageConfig.getStatusDeleteFail(),
+                        messageConfig.getMessageDeleteFail(),
+                        ""));
     }
 
 
