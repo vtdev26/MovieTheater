@@ -115,13 +115,15 @@ class EmployeeControllerTest {
 
 
     /*
-     *  Test save employee with userName exits
-     *  Case 1
+     *  Test add employee
+     *  Case 1: Add employee with userName exits
      * */
     @Test
     void saveEmployee() throws Exception {
         MockMultipartFile file = new MockMultipartFile("file", "test.txt",
                 "text/plain", "Spring Framework".getBytes());
+        final String employeeId = "";
+        final String accountId = "";
         final String userName = "chuong";
         final String password = "123";
         final String fullName = "hoang van chuong";
@@ -129,7 +131,7 @@ class EmployeeControllerTest {
         final String identityCard = "123456";
         final String email = "chuong@gmail.com";
         final String address = "nam dinh";
-        final String phoneNumber = "11111";
+        final String phoneNumber = "0983012606";
         ResponseObject responseObject = new ResponseObject(messageConfig.getStatusAddAccountExists(),
                 messageConfig.getMessageAddAccountExists(),
                 "");
@@ -151,6 +153,8 @@ class EmployeeControllerTest {
         Mockito.when(accountService.findAccountByUserName(userName)).thenReturn(accounts.get(0));
 
         mockMvc.perform(MockMvcRequestBuilders.post("/admin/employee/save")
+                        .param("employeeId", employeeId)
+                        .param("accountId", accountId)
                         .param("file", String.valueOf(file))
                         .param("userName", userName)
                         .param("password", password)
@@ -167,60 +171,16 @@ class EmployeeControllerTest {
 
 
     /*
-     *  Test save employee with data invalid
-     *  Case 2
+     *  Test add employee
+     *  Case 2: save employee with data invalid
      * */
     @Test
     void saveEmployee2() throws Exception {
         MockMultipartFile file = new MockMultipartFile("file", "test.txt",
                 "text/plain", "Spring Framework".getBytes());
-        String userName = "chuong";
-        String password = "123";
-        String fullName = "hoang van chuong";
-        String gender = "M";
-        String identityCard = "123456";
-        String email = "chuong@gmail.com";
-        String address = "nam dinh";
-
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
-        try {
-            date = DateFor.parse("08/07/2021");
-        } catch (ParseException e) {
-            LogUtils.getLogger().info("Convert date fail !!!");
-        }
-        List<Account> accounts = new ArrayList<>();
-        accounts.add(new Account("G3_00000001", "hanoi", date, "chuong1@gmail.com", "chuonghoang", "M", "1234561", "image", "123", "0983012606", date, 1, "chuong"));
-        accounts.add(new Account("G3_00000002", "hanoi", date, "chuong2@gmail.com", "chuonghoang", "M", "1234561", "image", "123", "0983012606", date, 1, "kien"));
-        accounts.add(new Account("G3_00000003", "hanoi", date, "chuong3@gmail.com", "chuonghoang", "M", "1234561", "image", "123", "0983012606", date, 1, "thang"));
-
-        // ResponseEntity responseEntity =new ResponseEntity(HttpStatus.BAD_REQUEST);
-        Mockito.when(accountService.findAccountByUserName(userName)).thenReturn(accounts.get(0));
-
-        mockMvc.perform(MockMvcRequestBuilders.post("/admin/employee/save")
-                        .param("file", String.valueOf(file))
-//                        .param("userName", userName)
-                        .param("password", password)
-                        .param("fullName", fullName)
-                        .param("gender", gender)
-                        .param("identityCard", identityCard)
-                        .param("email", email)
-                        .param("address", address))
-//                        .param("phoneNumber", "11111"))
-                .andExpect(MockMvcResultMatchers.status().is(HttpStatus.BAD_REQUEST.value()))
-                .andExpect(jsonPath("$.message").value(messageConfig.getMessageAddDataInvalid()));
-
-    }
-
-    /*
-     *  Test save employee
-     *  Case 3 normal case
-     * */
-    @Test
-    void saveEmployee3() throws Exception {
-        MockMultipartFile file = new MockMultipartFile("file", "test.txt",
-                "text/plain", "Spring Framework".getBytes());
-        final String userName = "chuong123";
+        final String employeeId = "";
+        final String accountId = "";
+        final String userName = "chuong";
         final String password = "123";
         final String fullName = "hoang van chuong";
         final String gender = "M";
@@ -228,7 +188,6 @@ class EmployeeControllerTest {
         final String email = "chuong@gmail.com";
         final String address = "nam dinh";
         final String phoneNumber = "0983012606";
-
         SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
@@ -241,39 +200,86 @@ class EmployeeControllerTest {
         accounts.add(new Account("G3_00000002", "hanoi", date, "chuong2@gmail.com", "chuonghoang", "M", "1234561", "image", "123", "0983012606", date, 1, "kien"));
         accounts.add(new Account("G3_00000003", "hanoi", date, "chuong3@gmail.com", "chuonghoang", "M", "1234561", "image", "123", "0983012606", date, 1, "thang"));
 
-        Mockito.when(accountService.findAccountByUserName(userName)).thenReturn(null);
-
-        Account account = new Account(null, address, date, email, fullName, gender, identityCard, null, password, phoneNumber, null, 1, userName);
-        Employee employee = new Employee(null, account);
-        Mockito.when(employeeService.save(employee)).thenReturn(false);
-
+        Mockito.when(accountService.findAccountByUserName(userName)).thenReturn(accounts.get(0));
         mockMvc.perform(MockMvcRequestBuilders.post("/admin/employee/save")
+                        .param("employeeId", employeeId)
+                        .param("accountId", accountId)
                         .param("file", String.valueOf(file))
-                        .param("employeeId", "G3_0000009")
-                        .param("accountId", "G3_0000009")
                         .param("userName", userName)
                         .param("password", password)
-                        .param("fullName", fullName)
-                        .param("gender", gender)
-                        .param("identityCard", identityCard)
-                        .param("email", email)
+//                        .param("fullName", fullName)
+//                        .param("gender", gender)
+//                        .param("identityCard", identityCard)
+//                        .param("email", email)
                         .param("address", address)
                         .param("phoneNumber", phoneNumber))
-                .andExpect(MockMvcResultMatchers.status().is(HttpStatus.INTERNAL_SERVER_ERROR.value()))
-                .andExpect(jsonPath("$.message").value(messageConfig.getMessageAddServerError()));
+                .andExpect(MockMvcResultMatchers.status().is(HttpStatus.BAD_REQUEST.value()))
+                .andExpect(jsonPath("$.message").value(messageConfig.getMessageAddDataInvalid()));
+
     }
+
+//    /*
+//     *  Test save employee
+//     *  Case 3 normal case
+//     * */
+//    @Test
+//    void saveEmployee3() throws Exception {
+//        MockMultipartFile file = new MockMultipartFile("file", "test.txt",
+//                "text/plain", "Spring Framework".getBytes());
+//        final String userName = "chuong123";
+//        final String password = "123";
+//        final String fullName = "hoang van chuong";
+//        final String gender = "M";
+//        final String identityCard = "123456";
+//        final String email = "chuong@gmail.com";
+//        final String address = "nam dinh";
+//        final String phoneNumber = "0983012606";
+//
+//        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+//        Date date = new Date();
+//        try {
+//            date = DateFor.parse("08/07/2021");
+//        } catch (ParseException e) {
+//            LogUtils.getLogger().info("Convert date fail !!!");
+//        }
+//        List<Account> accounts = new ArrayList<>();
+//        accounts.add(new Account("G3_00000001", "hanoi", date, "chuong1@gmail.com", "chuonghoang", "M", "1234561", "image", "123", "0983012606", date, 1, "chuong"));
+//        accounts.add(new Account("G3_00000002", "hanoi", date, "chuong2@gmail.com", "chuonghoang", "M", "1234561", "image", "123", "0983012606", date, 1, "kien"));
+//        accounts.add(new Account("G3_00000003", "hanoi", date, "chuong3@gmail.com", "chuonghoang", "M", "1234561", "image", "123", "0983012606", date, 1, "thang"));
+//
+//        Mockito.when(accountService.findAccountByUserName(userName)).thenReturn(null);
+//
+//        Account account = new Account(null, address, date, email, fullName, gender, identityCard, null, password, phoneNumber, null, 1, userName);
+//        Employee employee = new Employee(null, account);
+//        Mockito.when(employeeService.save(employee)).thenReturn(false);
+//
+//        mockMvc.perform(MockMvcRequestBuilders.post("/admin/employee/save")
+//                        .param("file", String.valueOf(file))
+//                        .param("employeeId", "G3_0000009")
+//                        .param("accountId", "G3_0000009")
+//                        .param("userName", userName)
+//                        .param("password", password)
+//                        .param("fullName", fullName)
+//                        .param("gender", gender)
+//                        .param("identityCard", identityCard)
+//                        .param("email", email)
+//                        .param("address", address)
+//                        .param("phoneNumber", phoneNumber))
+//                .andExpect(MockMvcResultMatchers.status().is(HttpStatus.INTERNAL_SERVER_ERROR.value()))
+//                .andExpect(jsonPath("$.message").value(messageConfig.getMessageAddServerError()));
+//    }
 
 
     /*
-     *  Test save employee
+     *  Test add employee fail
      *  Case 4 normal case
      * */
     @Test
     void saveEmployee4() throws Exception {
         MockMultipartFile file = new MockMultipartFile("file", "test.txt",
                 "text/plain", "Spring Framework".getBytes());
-        final String accountId = "G3_0000009";
-        final String employeeId = "G3_0000009";
+        final String accountId = "";
+        final String employeeId = "";
         final String userName = "chuong123";
         final String password = "123";
         final String fullName = "hoang van chuong";
@@ -308,10 +314,66 @@ class EmployeeControllerTest {
                         .param("email", email)
                         .param("address", address)
                         .param("phoneNumber", phoneNumber))
+                .andExpect(MockMvcResultMatchers.status().is(HttpStatus.INTERNAL_SERVER_ERROR.value()))
+                .andExpect(jsonPath("$.message").value(messageConfig.getMessageAddServerError()));
+    }
+
+
+    /*
+     *  Test add employee fail
+     *  Case 4 normal case
+     * */
+    @Test
+    void saveEmployee5() throws Exception {
+        MockMultipartFile file = new MockMultipartFile("file", "test.txt",
+                "text/plain", "Spring Framework".getBytes());
+        final String accountId = "G3_0000001";
+        final String employeeId = "G3_0000001";
+        final String userName = "chuong123";
+        final String password = "123";
+        final String fullName = "hoang van chuong";
+        final String gender = "M";
+        final String identityCard = "123456";
+        final String email = "chuong@gmail.com";
+        final String address = "nam dinh";
+        final String phoneNumber = "0983012606";
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        try {
+            date = DateFor.parse("08/07/2010");
+        } catch (ParseException e) {
+            LogUtils.getLogger().info("Convert date fail !!!");
+        }
+
+        Account account= new Account("G3_00000001", "hanoi", null, "chuong1@gmail.com", "chuonghoang", "M", "1234561", "image", null, "0983012606", null, 1, "chuong");
+
+        Account accountDB = new Account("G3_00000001", "hanoi", date, "chuong1@gmail.com", "chuonghoang", "M", "1234561", "image", "123", "0983012606", date, 1, "chuong");
+        Employee employee = new Employee(employeeId, accountDB);
+
+        Mockito.when(accountService.findAccountByAccountId(accountId)).thenReturn(accountDB);
+
+        Mockito.when(employeeService.save(employee)).thenReturn(true);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/admin/employee/save")
+                        .param("employeeId", employeeId)
+                        .param("accountId", accountId)
+                        .param("file", String.valueOf(file))
+                        .param("userName", userName)
+                        .param("password", password)
+                        .param("fullName", fullName)
+                        .param("gender", gender)
+                        .param("identityCard", identityCard)
+                        .param("email", email)
+                        .param("address", address)
+                        .param("phoneNumber", phoneNumber))
                 .andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
                 .andExpect(jsonPath("$.message").value(messageConfig.getMessageAddSuccess()));
     }
 
+
+    
     @Test
     void delete() throws Exception {
         final String id = "G3_T1uFFlz";
