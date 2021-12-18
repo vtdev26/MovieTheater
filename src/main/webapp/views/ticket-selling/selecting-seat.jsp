@@ -93,7 +93,7 @@
     </div>
 
     <div class="row my-5 pr-3 justify-content-end">
-        <button class="btn btn-primary mr-3 btnControl" id="btnBack"> <i
+        <button class="btn btn-primary mr-3 btnControl" id="btn_Back_To_Showtime"> <i
                 class="fas fa-long-arrow-alt-left"></i> Back</button>
         <button class="btn btn-primary btnControl" id="btnContinue"> Continue <i
                 class="fas fa-long-arrow-alt-right"></i></button>
