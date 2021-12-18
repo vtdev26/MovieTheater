@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import fa.appcode.web.vo.PromotionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -59,6 +60,9 @@ public class PromotionController {
 
 		LogUtils.getLogger().info(page);
 
+		/*
+		 * Set attribute
+		 */
 		model.addAttribute("listOfPromotions", page.toList());
 		model.addAttribute("numOfPages", page.getTotalPages());
 		model.addAttribute("currentPage", pageIndexVal);
@@ -68,7 +72,8 @@ public class PromotionController {
 	}
 
 	/**
-	 * Controller when user search, paging in screen promotion list
+	 * Controller when user search, paging, change page size in screen promotion
+	 * list
 	 *
 	 * @param model
 	 * @param searchData
@@ -121,19 +126,17 @@ public class PromotionController {
 	}
 
 	/**
-	 * Controller save a promotion
-	 *
-	 * @param promotion
+	 * Controller save/edit a promotion
+	 * 
+	 * @param promotionVo
 	 * @param result
-	 * @param file
 	 * @return
 	 */
 	@PostMapping("save")
 	@ResponseBody
-	public ResponseEntity<Map<String, String>> savePromotion(@Valid Promotion promotion, BindingResult result,
-			@RequestParam(name = "file", required = false) MultipartFile file) {
+	public ResponseEntity<Map<String, String>> savePromotion(@Valid PromotionVo promotionVo, BindingResult result) {
 
-		LogUtils.getLogger().info(promotion);
+		LogUtils.getLogger().info(promotionVo);
 
 		boolean check = true;
 		Map<String, String> errorList = new HashMap<>();
@@ -152,8 +155,8 @@ public class PromotionController {
 		/*
 		 * Check start time and end time
 		 */
-		if (promotion.getStartTime() != null && promotion.getEndTime() != null
-				&& promotion.getEndTime().compareTo(promotion.getStartTime()) < 0) {
+		if (promotionVo.getStartTime() != null && promotionVo.getEndTime() != null
+				&& promotionVo.getEndTime().compareTo(promotionVo.getStartTime()) < 0) {
 			check = false;
 			errorList.put("startTime", messageConfig.getStartTimeInvalid());
 			errorList.put("endTime", messageConfig.getEndTimeInvalid());
@@ -162,7 +165,7 @@ public class PromotionController {
 		/*
 		 * Check title exist
 		 */
-		if (promotionService.checkTitleExist(promotion.getPromotionId(), promotion.getTitle())) {
+		if (promotionService.checkTitleExist(promotionVo.getPromotionId(), promotionVo.getTitle())) {
 			check = false;
 			errorList.put("title", messageConfig.getTitlePromotionExisted());
 		}
@@ -173,9 +176,17 @@ public class PromotionController {
 			return new ResponseEntity<>(errorList, HttpStatus.BAD_REQUEST);
 		} else {
 			Map<String, String> message = new HashMap<>();
+
+			/*
+			 * Get promotion from promotionVo
+			 */
+			Promotion promotion = promotionVo.getPromotionFromVo();
+
 			/*
 			 * Save file image if it exists
 			 */
+			MultipartFile file = promotionVo.getFile();
+
 			if (file != null && !file.isEmpty()) {
 				try {
 					LogUtils.getLogger().info("co file");
@@ -205,7 +216,7 @@ public class PromotionController {
 
 	/**
 	 * Controller delete a promotion
-	 * 
+	 *
 	 * @param promotionId
 	 * @return
 	 */
