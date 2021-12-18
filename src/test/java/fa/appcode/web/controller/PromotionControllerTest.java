@@ -22,8 +22,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.multipart.MultipartFile;
 
+import fa.appcode.common.utils.Constants;
 import fa.appcode.config.PageConfig;
 import fa.appcode.services.PromotionService;
 import fa.appcode.web.entities.Promotion;
@@ -273,10 +273,11 @@ class PromotionControllerTest {
 
         Mockito.when(promotionService.checkTitleExist(promotionId, title)).thenReturn(false);
 
+        promotion.setImage(Constants.SRC_PROMOTION_IMAGE_2 + file.getOriginalFilename());
         Mockito.when(promotionService.saveOrUpdate(promotion)).thenReturn(true);
 
         mockMvc.perform(MockMvcRequestBuilders.multipart("/admin/promotion/save")
-                        .param("file", file.getOriginalFilename())
+                        .file(file)
                         .param("promotionId", promotionId.toString())
                         .param("title", title)
                         .param("startTime", "2021-12-01")
@@ -299,23 +300,26 @@ class PromotionControllerTest {
         Integer promotionId = 1;
         String title = "title";
         Date date = new SimpleDateFormat("dd/MM/yyyy").parse("01/12/2021");
+        String image = "/resources/img/promotion/Untitled2.png";
         Integer discountLevel = 10000;
         String detail = "promotion test update";
 
-        Promotion promotion = new Promotion(promotionId, detail, discountLevel, date, null, date, title);
+        Promotion promotion = new Promotion(promotionId, detail, discountLevel, date, image, date, title);
 
         Mockito.when(promotionService.checkTitleExist(promotionId, title)).thenReturn(false);
 
+        promotion.setImage(Constants.SRC_PROMOTION_IMAGE_2 + file.getOriginalFilename());
         Mockito.when(promotionService.saveOrUpdate(promotion)).thenReturn(true);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/admin/promotion/save")
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/admin/promotion/save")
+                        .file(file)
                         .param("promotionId", promotionId.toString())
                         .param("title", title)
                         .param("startTime", "2021-12-01")
                         .param("endTime", "2021-12-01")
                         .param("discountLevel", String.valueOf(discountLevel))
                         .param("detail", detail)
-                        .param("file", String.valueOf(file)))
+                        .param("image", "/resources/img/promotion/Untitled2.png"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(jsonPath("$.messageSuccess").value("Successfully save"));
     }
@@ -327,7 +331,7 @@ class PromotionControllerTest {
     @WithMockUser(roles = "ADMIN", username = "admin")
     void testSave6() throws Exception {
 
-        MultipartFile file = new MockMultipartFile("test", "filename.png", "image", "some xml".getBytes());
+        MockMultipartFile file = new MockMultipartFile("test", "filename.png", "image", "some xml".getBytes());
 
         Integer promotionId = 1;
         String title = "title";
@@ -339,16 +343,17 @@ class PromotionControllerTest {
 
         Mockito.when(promotionService.checkTitleExist(promotionId, title)).thenReturn(false);
 
+        promotion.setImage(Constants.SRC_PROMOTION_IMAGE_2 + file.getOriginalFilename());
         Mockito.when(promotionService.saveOrUpdate(promotion)).thenReturn(false);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/admin/promotion/save")
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/admin/promotion/save")
+                        .file(file)
                         .param("promotionId", promotionId.toString())
                         .param("title", title)
                         .param("startTime", "2021-12-01")
                         .param("endTime", "2021-12-01")
                         .param("discountLevel", String.valueOf(discountLevel))
-                        .param("detail", detail)
-                        .param("file", String.valueOf(file)))
+                        .param("detail", detail))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(jsonPath("$.messageFailed").value("Unsuccessfully save"));
     }
