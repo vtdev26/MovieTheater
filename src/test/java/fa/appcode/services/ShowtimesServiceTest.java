@@ -118,7 +118,7 @@ class ShowtimesServiceTest {
 	 * TC1: Case Normal (Date: Current date)
 	 */
 	@Test
-	void testgetShowDateList_TC1() {
+	void testgetShowDateListTC1() {
 		String dateSelecting = LocalDate.now().toString();
 		assertEquals(6, showtimesService.getShowDateList(dateSelecting).size());
 	}
@@ -127,7 +127,7 @@ class ShowtimesServiceTest {
 	 * TC2: Case Abnormal (Date: null)
 	 */
 	@Test
-	void testgetShowDateList_TC2() {
+	void testgetShowDateListTC2() {
 		String dateSelecting = null;
 		assertEquals(6, showtimesService.getShowDateList(dateSelecting).size());
 	}
@@ -136,7 +136,7 @@ class ShowtimesServiceTest {
 	 * TC3: Case Abnormal (Date: "")
 	 */
 	@Test
-	void testgetShowDateList_TC3() {
+	void testgetShowDateListTC3() {
 		String dateSelecting = "";
 		assertEquals(6, showtimesService.getShowDateList(dateSelecting).size());
 	}
@@ -145,7 +145,7 @@ class ShowtimesServiceTest {
 	 * TC01: Case Normal (Selecting date: current date, page index: 1)
 	 */
 	@Test
-	void testFindBySelectedDate_TC1() {
+	void testFindBySelectedDateTC1() {
 		Mockito.when(showtimesRepository.findAll(showDateSpecification.getListByDate(DateUtils.convertToDate(LocalDate.now()))))
 		.thenReturn(listShowDate);
 		
@@ -162,7 +162,7 @@ class ShowtimesServiceTest {
 	 * TC02: Case Abnormal (Selecting date: "", page index: 1)
 	 */
 	@Test
-	void testFindBySelectedDate_TC2() {
+	void testFindBySelectedDateTC2() {
 		Mockito.when(showtimesRepository.findAll(showDateSpecification.getListByDate(DateUtils.convertToDate(LocalDate.now()))))
 		.thenReturn(listShowDate);
 		
@@ -179,7 +179,7 @@ class ShowtimesServiceTest {
 	 * TC03: Case Abnormal (Selecting date: null, page index: 1)
 	 */
 	@Test
-	void testFindBySelectedDate_TC3() {
+	void testFindBySelectedDateTC3() {
 		Mockito.when(showtimesRepository.findAll(showDateSpecification.getListByDate(DateUtils.convertToDate(LocalDate.now()))))
 		.thenReturn(listShowDate);
 		
@@ -196,7 +196,7 @@ class ShowtimesServiceTest {
 	 * TC04: Case Normal (Selecting date: now, page index: 2)
 	 */
 	@Test
-	void testFindBySelectedDate_TC4() {
+	void testFindBySelectedDateTC4() {
 		Mockito.when(showtimesRepository.findAll(showDateSpecification.getListByDate(DateUtils.convertToDate(LocalDate.now()))))
 		.thenReturn(listShowDate);
 		
@@ -214,7 +214,7 @@ class ShowtimesServiceTest {
 	 * TC05: Case Abnormal (page index > total page)
 	 */
 	@Test
-	void testFindBySelectedDate_TC5() {
+	void testFindBySelectedDateTC5() {
 		Mockito.when(showtimesRepository.findAll(showDateSpecification.getListByDate(DateUtils.convertToDate(LocalDate.now()))))
 		.thenReturn(listShowDate);
 		
@@ -229,7 +229,7 @@ class ShowtimesServiceTest {
 	 */
 	
 	@Test
-	void testFindBySelectedDate_TC6() {
+	void testFindBySelectedDateTC6() {
 		Mockito.when(showtimesRepository.findAll(showDateSpecification.getListByDate(DateUtils.convertToDate(LocalDate.now()))))
 		.thenReturn(new ArrayList<ShowDates>());	
 		

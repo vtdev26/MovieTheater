@@ -50,7 +50,7 @@ class CinemaRoomServiceTest {
 	 * TC1: Case Normal (MovieId: 1)
 	 */
 	@Test
-	void testFindByMovieId_TC1() {
+	void testFindByMovieIdTC1() {
 		String movieId = "1";
 		CinemaRoom cinemaRoom = new CinemaRoom(1, "Room 1", 60);
 		Mockito.when(cinemaRoomRepository.findRoomByMovieId(movieId)).thenReturn(cinemaRoom);
@@ -61,7 +61,7 @@ class CinemaRoomServiceTest {
 	 * TC2: Case Abnormal (MovieId: "")
 	 */
 	@Test
-	void testFindByMovieId_TC2() {
+	void testFindByMovieIdTC2() {
 		String movieId = "";
 		assertEquals(null, cinemaRoomService.findByMovieId(movieId));
 	}
@@ -70,7 +70,7 @@ class CinemaRoomServiceTest {
 	 * TC3: Case Abnormal (MovieId: null)
 	 */
 	@Test
-	void testFindByMovieId_TC3() {
+	void testFindByMovieIdTC3() {
 		String movieId = null;
 		assertEquals(null, cinemaRoomService.findByMovieId(movieId));
 	}
@@ -79,7 +79,7 @@ class CinemaRoomServiceTest {
 	 * TC1: Normal case (CinemaRoom: Not null, ScheduleSeats: Not null)
 	 */
 	@Test
-	void testSeatSoldsHanlder_TC1() {
+	void testSeatSoldsHanlderTC1() {
 		List<Seat> seats = new ArrayList<Seat>();
 		for (int i = 0; i < 60; i++) {
 			seats.add(new Seat(i + 1, 0));
@@ -98,7 +98,7 @@ class CinemaRoomServiceTest {
 	 * TC2: Abnormal case (CinemaRoom: Not null, ScheduleSeats: null)
 	 */
 	@Test
-	void testSeatSoldsHanlder_TC2() {
+	void testSeatSoldsHanlderTC2() {
 		List<Seat> seats = new ArrayList<Seat>();
 		for (int i = 0; i < 60; i++) {
 			seats.add(new Seat(i + 1, 0));
@@ -116,7 +116,7 @@ class CinemaRoomServiceTest {
 	 * TC3: Abnormal case (CinemaRoom: null, ScheduleSeats: Not null)
 	 */
 	@Test
-	void testSeatSoldsHanlder_TC3() {
+	void testSeatSoldsHanlderTC3() {
 		CinemaRoom cinemaRoom = null;
 		
 		List<ScheduleSeat> scheduleSeats = new ArrayList<ScheduleSeat>();

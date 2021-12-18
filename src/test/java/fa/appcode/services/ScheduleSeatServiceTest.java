@@ -48,7 +48,7 @@ class ScheduleSeatServiceTest {
 	 * TC1: Normal case: (MovieId: 1, ScheduleId: 1)
 	 */
 	@Test
-	void testFindByMovieIdAndScheduleId_TC1() {
+	void testFindByMovieIdAndScheduleIdTC1() {
 		final String movieId = "1";
 		final Integer scheduleId = 1;
 		
@@ -68,7 +68,7 @@ class ScheduleSeatServiceTest {
 	 * TC2: Normal case: (MovieId: "", ScheduleId: 1)
 	 */
 	@Test
-	void testFindByMovieIdAndScheduleId_TC2() {
+	void testFindByMovieIdAndScheduleIdTC2() {
 		final String movieId = "";
 		final Integer scheduleId = 1;
 		
@@ -80,7 +80,7 @@ class ScheduleSeatServiceTest {
 	 * TC3: Normal case: (MovieId: 1, ScheduleId: null)
 	 */
 	@Test
-	void testFindByMovieIdAndScheduleId_TC3() {
+	void testFindByMovieIdAndScheduleIdTC3() {
 		final String movieId = "1";
 		final Integer scheduleId = null;	
 		assertEquals(null, scheduleSeatService.findByMovieIdAndScheduleId(movieId, scheduleId + ""));
@@ -90,7 +90,7 @@ class ScheduleSeatServiceTest {
 	 * TC4: Normal case: (MovieId: 1, ScheduleId: 0)
 	 */
 	@Test
-	void testFindByMovieIdAndScheduleId_TC4() {
+	void testFindByMovieIdAndScheduleIdTC4() {
 		final String movieId = "1";
 		final Integer scheduleId = 0;
 		
@@ -104,7 +104,7 @@ class ScheduleSeatServiceTest {
 	 * TC5: Normal case: (MovieId: null, ScheduleId: 1)
 	 */
 	@Test
-	void testFindByMovieIdAndScheduleId_TC5() {
+	void testFindByMovieIdAndScheduleIdTC5() {
 		final String movieId = null;
 		final Integer scheduleId = 1;
 		
