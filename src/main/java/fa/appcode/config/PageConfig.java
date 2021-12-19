@@ -32,5 +32,8 @@ public class PageConfig {
 
 	@Value("${login.fail.incorrect}")
 	private String incorrect;
+	
+	@Value("${invoice.score.add}")
+	private Double scoreAdd;
 
 }

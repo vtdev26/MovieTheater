@@ -12,7 +12,7 @@ import fa.appcode.web.entities.Member;
 public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
-	MemberRepository memberRepository;
+	private MemberRepository memberRepository;
 
 	@Override
 	public Member findByMemberIdOrIdendityCard(String member) {
@@ -20,6 +20,14 @@ public class MemberServiceImpl implements MemberService {
 			return null;
 		}
 		return memberRepository.findByMemberIdOrIdendityCard(member);
+	}
+
+	@Override
+	public Member save(Member member) {
+		if(member == null) {
+			return null;
+		}
+		return memberRepository.save(member);
 	}
 
 }

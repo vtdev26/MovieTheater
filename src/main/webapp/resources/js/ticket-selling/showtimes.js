@@ -151,7 +151,7 @@ $(document).ready(function () {
 				$(".member-information").append(`
 				<tr>
 				<th scope="row">Member ID:</th>
-				<td>${response.memberId}</td>
+				<td id="memberConfirm" data-member-confirm="${response.memberId}">${response.memberId}</td>
 			</tr>
 			<tr>
 				<th scope="row">Identity Card:</th>
@@ -183,7 +183,7 @@ $(document).ready(function () {
 					</div>
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="exampleRadios"
-							id="radDisagree" value="option2">
+							id="radDisagree" checked="checked" value="option2">
 						<label class="form-check-label" for="exampleRadios2">
 							Disagree
 						</label>
@@ -200,19 +200,90 @@ $(document).ready(function () {
 		});
 	});
 
-	$("body").on("change", "#radAgree", function () {
-		if ($(this).prop('checked')) {
-			var score = $("#memberScore").data("score");
-			var totalPrice = $(".totalPriceTicket").data("total-price");
+	$("body").on("click", "#btn_Confirm_Ticket", function () {
+		var score = $("#memberScore").data("score");
+		var totalPrice = $(".totalPriceTicket").data("total-price");
+		var useScore = 0;
+		if ($("#radAgree").is(":checked")) {
 			if(score < totalPrice){
-				$("#messageConfirm").html("Member score is not enough to convert into ticket");
-				$(this).prop('checked', false); 
+				useScore = score;
 			}else{
-				if(confirm("Confirm if you want to convert score!") == true){
-					$("#scoreColumn").remove();
-					$("#convertColumn").remove();
-				}
+				useScore = totalPrice;
+			}
+			if(totalPrice < score){
+				totalPrice = 0;
+			}else{
+				totalPrice = totalPrice - score;
 			}
 		}
+		$("#scoreColumn").remove();
+		$("#convertColumn").remove();
+
+		var confirmTicketVo = new Object();
+		confirmTicketVo.idSeatSelecting = listSelectedSeat;
+		confirmTicketVo.movieId = movieId;
+		confirmTicketVo.scheduleId = scheduleId;
+		confirmTicketVo.dateSelecting = dateSelecting;
+		confirmTicketVo.timeSelecting = timeName;
+		confirmTicketVo.useScore = useScore;
+		confirmTicketVo.totalPrice = totalPrice;
+		confirmTicketVo.memberId = $("#memberConfirm").data("member-confirm");
+		$.post({
+			url: "/admin/confirm-ticket-booking",
+			data: JSON.stringify(confirmTicketVo),
+			dataType: "json",
+			contentType: "application/json",
+			statusCode: {
+				200: function(response){
+					$("#btn_Back_To_SelectingSeat").hide();
+					$("#btn_Confirm_Ticket").hide();
+					$("#formSearchMember").remove();
+					$("#messageConfirm").html("");
+					$("#messageConfirm").html(JSON.stringify(response.responseText));
+					$("#totalPriceTicket").remove();
+					$(".table-confirm-ticket").append(`
+					<tr>
+					<th scope="row">Score:</th>
+						<td> ` + useScore +` </td>
+					</tr>
+					<tr id="totalPriceTicket">
+						<th scope="row">Total:</th>
+							<td class="text-success font-weight-bold totalPriceTicket"  data-total-price="`+ totalPrice +`" >
+								` + new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalPrice) + `
+						</td>
+					</tr>
+					`);
+
+					$(".confirmTicketControl").append(`
+					<button class="btn btn-primary" id="btn_Back_To_Dashboard"> Back To Dashboard <i
+					class="fas fa-long-arrow-alt-right"></i></button>
+					`);
+				},
+				403: function(response){
+					$("#messageConfirm").html("");
+					$("#messageConfirm").html(JSON.stringify(response.responseText));	
+				}
+			}
+		});
+	});
+
+	$("body").on("click", "#btn_Back_To_Dashboard", function () {
+		dateSelecting = '';
+		pageIndex = 0;
+		scheduleId = 0;
+		movieId = '';
+		seatQuantity = 0;
+		timeName = '';
+		listSelectedSeat = [];
+
+		$.get({
+			url: "/admin/dashboard/",
+			success: function (response) {
+				alert("Success!");
+			},
+			error: function (response){
+				alert("Success!");
+			}
+		});
 	});
 });

@@ -11,12 +11,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fa.appcode.common.utils.Constants;
+import fa.appcode.config.MessageConfig;
 import fa.appcode.config.PageConfig;
 import fa.appcode.services.CinemaRoomService;
+import fa.appcode.services.InvoiceService;
 import fa.appcode.services.MemberService;
 import fa.appcode.services.MovieService;
 import fa.appcode.services.ScheduleSeatService;
@@ -28,6 +31,7 @@ import fa.appcode.web.entities.Movie;
 import fa.appcode.web.entities.MovieDate;
 import fa.appcode.web.entities.ScheduleSeat;
 import fa.appcode.web.entities.Seat;
+import fa.appcode.web.vo.ConfirmTicketVo;
 import fa.appcode.web.vo.PageVo;
 
 /**
@@ -54,6 +58,12 @@ public class TicketSellingController {
 	
 	@Autowired
 	private SeatService seatService;
+	
+	@Autowired
+	private InvoiceService invoiceService;
+	
+	@Autowired
+	private MessageConfig messageConfig;
 	
 	@Autowired
 	private PageConfig pageConfig;
@@ -136,9 +146,12 @@ public class TicketSellingController {
 		return responseEntity;
 	}
 	
-	@PostMapping("confirm-booking")
-	public ResponseEntity<Boolean> confirmBooking() {
-		return ResponseEntity.ok(Boolean.TRUE);
+	@PostMapping("/confirm-ticket-booking")
+	public ResponseEntity<String> confirmBooking(@RequestBody ConfirmTicketVo confirmTicketVo) {
+		if(invoiceService.save(confirmTicketVo)) {
+			return ResponseEntity.status(HttpStatus.OK).body(messageConfig.getSaveTicketSuccess());
+		}
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(messageConfig.getSaveTicketFailed());
 	}
 	
 	
