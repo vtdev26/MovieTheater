@@ -7,6 +7,7 @@ package fa.appcode.web.entities;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,7 +45,7 @@ public class Invoice {
 	private Date bookingDate;
 	
 	@Column(name = "movie_name", columnDefinition = "NVARCHAR(255)")
-	private String movieNameString;
+	private String movieName;
 	
 	@Column(name = "schedule_show", columnDefinition = "DATETIME")
 	private Date scheduleShow;
@@ -68,7 +69,7 @@ public class Invoice {
 	@JoinColumn(name = "account_id", referencedColumnName = "account_id")
 	private Account account;
 	
-	@OneToMany(mappedBy = "invoice")
+	@OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL)
 	private List<ScheduleSeat> scheduleSeats;
 
 }

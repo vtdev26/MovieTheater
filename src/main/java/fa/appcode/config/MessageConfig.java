@@ -1,5 +1,6 @@
 package fa.appcode.config;
 
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -85,5 +86,10 @@ public class MessageConfig {
 
 	@Value("${promotion.title.exist}")
 	private String titlePromotionExisted;
+	
+	@Value("${ticket.save.success}")
+	private String saveTicketSuccess;
 
+	@Value("${ticket.save.failed}")
+	private String saveTicketFailed;
 }

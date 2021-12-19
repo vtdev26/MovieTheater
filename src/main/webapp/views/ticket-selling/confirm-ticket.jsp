@@ -13,7 +13,7 @@
                                 <p class="film-title text-primary">
                                     ${movie.movieNameVn}
                                 </p>
-                                <table class="table table-hover">
+                                <table class="table table-hover table-confirm-ticket">
                                     <tbody>
                                         <tr>
                                             <th scope="row">Screen:</th>
@@ -29,7 +29,7 @@
                                         </tr>
                                         <tr>
                                             <th scope="row">Seat:</th>
-                                            <td>
+                                            <td id="seatName">
                                                 <c:forEach var="seat" items="${seats}">
                                                     ${seat.seatRow}${seat.seatColumn}
                                                 </c:forEach>
@@ -48,7 +48,7 @@
                                                 </c:forEach>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr id="totalPriceTicket">
                                             <th scope="row">Total:</th>
                                             <td class="text-success font-weight-bold totalPriceTicket"  data-total-price="${totalPrice}" >
                                                 <fmt:formatNumber type="number" minFractionDigits="0"
@@ -64,7 +64,7 @@
                                 </p>
                                 <table class="table">
                                     <tbody>
-                                        <tr>
+                                        <tr id="formSearchMember">
                                             <td colspan="4" scope="row">
                                                 <form>
                                                     <div class="form-row align-items-center">
@@ -93,10 +93,10 @@
                     </div>
                 </div>
 
-                <div class="row my-5 pr-3 justify-content-end">
-                    <button class="btn btn-primary mr-3 btnControlConfirm" id="btn_Back_To_SelectingSeat"> <i
+                <div class="row my-5 pr-3 justify-content-end confirmTicketControl">
+                    <button class="btn btn-primary mr-3" id="btn_Back_To_SelectingSeat"> <i
                             class="fas fa-long-arrow-alt-left"></i>
                         Back</button>
-                    <button class="btn btn-primary btnControlConfirm"> Confirm Booking Ticket <i
+                    <button class="btn btn-primary" id="btn_Confirm_Ticket"> Confirm Booking Ticket <i
                             class="fas fa-long-arrow-alt-right"></i></button>
                 </div>
