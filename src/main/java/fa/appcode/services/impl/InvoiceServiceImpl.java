@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +25,12 @@ import fa.appcode.web.entities.Seat;
 import fa.appcode.web.entities.Ticket;
 import fa.appcode.web.vo.ConfirmTicketVo;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InvoiceServiceImpl.
+ */
 @Repository
+@Transactional
 public class InvoiceServiceImpl implements InvoiceService {
 	
 	@Autowired 
@@ -44,13 +51,25 @@ public class InvoiceServiceImpl implements InvoiceService {
 	@Autowired
 	private PageConfig pageConfig;
 
+	
+	/**
+	 * Save ticket, edit member score and save invoice
+	 *
+	 * @param confirmTicketVo the confirm ticket Vo.
+	 * @return the boolean
+	 */
 	@Override
 	public Boolean save(ConfirmTicketVo confirmTicketVo) {
 		if(confirmTicketVo == null) {
-			return null;
+			return false;
 		}
+		
 		List<Seat> seats = seatService.findAllBySeatId(confirmTicketVo.getIdSeatSelecting());
 		Member member = memberService.findByMemberIdOrIdendityCard(confirmTicketVo.getMemberId());
+		
+		if(member == null || (seats == null || seats.size() == 0)) {
+			return false;
+		}
 		if(confirmTicketVo.getUseScore() == 0) {
 			member.setScore(member.getScore() + pageConfig.getScoreAdd());
 		}else {

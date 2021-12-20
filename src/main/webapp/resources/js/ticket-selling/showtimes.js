@@ -277,6 +277,13 @@ $(document).ready(function () {
 		timeName = '';
 		listSelectedSeat = [];
 
-		window.location.href = "/admin/dashboard";
+		// window.location.href = "/admin/dashboard";
+		$.get({
+			url: "/admin/dashboard",
+			success: function(response) {
+				$(".container-fluid").html(`<h1 class="row justify-content-center mt-5">Welcome To G3 -
+				MovieTheater</h1>`);
+			},
+		});
 	});
 });
