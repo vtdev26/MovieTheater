@@ -21,14 +21,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+
+import fa.appcode.config.MessageConfig;
 import fa.appcode.services.CinemaRoomService;
+import fa.appcode.services.InvoiceService;
+import fa.appcode.services.MemberService;
 import fa.appcode.services.ScheduleSeatService;
 import fa.appcode.services.ShowtimesService;
+import fa.appcode.web.entities.Account;
 import fa.appcode.web.entities.CinemaRoom;
+import fa.appcode.web.entities.Member;
 import fa.appcode.web.entities.Movie;
 import fa.appcode.web.entities.MovieDate;
 import fa.appcode.web.entities.MovieSchedule;
@@ -36,10 +47,12 @@ import fa.appcode.web.entities.Schedule;
 import fa.appcode.web.entities.ScheduleSeat;
 import fa.appcode.web.entities.Seat;
 import fa.appcode.web.entities.ShowDates;
+import fa.appcode.web.vo.ConfirmTicketVo;
 import fa.appcode.web.vo.PageVo;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@WithMockUser(username="admin",roles={"ADMIN"})
 class TicketSellingControllerTest {
 
 	@MockBean
@@ -51,13 +64,26 @@ class TicketSellingControllerTest {
 	@MockBean
 	private ScheduleSeatService scheduleSeatService;
 	
+	@MockBean
+	private MemberService memberService;
+	
+	@MockBean
+	private InvoiceService invoiceService;
+	
+	@MockBean
+	private MessageConfig messageConfig;
+	
 	@Autowired
 	private MockMvc mockMvc;
 	
 	private static List<ShowDates> listShowDate = null;
+	
 	private static MovieDate movieDate1 = null;
-	private static MovieDate movieDate2 = null;		
+	
+	private static MovieDate movieDate2 = null;	
+	
 	private static MovieDate movieDate3 = null;
+	
 	private static List<LocalDate> listDates = null;
 	
 	@BeforeAll
@@ -184,13 +210,13 @@ class TicketSellingControllerTest {
 	}
 	
 	/**
-	 * TC3: Abnormal case (pageIndex = null, dateSelecting = "2021/12/07", maxPage = 2)
+	 * TC3: Abnormal case (pageIndex = null, dateSelecting = "LocalDate.now +"" ", maxPage = 2)
 	 * @throws Exception 
 	 */
 	@Test
 	void testShowtimes_TC3() throws Exception {
 		Integer pageIndex = null;
-		String dateSelecting = "2021-12-07";
+		String dateSelecting = LocalDate.now() +"";
 		Integer maxPage = 2;
 
 		
@@ -388,5 +414,122 @@ class TicketSellingControllerTest {
 				.param("scheduleId", String.valueOf(scheduleId)))
 				.andExpect(MockMvcResultMatchers.model().attribute("cinemaRoom", cinemaRoom))
 				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/selecting-seat"));	
+	}
+	
+	/**
+	 * TC1: Case Normal (memberInfor = "123")
+	 * @throws Exception 
+	 */
+	@Test
+	void testCheckMember_TC1() throws Exception {
+		
+		String memberInfor = "123";
+		
+		Account account = new Account("ac123", "account1", "123");
+		Member member = new Member("m123", 15000.0, account);
+		
+		ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		String jsonExpect = objectWriter.writeValueAsString(member);
+		
+		Mockito.when(memberService.findByMemberIdOrIdendityCard(memberInfor)).thenReturn(member);
+		mockMvc.perform(MockMvcRequestBuilders.get("/admin/confirm-ticket/"+ memberInfor))
+			.andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
+			.andExpect(MockMvcResultMatchers.content().json(jsonExpect));
+	}
+	
+	/**
+	 * TC2: Case Abnormal (memberInfor = "")
+	 * @throws Exception 
+	 */
+	@Test
+	void testCheckMember_TC2() throws Exception {
+		
+		String memberInfor = "";
+		
+		Member member = null;
+		
+		Mockito.when(memberService.findByMemberIdOrIdendityCard(memberInfor)).thenReturn(member);
+		mockMvc.perform(MockMvcRequestBuilders.get("/admin/confirm-ticket/"+ memberInfor))
+			.andExpect(MockMvcResultMatchers.status().is(HttpStatus.BAD_REQUEST.value()));
+	}
+	
+	/**
+	 * TC3: Case Abnormal (memberInfor = null)
+	 * @throws Exception 
+	 */
+	@Test
+	void testCheckMember_TC3() throws Exception {
+		
+		String memberInfor = null;
+		
+		Member member = null;
+		
+		Mockito.when(memberService.findByMemberIdOrIdendityCard(memberInfor)).thenReturn(member);
+		mockMvc.perform(MockMvcRequestBuilders.get("/admin/confirm-ticket/"+ memberInfor))
+			.andExpect(MockMvcResultMatchers.status().is(HttpStatus.BAD_REQUEST.value()));
+	}
+	
+	/**
+	 * TC1: Case Normal: Save success
+	 * @throws Exception
+	 */
+	@Test
+	void testConfirmBooking_TC1() throws Exception {
+		ConfirmTicketVo confirmTicketVo = new ConfirmTicketVo();
+		String[] idSeatSelectings = {"1", "2", "3"};
+		confirmTicketVo = new ConfirmTicketVo();
+		confirmTicketVo.setDateSelecting("2021-12-20");
+		confirmTicketVo.setIdSeatSelecting(idSeatSelectings);
+		confirmTicketVo.setMemberId("m123");
+		confirmTicketVo.setMovieId("1");
+		confirmTicketVo.setScheduleId(1);
+		confirmTicketVo.setTimeSelecting("15:00");
+		confirmTicketVo.setTotalPrice(30000.0);
+		confirmTicketVo.setUseScore(20000.0);
+		
+		ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+
+		
+		Mockito.when(messageConfig.getSaveTicketSuccess()).thenReturn("saveTicketSuccess");
+		Mockito.when(messageConfig.getSaveTicketFailed()).thenReturn("saveTicketFailed");
+		Mockito.when(invoiceService.save(confirmTicketVo)).thenReturn(true);
+		String jsonExpect = objectWriter.writeValueAsString(confirmTicketVo);
+		
+		mockMvc.perform(MockMvcRequestBuilders.post("/admin/confirm-ticket-booking")
+				.content(jsonExpect).contentType(MediaType.APPLICATION_JSON))
+			.andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
+			.andExpect(MockMvcResultMatchers.content().string("saveTicketSuccess"));
+	}
+	
+	/**
+	 * TC1: Case Normal: Save failed
+	 * @throws Exception
+	 */
+	@Test
+	void testConfirmBooking_TC2() throws Exception {
+		ConfirmTicketVo confirmTicketVo = new ConfirmTicketVo();
+		String[] idSeatSelectings = {"1", "2", "3"};
+		confirmTicketVo = new ConfirmTicketVo();
+		confirmTicketVo.setDateSelecting("2021-12-20");
+		confirmTicketVo.setIdSeatSelecting(idSeatSelectings);
+		confirmTicketVo.setMemberId("m123");
+		confirmTicketVo.setMovieId("1");
+		confirmTicketVo.setScheduleId(1);
+		confirmTicketVo.setTimeSelecting("15:00");
+		confirmTicketVo.setTotalPrice(30000.0);
+		confirmTicketVo.setUseScore(20000.0);
+		
+		ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+
+		
+		Mockito.when(messageConfig.getSaveTicketSuccess()).thenReturn("saveTicketSuccess");
+		Mockito.when(messageConfig.getSaveTicketFailed()).thenReturn("saveTicketFailed");
+		Mockito.when(invoiceService.save(confirmTicketVo)).thenReturn(false);
+		String jsonExpect = objectWriter.writeValueAsString(confirmTicketVo);
+		
+		mockMvc.perform(MockMvcRequestBuilders.post("/admin/confirm-ticket-booking")
+				.content(jsonExpect).contentType(MediaType.APPLICATION_JSON))
+			.andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()))
+			.andExpect(MockMvcResultMatchers.content().string("saveTicketFailed"));
 	}
 }

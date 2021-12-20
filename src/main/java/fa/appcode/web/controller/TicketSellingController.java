@@ -125,6 +125,9 @@ public class TicketSellingController {
 	/**
 	 * Show confirm ticket controller.
 	 *
+	 * @param modelMap the model map
+	 * @param listSelectedSeat the list selected seat
+	 * @param movieId the movie id
 	 * @return view name "ticket-selling/confirm-ticket".
 	 */
 	@GetMapping("/confirm-ticket")
@@ -139,13 +142,31 @@ public class TicketSellingController {
 		return "ticket-selling/confirm-ticket";
 	}
 	
+	/**
+	 * Check member.
+	 *
+	 * @param memberInfor the member infor
+	 * @return the response entity
+	 */
 	@GetMapping("/confirm-ticket/{memberInfor}")
 	public ResponseEntity<Member> checkMember(@PathVariable String memberInfor){
 		Member member = memberService.findByMemberIdOrIdendityCard(memberInfor);
-		ResponseEntity<Member> responseEntity = new ResponseEntity<Member>(member, HttpStatus.OK);
+		
+		ResponseEntity<Member> responseEntity = null;
+		if(member != null) {
+			responseEntity = new ResponseEntity<Member>(member, HttpStatus.OK);
+		}else {
+			responseEntity = new ResponseEntity<Member>(member, HttpStatus.BAD_REQUEST);
+		}	
 		return responseEntity;
 	}
 	
+	/**
+	 * Confirm booking.
+	 *
+	 * @param confirmTicketVo the confirm ticket vo
+	 * @return the response entity
+	 */
 	@PostMapping("/confirm-ticket-booking")
 	public ResponseEntity<String> confirmBooking(@RequestBody ConfirmTicketVo confirmTicketVo) {
 		if(invoiceService.save(confirmTicketVo)) {

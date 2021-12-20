@@ -126,6 +126,16 @@ public class Account {
 
     }
 
+	public Account(String accountId, @NotEmpty(message = "{account.fullName.empty}") String fullName,
+			@NotEmpty(message = "{account.identityCard.empty}") String identityCard) {
+		super();
+		this.accountId = accountId;
+		this.fullName = fullName;
+		this.identityCard = identityCard;
+	}
+    
+    
+
 
     @Override
     public boolean equals(Object o) {
@@ -146,6 +156,5 @@ public class Account {
                 && Objects.equals(roles, account.roles)
                 && Objects.equals(invoices, account.invoices);
     }
-
 
 }
