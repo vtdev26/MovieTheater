@@ -24,10 +24,10 @@ import lombok.Setter;
 public class ScheduleSeat {
 	
 	@Id
-	@Column(name = "cinema_room_id", columnDefinition = "NVARCHAR(10)")
+	@Column(name = "schedule_seat_id", columnDefinition = "NVARCHAR(10)")
 	@GenericGenerator(name = "sequence_string_id", strategy = "fa.appcode.common.utils.StringGenerator")
 	@GeneratedValue(generator = "sequence_string_id")
-	private String cinemaRoomId;
+	private String scheduleSeatId;
 	
 	@Column(name = "movie_id")
 	private String movieId;
@@ -63,9 +63,9 @@ public class ScheduleSeat {
 		this.seatType = seatType;
 	}
 
-	public ScheduleSeat(String cinemaRoomId, Integer seatId, Integer status) {
+	public ScheduleSeat(String scheduleSeatId, Integer seatId, Integer status) {
 		super();
-		this.cinemaRoomId = cinemaRoomId;
+		this.scheduleSeatId = scheduleSeatId;
 		this.seatId = seatId;
 		this.status = status;
 	}
