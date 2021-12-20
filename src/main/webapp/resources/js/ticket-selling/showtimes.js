@@ -22,6 +22,7 @@ $(document).ready(function () {
 			}
 		});
 	});
+
 	$("body").on("click", "a.showtimes", function () {
 		pageIndex = $(this).attr("value");
 		$.get({
@@ -276,14 +277,6 @@ $(document).ready(function () {
 		timeName = '';
 		listSelectedSeat = [];
 
-		$.get({
-			url: "/admin/dashboard/",
-			success: function (response) {
-				alert("Success!");
-			},
-			error: function (response){
-				alert("Success!");
-			}
-		});
+		window.location.href = "/admin/dashboard";
 	});
 });
