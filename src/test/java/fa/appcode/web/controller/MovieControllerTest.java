@@ -243,6 +243,65 @@ class MovieControllerTest {
 				.andExpect(MockMvcResultMatchers.model().attribute("schedules", schedules))
 				.andExpect(MockMvcResultMatchers.model().attribute("cinemaRooms", cinemaRooms));
 	}
+	/**
+   * Test show add movie(edit)
+   *
+   * @throws Exception the exception
+   */
+	@Test
+  @WithMockUser(roles = "ADMIN", username = "admin")
+  void testShowAddMovie2() throws Exception {
+	  Movie movie = new Movie();
+	  movie.setMovieId("movieId");
+    movie.setActor("Duy Khanh");
+    movie.setDuration((double) 111);
+    movie.setDirector("Duy Khanh");
+    movie.setContent("aaaa");
+    movie.setFromDate(new SimpleDateFormat("yyy-MM-dd").parse("2021-11-11"));
+    movie.setToDate(new SimpleDateFormat("yyy-MM-dd").parse("2021-12-11"));
+    movie.setReleaseDate(new SimpleDateFormat("yyy-MM-dd").parse("2021-12-11"));
+    movie.setMovieNameEnglish("ENG");
+    movie.setMovieNameVn("VN");
+    movie.setMovieProductCompany("Marvel");
+    movie.setCinemaRoom(cinemaRooms.get(0));
+    movie.setVersion("2D,3D");
+    for (Type type : types) {
+      movieTypes.add(new MovieType(new MovieTypeId(movie.getMovieId(),type.getTypeId()), movie,type));
+
+      Mockito.when(typeService.getById(type.getTypeId())).thenReturn(type);
+    }
+    for (Schedule schedule : schedules) {
+      movieSchedules.add(new MovieSchedule(new MovieScheduleId(movie.getMovieId(),schedule.getScheduleId()),movie, schedule));
+      Mockito.when(scheduleService.getById(schedule.getScheduleId())).thenReturn(schedule);
+    }
+    for (ShowDates showDate : showDates) {
+      movieDates.add(new MovieDate(new MoviDateId(movie.getMovieId(),showDate.getShowDateId()),movie, showDate));
+    }
+    movie.setMovieDates(movieDates);
+    movie.setMovieTypes(movieTypes);
+    movie.setMovieSchedules(movieSchedules);
+    List<Integer> typeIds = new ArrayList<Integer>();
+    List<Integer> scheludeIds = new ArrayList<Integer>();
+    for (MovieType movieType : movie.getMovieTypes()) {
+      typeIds.add(movieType.getType().getTypeId());
+    }
+    for (MovieSchedule movieSchedule : movie.getMovieSchedules()) {
+      scheludeIds.add(movieSchedule.getSchedule().getScheduleId());
+    }
+    Mockito.when(movieService.getById("movieId")).thenReturn(movie);
+    Mockito.when(typeService.findAll()).thenReturn(types);
+    Mockito.when(scheduleService.findAll()).thenReturn(schedules);
+    Mockito.when(cinemaRoomService.findAll()).thenReturn(cinemaRooms);
+    mockMvc.perform(
+        MockMvcRequestBuilders.get("/admin/movie/add-movie").param("movieId", "movieId"))
+        .andExpect(MockMvcResultMatchers.view().name("movie/detail-movie"))
+        .andExpect(MockMvcResultMatchers.model().attribute("movie", movie))
+        .andExpect(MockMvcResultMatchers.model().attribute("scheduleIdss", scheludeIds))
+        .andExpect(MockMvcResultMatchers.model().attribute("typeIdss", typeIds))
+        .andExpect(MockMvcResultMatchers.model().attribute("types", types))
+        .andExpect(MockMvcResultMatchers.model().attribute("schedules", schedules))
+        .andExpect(MockMvcResultMatchers.model().attribute("cinemaRooms", cinemaRooms));
+  }
 
 	/**
 	 * Test save movie normal case.
@@ -312,7 +371,7 @@ class MovieControllerTest {
 				.param("scheduleIds", scheduleIdsString.toString())
 				.param("cinemaRoom", movie.getCinemaRoom().getCinemaRoomId().toString()))
 				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(jsonPath("$.messageSucces").value(pageConfig.getSaveSuccess()));
+				.andExpect(jsonPath("$.messageSuccess").value(pageConfig.getSaveSuccess()));
 
 	}
 
