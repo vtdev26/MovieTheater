@@ -2,12 +2,12 @@
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <h3 class="row justify-content-center" id="titlePage"></h3>
-            <img id="imgMovie" src="/resources/img/movie/${movie.largeImage}">
+            <img id="imgMovie" src="${movie.largeImage}" >
             <div>
                 <hr>
                 <form action="#" method="post" name="formMovie" id="formMovie" enctype="multipart/form-data">
                     <input type="hidden" value="${movie.movieId}" id="movieId" name="movieId">
-                    <p style="color: red" id="message"></p>
+                    <p style="color: blue" id="message"></p>
                     <div class="form-group">
                         <label for="movieNameEnglish" class="font-weight-bold">Movie Name(ENG) <span class="text-danger">(*)</span></label>
                         <input type="text" class="form-control" id="movieNameEnglish" name="movieNameEnglish" placeholder="Movie Name(ENG)" value="${movie.movieNameEnglish}">

@@ -35,6 +35,7 @@ import fa.appcode.services.CinemaRoomService;
 import fa.appcode.services.MovieService;
 import fa.appcode.services.ScheduleService;
 import fa.appcode.services.ShowDatesService;
+import fa.appcode.services.StorageService;
 import fa.appcode.services.TypeService;
 import fa.appcode.web.entities.CinemaRoom;
 import fa.appcode.web.entities.MoviDateId;
@@ -68,7 +69,8 @@ public class MovieController {
 	ShowDatesService showDatesService;
 	@Autowired
 	MovieRepository movieRepository;
-
+	@Autowired
+  private StorageService storageService;
 	@GetMapping("/list")
 	public String listMovie(Model model, @RequestParam(value = "pageIndex", required = false) String pageIndex) {
 
@@ -185,7 +187,7 @@ public class MovieController {
 			return new ResponseEntity<Map<String, String>>(errortList, HttpStatus.BAD_REQUEST);
 
 		} else {
-
+		  Map<String, String> messageToDisplay = new HashMap<String, String>();
 			if (Constants.DEFAULT_WORD.equals(movie.getMovieId())) {
 				movie.setReleaseDate(movie.getFromDate());
 				movie.setMovieId(null);
@@ -193,12 +195,16 @@ public class MovieController {
 			else {
         movie.setReleaseDate(movieServices.getById(movie.getMovieId()).getReleaseDate());
       }
-			if (movieImage!=null && !movieImage.isEmpty()) {
-				String uploadDir = Constants.MOVIE_SRC_IMG;
-				FileUploadUtils.saveFile(uploadDir, movieImage.getOriginalFilename(), movieImage);
-				movie.setLargeImage(movieImage.getOriginalFilename());
-			}
-			CinemaRoom cinemaRoomtoSave = cinemaRoomService.findById(cinemaRoom);
+			if (movieImage != null && !movieImage.isEmpty()) {
+        try {
+            storageService.storeFile(movieImage, Constants.MOVIE_SRC_IMG);
+            movie.setLargeImage(Constants.MOVIE_SRC_IMG_DISPLAY + movieImage.getOriginalFilename());
+        } catch (Exception exception) {
+            messageToDisplay.put("messageFailed", exception.getMessage());
+            return new ResponseEntity<>(messageToDisplay, HttpStatus.BAD_REQUEST);
+        }
+    }
+			CinemaRoom cinemaRoomToSave = cinemaRoomService.findById(cinemaRoom);
 			List<MovieType> movieTypes = new ArrayList<MovieType>();
 			List<MovieSchedule> movieSchedules = new ArrayList<MovieSchedule>();
 			List<ShowDates> showDates = showDatesService.findByFromDateAndToDate(movie.getFromDate(),
@@ -215,12 +221,11 @@ public class MovieController {
 			for (Integer scheduleId : scheduleIds) {
 				movieSchedules.add(new MovieSchedule(new MovieScheduleId(movie.getMovieId(), scheduleId), movie, scheduleService.getById(scheduleId)));
 			}
-			Map<String, String> messageToDisplay = new HashMap<String, String>();
-			movie.setCinemaRoom(cinemaRoomtoSave);
+			movie.setCinemaRoom(cinemaRoomToSave);
 			movie.setMovieTypes(movieTypes);
 			movie.setMovieSchedules(movieSchedules);
 			if (movieServices.saveMovie(movie)) {
-				messageToDisplay.put("messageSucces", pageConfig.getSaveSuccess());
+				messageToDisplay.put("messageSuccess", pageConfig.getSaveSuccess());
 				return new ResponseEntity<Map<String, String>>(messageToDisplay, HttpStatus.OK);
 
 			} else {

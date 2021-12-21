@@ -7818,3 +7818,117 @@ Identify and stop the process that's listening on port 8080 or configure this ap
 [INFO ] 21-12-2021 14:57:09 [main] INFO  DefaultSecurityFilterChain 51 - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@49a0fe14, org.springframework.security.web.context.SecurityContextPersistenceFilter@29ceefb3, org.springframework.security.web.header.HeaderWriterFilter@1226ba98, org.springframework.security.web.authentication.logout.LogoutFilter@3ed4c822, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3dfe520, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@12dd3501, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7a791e8b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@11eb8842, org.springframework.security.web.session.SessionManagementFilter@6ed87b1c, org.springframework.security.web.access.ExceptionTranslationFilter@2db0dd19, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@452ea8f0]
 [INFO ] 21-12-2021 14:57:10 [main] INFO  StartupInfoLogger 61 - Started InvoiceServiceTest in 6.602 seconds (JVM running for 8.082)
 [INFO ] 21-12-2021 14:57:10 [SpringApplicationShutdownHook] INFO  AbstractEntityManagerFactoryBean 651 - Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 21-12-2021 17:56:31 [background-preinit] INFO  Version 21 - HV000001: Hibernate Validator 6.2.0.Final
+[INFO ] 21-12-2021 17:56:31 [restartedMain] INFO  StartupInfoLogger 55 - Starting Java04MovietheterG3Application using Java 12.0.2 on DESKTOP-6O1UDOF with PID 15308 (C:\Users\Khanh\eclipse-workspace\java_04_movietheater_g3_v1.4\target\classes started by Khanh in C:\Users\Khanh\eclipse-workspace\java_04_movietheater_g3_v1.4)
+[INFO ] 21-12-2021 17:56:31 [restartedMain] INFO  SpringApplication 635 - No active profile set, falling back to default profiles: default
+[INFO ] 21-12-2021 17:56:31 [restartedMain] INFO  DeferredLog 255 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[INFO ] 21-12-2021 17:56:31 [restartedMain] INFO  DeferredLog 255 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[INFO ] 21-12-2021 17:56:33 [restartedMain] INFO  RepositoryConfigurationDelegate 132 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[INFO ] 21-12-2021 17:56:33 [restartedMain] INFO  RepositoryConfigurationDelegate 201 - Finished Spring Data repository scanning in 223 ms. Found 15 JPA repository interfaces.
+[INFO ] 21-12-2021 17:56:34 [restartedMain] INFO  TomcatWebServer 108 - Tomcat initialized with port(s): 8080 (http)
+[INFO ] 21-12-2021 17:56:34 [restartedMain] INFO  ServletWebServerApplicationContext 290 - Root WebApplicationContext: initialization completed in 2971 ms
+[INFO ] 21-12-2021 17:56:35 [restartedMain] INFO  LogHelper 31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+[INFO ] 21-12-2021 17:56:35 [restartedMain] INFO  Version 44 - HHH000412: Hibernate ORM core version 5.6.1.Final
+[INFO ] 21-12-2021 17:56:35 [restartedMain] INFO  JavaReflectionManager 56 - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[INFO ] 21-12-2021 17:56:36 [restartedMain] INFO  Dialect 175 - HHH000400: Using dialect: org.hibernate.dialect.SQLServer2016Dialect
+[INFO ] 21-12-2021 17:56:38 [restartedMain] INFO  JtaPlatformInitiator 52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[INFO ] 21-12-2021 17:56:38 [restartedMain] INFO  AbstractEntityManagerFactoryBean 437 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[WARN ] 21-12-2021 17:56:38 [restartedMain] WARN  JpaBaseConfiguration$JpaWebConfiguration 219 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 21-12-2021 17:56:40 [restartedMain] INFO  DefaultSecurityFilterChain 51 - Will secure Ant [pattern='/resources/**'] with []
+[INFO ] 21-12-2021 17:56:40 [restartedMain] INFO  DefaultSecurityFilterChain 51 - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@24ef5ac5, org.springframework.security.web.context.SecurityContextPersistenceFilter@29e56840, org.springframework.security.web.header.HeaderWriterFilter@69260fd3, org.springframework.security.web.authentication.logout.LogoutFilter@47ef0b72, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@10f24c56, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@55268d86, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@756a030, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7337ec06, org.springframework.security.web.session.SessionManagementFilter@434046cd, org.springframework.security.web.access.ExceptionTranslationFilter@6f900db2, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@55e2e771]
+[WARN ] 21-12-2021 17:56:40 [restartedMain] WARN  OptionalLiveReloadServer 61 - Unable to start LiveReload server
+[WARN ] 21-12-2021 17:56:40 [restartedMain] WARN  AbstractApplicationContext 591 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+[INFO ] 21-12-2021 17:56:40 [restartedMain] INFO  AbstractEntityManagerFactoryBean 651 - Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 21-12-2021 17:56:40 [restartedMain] INFO  ConditionEvaluationReportLoggingListener 136 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[ERROR] 21-12-2021 17:56:40 [restartedMain] ERROR LoggingFailureAnalysisReporter 40 - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+[INFO ] 21-12-2021 17:57:08 [background-preinit] INFO  Version 21 - HV000001: Hibernate Validator 6.2.0.Final
+[INFO ] 21-12-2021 17:57:08 [restartedMain] INFO  StartupInfoLogger 55 - Starting Java04MovietheterG3Application using Java 12.0.2 on DESKTOP-6O1UDOF with PID 17628 (C:\Users\Khanh\eclipse-workspace\java_04_movietheater_g3_v1.4\target\classes started by Khanh in C:\Users\Khanh\eclipse-workspace\java_04_movietheater_g3_v1.4)
+[INFO ] 21-12-2021 17:57:08 [restartedMain] INFO  SpringApplication 635 - No active profile set, falling back to default profiles: default
+[INFO ] 21-12-2021 17:57:08 [restartedMain] INFO  DeferredLog 255 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[INFO ] 21-12-2021 17:57:08 [restartedMain] INFO  DeferredLog 255 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[INFO ] 21-12-2021 17:57:09 [restartedMain] INFO  RepositoryConfigurationDelegate 132 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[INFO ] 21-12-2021 17:57:09 [restartedMain] INFO  RepositoryConfigurationDelegate 201 - Finished Spring Data repository scanning in 123 ms. Found 15 JPA repository interfaces.
+[INFO ] 21-12-2021 17:57:10 [restartedMain] INFO  TomcatWebServer 108 - Tomcat initialized with port(s): 8080 (http)
+[INFO ] 21-12-2021 17:57:10 [restartedMain] INFO  ServletWebServerApplicationContext 290 - Root WebApplicationContext: initialization completed in 2098 ms
+[INFO ] 21-12-2021 17:57:10 [restartedMain] INFO  LogHelper 31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+[INFO ] 21-12-2021 17:57:10 [restartedMain] INFO  Version 44 - HHH000412: Hibernate ORM core version 5.6.1.Final
+[INFO ] 21-12-2021 17:57:11 [restartedMain] INFO  JavaReflectionManager 56 - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[INFO ] 21-12-2021 17:57:11 [restartedMain] INFO  Dialect 175 - HHH000400: Using dialect: org.hibernate.dialect.SQLServer2016Dialect
+[INFO ] 21-12-2021 17:57:12 [restartedMain] INFO  JtaPlatformInitiator 52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[INFO ] 21-12-2021 17:57:12 [restartedMain] INFO  AbstractEntityManagerFactoryBean 437 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[WARN ] 21-12-2021 17:57:13 [restartedMain] WARN  JpaBaseConfiguration$JpaWebConfiguration 219 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 21-12-2021 17:57:14 [restartedMain] INFO  DefaultSecurityFilterChain 51 - Will secure Ant [pattern='/resources/**'] with []
+[INFO ] 21-12-2021 17:57:14 [restartedMain] INFO  DefaultSecurityFilterChain 51 - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@15bc9363, org.springframework.security.web.context.SecurityContextPersistenceFilter@c8e82fd, org.springframework.security.web.header.HeaderWriterFilter@4c9f7f01, org.springframework.security.web.authentication.logout.LogoutFilter@2f830dfa, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@21d6ddde, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1fc7825a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@62dd37fa, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@21d3a95c, org.springframework.security.web.session.SessionManagementFilter@674b6d4c, org.springframework.security.web.access.ExceptionTranslationFilter@1d671c8b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@16b6ffe8]
+[WARN ] 21-12-2021 17:57:14 [restartedMain] WARN  OptionalLiveReloadServer 61 - Unable to start LiveReload server
+[WARN ] 21-12-2021 17:57:14 [restartedMain] WARN  AbstractApplicationContext 591 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+[INFO ] 21-12-2021 17:57:14 [restartedMain] INFO  AbstractEntityManagerFactoryBean 651 - Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 21-12-2021 17:57:14 [restartedMain] INFO  ConditionEvaluationReportLoggingListener 136 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[ERROR] 21-12-2021 17:57:14 [restartedMain] ERROR LoggingFailureAnalysisReporter 40 - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+[INFO ] 21-12-2021 17:59:51 [background-preinit] INFO  Version 21 - HV000001: Hibernate Validator 6.2.0.Final
+[INFO ] 21-12-2021 17:59:51 [restartedMain] INFO  StartupInfoLogger 55 - Starting Java04MovietheterG3Application using Java 12.0.2 on DESKTOP-6O1UDOF with PID 7852 (C:\Users\Khanh\eclipse-workspace\java_04_movietheater_g3_v1.4\target\classes started by Khanh in C:\Users\Khanh\eclipse-workspace\java_04_movietheater_g3_v1.4)
+[INFO ] 21-12-2021 17:59:51 [restartedMain] INFO  SpringApplication 635 - No active profile set, falling back to default profiles: default
+[INFO ] 21-12-2021 17:59:51 [restartedMain] INFO  DeferredLog 255 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[INFO ] 21-12-2021 17:59:51 [restartedMain] INFO  DeferredLog 255 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[INFO ] 21-12-2021 17:59:52 [restartedMain] INFO  RepositoryConfigurationDelegate 132 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[INFO ] 21-12-2021 17:59:52 [restartedMain] INFO  RepositoryConfigurationDelegate 201 - Finished Spring Data repository scanning in 143 ms. Found 15 JPA repository interfaces.
+[INFO ] 21-12-2021 17:59:53 [restartedMain] INFO  TomcatWebServer 108 - Tomcat initialized with port(s): 8080 (http)
+[INFO ] 21-12-2021 17:59:54 [restartedMain] INFO  ServletWebServerApplicationContext 290 - Root WebApplicationContext: initialization completed in 2904 ms
+[INFO ] 21-12-2021 17:59:54 [restartedMain] INFO  LogHelper 31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+[INFO ] 21-12-2021 17:59:54 [restartedMain] INFO  Version 44 - HHH000412: Hibernate ORM core version 5.6.1.Final
+[INFO ] 21-12-2021 17:59:54 [restartedMain] INFO  JavaReflectionManager 56 - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[INFO ] 21-12-2021 17:59:55 [restartedMain] INFO  Dialect 175 - HHH000400: Using dialect: org.hibernate.dialect.SQLServer2016Dialect
+[INFO ] 21-12-2021 17:59:58 [restartedMain] INFO  JtaPlatformInitiator 52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[INFO ] 21-12-2021 17:59:58 [restartedMain] INFO  AbstractEntityManagerFactoryBean 437 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[WARN ] 21-12-2021 17:59:59 [restartedMain] WARN  JpaBaseConfiguration$JpaWebConfiguration 219 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 21-12-2021 18:00:00 [restartedMain] INFO  DefaultSecurityFilterChain 51 - Will secure Ant [pattern='/resources/**'] with []
+[INFO ] 21-12-2021 18:00:00 [restartedMain] INFO  DefaultSecurityFilterChain 51 - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4530d9a0, org.springframework.security.web.context.SecurityContextPersistenceFilter@44675cde, org.springframework.security.web.header.HeaderWriterFilter@6f972dd9, org.springframework.security.web.authentication.logout.LogoutFilter@49ce2c8d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@664cb329, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2910e38f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@689ec1f2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@131a5982, org.springframework.security.web.session.SessionManagementFilter@6a6a475f, org.springframework.security.web.access.ExceptionTranslationFilter@88ce86c, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7d26e980]
+[WARN ] 21-12-2021 18:00:00 [restartedMain] WARN  OptionalLiveReloadServer 61 - Unable to start LiveReload server
+[WARN ] 21-12-2021 18:00:00 [restartedMain] WARN  AbstractApplicationContext 591 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+[INFO ] 21-12-2021 18:00:00 [restartedMain] INFO  AbstractEntityManagerFactoryBean 651 - Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 21-12-2021 18:00:00 [restartedMain] INFO  ConditionEvaluationReportLoggingListener 136 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[ERROR] 21-12-2021 18:00:00 [restartedMain] ERROR LoggingFailureAnalysisReporter 40 - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
