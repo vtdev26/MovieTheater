@@ -188,7 +188,7 @@ public class MovieController {
 
 		} else {
 			Map<String, String> messageToDisplay = new HashMap<String, String>();
-			if (Constants.DEFAULT_WORD.equals(movie.getMovieId())) {
+			if (movie.getMovieId()==null || Constants.DEFAULT_WORD.equals(movie.getMovieId())) {
 				movie.setReleaseDate(movie.getFromDate());
 				movie.setMovieId(null);
 			} else {
@@ -202,9 +202,9 @@ public class MovieController {
 					messageToDisplay.put("messageFailed", exception.getMessage());
 					return new ResponseEntity<>(messageToDisplay, HttpStatus.BAD_REQUEST);
 				}
-			} else {
-				movie.setLargeImage(movieServices.getById(movie.getMovieId()).getLargeImage());
-			}
+			} else if (movie.getMovieId()!=null && !Constants.DEFAULT_WORD.equals(movie.getMovieId())) {
+			  movie.setLargeImage(movieServices.getById(movie.getMovieId()).getLargeImage());
+      } 
 			CinemaRoom cinemaRoomtoSave = cinemaRoomService.findById(cinemaRoom);
 			List<MovieType> movieTypes = new ArrayList<MovieType>();
 			List<MovieSchedule> movieSchedules = new ArrayList<MovieSchedule>();

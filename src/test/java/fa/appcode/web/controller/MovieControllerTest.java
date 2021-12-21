@@ -312,7 +312,6 @@ class MovieControllerTest {
 	@WithMockUser(roles = "ADMIN", username = "admin")
 	void testSaveMovie1() throws Exception {
 		Movie movie = new Movie();
-		movie.setMovieId("1");
 		movie.setActor("Duy Khanh");
 		movie.setDuration((double) 111);
 		movie.setDirector("Duy Khanh");
@@ -360,8 +359,6 @@ class MovieControllerTest {
 		movie.setMovieTypes(movieTypes);
 		movie.setMovieSchedules(movieSchedules);
 		Mockito.when(movieService.getById(movie.getMovieId())).thenReturn(movie);
-		Mockito.when(movieService.getById("").getLargeImage()).thenReturn("");
-
 		Mockito.when(cinemaRoomService.findById("0")).thenReturn(cinemaRooms.get(0));
 		Mockito.when(showDatesService.findByFromDateAndToDate(movie.getFromDate(), movie.getToDate()))
 				.thenReturn(showDates);
