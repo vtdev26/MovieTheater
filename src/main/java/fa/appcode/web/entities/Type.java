@@ -31,6 +31,14 @@ public class Type {
 	@Column(name = "type_name", columnDefinition = "NVARCHAR(255)")
 	private String typeName;
 
-	@OneToMany(mappedBy = "type", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "type")
 	private Set<MovieType> movieTypes;
+
+	public Type(Integer typeId, String typeName) {
+		super();
+		this.typeId = typeId;
+		this.typeName = typeName;
+	}
+	
+	
 }

@@ -75,16 +75,16 @@ class ShowtimesServiceTest {
 		MovieSchedule movieSchedule3 = new MovieSchedule(movie2, schedule1);
 		MovieSchedule movieSchedule4 = new MovieSchedule(movie3, schedule1);
 		
-		Set<MovieSchedule> movieSchedules1 = new HashSet<MovieSchedule>();
+		List<MovieSchedule> movieSchedules1 = new ArrayList<MovieSchedule>();
 		movieSchedules1.add(movieSchedule1);
 		movieSchedules1.add(movieSchedule2);
 		movie1.setMovieSchedules(movieSchedules1);
 		
-		Set<MovieSchedule> movieSchedules2 = new HashSet<MovieSchedule>();
+		List<MovieSchedule> movieSchedules2 = new ArrayList<MovieSchedule>();
 		movieSchedules2.add(movieSchedule3);
 		movie2.setMovieSchedules(movieSchedules2);
 		
-		Set<MovieSchedule> movieSchedules3 = new HashSet<MovieSchedule>();
+		List<MovieSchedule> movieSchedules3 = new ArrayList<MovieSchedule>();
 		movieSchedules2.add(movieSchedule4);
 		movie2.setMovieSchedules(movieSchedules3);
 		

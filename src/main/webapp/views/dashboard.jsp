@@ -233,7 +233,7 @@
 
 				<!-- Movie scripts -->
 				<script src="/resources/js/movie/list-movie.js"></script>
-
+				<script src="/resources/js/movie/detail-movie.js"></script>
 				<!-- Promotion scripts -->
 				<script src="/resources/js/promotion/list-promotion.js"></script>
 				<script src="/resources/js/promotion/detail-promotion.js"></script>

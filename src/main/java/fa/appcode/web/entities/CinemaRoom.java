@@ -60,7 +60,11 @@ public class CinemaRoom {
 		this.seatQuantity = seatQuantity;
 		this.seats = seats;
 	}
-	
+	public CinemaRoom(Integer cinemaRoomId, String cinemaRoomName) {
+    super();
+    this.cinemaRoomId = cinemaRoomId;
+    this.cinemaRoomName = cinemaRoomName;
+  }
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

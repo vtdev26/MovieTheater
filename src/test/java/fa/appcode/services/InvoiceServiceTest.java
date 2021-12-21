@@ -148,7 +148,7 @@ class InvoiceServiceTest {
 		Mockito.when(ticketService.saveAll(tickets)).thenReturn(tickets);
 		Mockito.when(seatService.findAllBySeatId(seatIds)).thenReturn(seats);
 		Mockito.when(memberService.findByMemberIdOrIdendityCard(confirmTicketVo.getMemberId())).thenReturn(member);
-		Mockito.when(movieService.findByMovieId(confirmTicketVo.getMovieId())).thenReturn(movie);
+		Mockito.when(movieService.getById(confirmTicketVo.getMovieId())).thenReturn(movie);
 		Mockito.when(pageConfig.getScoreAdd()).thenReturn(15000.0);
 		
 		assertTrue(invoiceService.save(confirmTicketVo));
@@ -167,7 +167,7 @@ class InvoiceServiceTest {
 		Mockito.when(ticketService.saveAll(tickets)).thenReturn(tickets);
 		Mockito.when(seatService.findAllBySeatId(seatIds)).thenReturn(seats);
 		Mockito.when(memberService.findByMemberIdOrIdendityCard(confirmTicketVo.getMemberId())).thenReturn(member);
-		Mockito.when(movieService.findByMovieId(confirmTicketVo.getMovieId())).thenReturn(movie);
+		Mockito.when(movieService.getById(confirmTicketVo.getMovieId())).thenReturn(movie);
 		Mockito.when(pageConfig.getScoreAdd()).thenReturn(15000.0);
 		
 		assertTrue(!invoiceService.save(confirmTicketVo));
@@ -186,7 +186,7 @@ class InvoiceServiceTest {
 		Mockito.when(ticketService.saveAll(tickets)).thenReturn(tickets);
 		Mockito.when(seatService.findAllBySeatId(seatIds)).thenReturn(seats);
 		Mockito.when(memberService.findByMemberIdOrIdendityCard(confirmTicketVo.getMemberId())).thenReturn(member);
-		Mockito.when(movieService.findByMovieId(confirmTicketVo.getMovieId())).thenReturn(null);
+		Mockito.when(movieService.getById(confirmTicketVo.getMovieId())).thenReturn(null);
 		Mockito.when(pageConfig.getScoreAdd()).thenReturn(15000.0);
 		
 		assertTrue(!invoiceService.save(confirmTicketVo));
@@ -205,7 +205,7 @@ class InvoiceServiceTest {
 		Mockito.when(ticketService.saveAll(tickets)).thenReturn(null);
 		Mockito.when(seatService.findAllBySeatId(seatIds)).thenReturn(seats);
 		Mockito.when(memberService.findByMemberIdOrIdendityCard(confirmTicketVo.getMemberId())).thenReturn(member);
-		Mockito.when(movieService.findByMovieId(confirmTicketVo.getMovieId())).thenReturn(movie);
+		Mockito.when(movieService.getById(confirmTicketVo.getMovieId())).thenReturn(movie);
 		Mockito.when(pageConfig.getScoreAdd()).thenReturn(15000.0);
 		
 		assertTrue(!invoiceService.save(confirmTicketVo));
@@ -224,7 +224,7 @@ class InvoiceServiceTest {
 		Mockito.when(ticketService.saveAll(tickets)).thenReturn(null);
 		Mockito.when(seatService.findAllBySeatId(seatIds)).thenReturn(seats);
 		Mockito.when(memberService.findByMemberIdOrIdendityCard(confirmTicketVo.getMemberId())).thenReturn(member);
-		Mockito.when(movieService.findByMovieId(confirmTicketVo.getMovieId())).thenReturn(movie);
+		Mockito.when(movieService.getById(confirmTicketVo.getMovieId())).thenReturn(movie);
 		Mockito.when(pageConfig.getScoreAdd()).thenReturn(15000.0);
 		
 		assertTrue(!invoiceService.save(confirmTicketVo));
@@ -243,7 +243,7 @@ class InvoiceServiceTest {
 		Mockito.when(ticketService.saveAll(tickets)).thenReturn(tickets);
 		Mockito.when(seatService.findAllBySeatId(seatIds)).thenReturn(seats);
 		Mockito.when(memberService.findByMemberIdOrIdendityCard(confirmTicketVo.getMemberId())).thenReturn(null);
-		Mockito.when(movieService.findByMovieId(confirmTicketVo.getMovieId())).thenReturn(movie);
+		Mockito.when(movieService.getById(confirmTicketVo.getMovieId())).thenReturn(movie);
 		Mockito.when(pageConfig.getScoreAdd()).thenReturn(15000.0);
 		
 		assertTrue(!invoiceService.save(confirmTicketVo));

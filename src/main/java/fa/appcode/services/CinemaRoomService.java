@@ -17,4 +17,5 @@ public interface CinemaRoomService {
 	CinemaRoom findByMovieId(String movieId);
 	
 	CinemaRoom seatSoldsHanlder(CinemaRoom cinemaRoom, List<ScheduleSeat> scheduleSeats);
+	List<CinemaRoom> findAll();
 }
