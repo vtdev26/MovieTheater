@@ -67,8 +67,8 @@ public class ShowtimesServiceImpl implements ShowtimesService {
 
 		List<ShowDates> showDates = null;
 
-		if (date == null || date == "") {
-			date = LocalDate.now() + "";
+		if (date == null || Constants.DEFAULT_WORD.equals(date)) {
+			date = LocalDate.now().toString();
 		}
 		showDates = showTimesRepository
 				.findAll(showDateSpecification.getListByDate(DateUtils.convertToDate(LocalDate.parse(date))));

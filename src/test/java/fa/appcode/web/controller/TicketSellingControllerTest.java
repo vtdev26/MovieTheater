@@ -2,6 +2,7 @@ package fa.appcode.web.controller;
 
 
 
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -11,10 +12,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +34,9 @@ import fa.appcode.config.PageConfig;
 import fa.appcode.services.CinemaRoomService;
 import fa.appcode.services.InvoiceService;
 import fa.appcode.services.MemberService;
+import fa.appcode.services.MovieService;
 import fa.appcode.services.ScheduleSeatService;
+import fa.appcode.services.SeatService;
 import fa.appcode.services.ShowtimesService;
 import fa.appcode.web.entities.Account;
 import fa.appcode.web.entities.CinemaRoom;
@@ -58,84 +58,90 @@ class TicketSellingControllerTest {
 
 	@MockBean
 	private ShowtimesService showtimesService;
-	
+
 	@MockBean
 	private CinemaRoomService cinemaRoomService;
-	
+
 	@MockBean
 	private ScheduleSeatService scheduleSeatService;
-	
+
 	@MockBean
 	private MemberService memberService;
-	
+
 	@MockBean
 	private InvoiceService invoiceService;
-	
+
+	@MockBean
+	private MovieService movieService;
+
+	@MockBean
+	private SeatService seatService;
+
 	@Autowired
 	private MessageConfig messageConfig;
-	
+
 	@Autowired
 	private PageConfig pageConfig;
-	
+
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	private static List<ShowDates> listShowDate = null;
-	
+
 	private static MovieDate movieDate1 = null;
-	
-	private static MovieDate movieDate2 = null;	
-	
+
+	private static MovieDate movieDate2 = null;
+
 	private static MovieDate movieDate3 = null;
-	
+
 	private static List<LocalDate> listDates = null;
-	
+
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception {		
-		
+	static void setUpBeforeClass() throws Exception {
+
 		LocalDate startDate = LocalDate.now();
 		listDates = startDate.datesUntil(startDate.plusDays(6)).collect(Collectors.toList());
-		
+
 		CinemaRoom cinemaRoom = new CinemaRoom();
-		ShowDates showDates = new ShowDates(1, 
+		ShowDates showDates = new ShowDates(1,
 				Date.from(LocalDate.of(2021, 12, 06).atStartOfDay(ZoneId.systemDefault()).toInstant()), "2021/12/06");
-		
+
 		Movie movie1 = new Movie("1", "actor 1", "movie 1", cinemaRoom);
 		Movie movie2 = new Movie("2", "actor 2", "movie 2", cinemaRoom);
 		Movie movie3 = new Movie("3", "actor 3", "movie 3", cinemaRoom);
-		
+
 		movieDate1 = new MovieDate(movie1, showDates);
 		movieDate2 = new MovieDate(movie2, showDates);
 		movieDate3 = new MovieDate(movie3, showDates);
-		
+
 		Schedule schedule1 = new Schedule(1, "08:00");
 		Schedule schedule2 = new Schedule(2, "09:00");
-		
+
 		MovieSchedule movieSchedule1 = new MovieSchedule(movie1, schedule1);
 		MovieSchedule movieSchedule2 = new MovieSchedule(movie1, schedule2);
 		MovieSchedule movieSchedule3 = new MovieSchedule(movie2, schedule1);
 		MovieSchedule movieSchedule4 = new MovieSchedule(movie3, schedule1);
-		
+
 		List<MovieSchedule> movieSchedules1 = new ArrayList<MovieSchedule>();
 		movieSchedules1.add(movieSchedule1);
 		movieSchedules1.add(movieSchedule2);
 		movie1.setMovieSchedules(movieSchedules1);
-		
+
 		List<MovieSchedule> movieSchedules2 = new ArrayList<MovieSchedule>();
 		movieSchedules2.add(movieSchedule3);
 		movie2.setMovieSchedules(movieSchedules2);
-		
+
 		List<MovieSchedule> movieSchedules3 = new ArrayList<MovieSchedule>();
 		movieSchedules2.add(movieSchedule4);
 		movie2.setMovieSchedules(movieSchedules3);
-		
+
 		Set<MovieDate> movieDates = new HashSet<MovieDate>();
 		movieDates.add(movieDate1);
 		movieDates.add(movieDate2);
 		movieDates.add(movieDate3);
-		
+
 		showDates.setMovieDates(movieDates);
-		
+
 		listShowDate = new ArrayList<ShowDates>();
 		listShowDate.add(showDates);
 		listShowDate.add(showDates);
@@ -143,21 +149,9 @@ class TicketSellingControllerTest {
 		listShowDate.add(showDates);
 	}
 
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-	}
-
-	@BeforeEach
-	void setUp() throws Exception {
-	}
-
-	@AfterEach
-	void tearDown() throws Exception {
-	}
-
 	/**
-	 * TC1: Normal case (pageIndex = null, dateSelecting = null, maxPage = 2)
-	 * @throws Exception 
+	 * TC1: Normal case (pageIndex = null, dateSelecting = null, maxPage = 20)
+	 * @throws Exception
 	 */
 	@Test
 	void testShowtimesTC1() throws Exception {
@@ -165,28 +159,28 @@ class TicketSellingControllerTest {
 		String dateSelecting = null;
 		Integer maxPage = 20;
 
-		
+
 		Mockito.when(showtimesService.getShowDateList(LocalDate.now().toString())).thenReturn(listDates);
-		
+
 		List<MovieDate> movieDates = new ArrayList<MovieDate>();
 		movieDates.add(movieDate1);
 		movieDates.add(movieDate2);
 		PageVo<MovieDate> pageVo = new PageVo<MovieDate>(1, maxPage, movieDates);
-		
+
 		Mockito.when(showtimesService.findMovieTimeByDate(dateSelecting, pageIndex, pageConfig.getMaxPageShowTime())).thenReturn(pageVo);
-		
+
 		mockMvc.perform(MockMvcRequestBuilders.get("/admin/showtimes"))
 				.andExpect(MockMvcResultMatchers.model().attribute("listDates", listDates))
 				.andExpect(MockMvcResultMatchers.model().attribute("dateSelecting", LocalDate.now()+""))
 				.andExpect(MockMvcResultMatchers.model().attribute("pageIndex", pageVo.getPageIndex()))
 				.andExpect(MockMvcResultMatchers.model().attribute("movieDates", pageVo.getContent()))
 				.andExpect(MockMvcResultMatchers.model().attribute("totalPages", pageVo.getTotalPage()))
-				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/showtimes"));	
+				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/showtimes"));
 	}
-	
+
 	/**
-	 * TC2: Abnormal case (pageIndex = null, dateSelecting = "", maxPage = 2)
-	 * @throws Exception 
+	 * TC2: Abnormal case (pageIndex = null, dateSelecting = "", maxPage = 20)
+	 * @throws Exception
 	 */
 	@Test
 	void testShowtimesTC2() throws Exception {
@@ -194,28 +188,28 @@ class TicketSellingControllerTest {
 		String dateSelecting = "";
 		Integer maxPage = 20;
 
-		
+
 		Mockito.when(showtimesService.getShowDateList(LocalDate.now().toString())).thenReturn(listDates);
-		
+
 		List<MovieDate> movieDates = new ArrayList<MovieDate>();
 		movieDates.add(movieDate1);
 		movieDates.add(movieDate2);
 		PageVo<MovieDate> pageVo = new PageVo<MovieDate>(1, maxPage, movieDates);
-		
+
 		Mockito.when(showtimesService.findMovieTimeByDate(dateSelecting, pageIndex, pageConfig.getMaxPageShowTime())).thenReturn(pageVo);
-		
+
 		mockMvc.perform(MockMvcRequestBuilders.get("/admin/showtimes").param("dateSelecting", dateSelecting))
 				.andExpect(MockMvcResultMatchers.model().attribute("listDates", listDates))
 				.andExpect(MockMvcResultMatchers.model().attribute("dateSelecting", LocalDate.now()+""))
 				.andExpect(MockMvcResultMatchers.model().attribute("pageIndex", pageVo.getPageIndex()))
 				.andExpect(MockMvcResultMatchers.model().attribute("movieDates", pageVo.getContent()))
 				.andExpect(MockMvcResultMatchers.model().attribute("totalPages", pageVo.getTotalPage()))
-				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/showtimes"));	
+				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/showtimes"));
 	}
-	
+
 	/**
-	 * TC3: Abnormal case (pageIndex = null, dateSelecting = "LocalDate.now +"" ", maxPage = 2)
-	 * @throws Exception 
+	 * TC3: Abnormal case (pageIndex = null, dateSelecting = "LocalDate.now +"" ", maxPage = 20)
+	 * @throws Exception
 	 */
 	@Test
 	void testShowtimesTC3() throws Exception {
@@ -223,28 +217,28 @@ class TicketSellingControllerTest {
 		String dateSelecting = LocalDate.now() +"";
 		Integer maxPage = 20;
 
-		
+
 		Mockito.when(showtimesService.getShowDateList(LocalDate.now().toString())).thenReturn(listDates);
-		
+
 		List<MovieDate> movieDates = new ArrayList<MovieDate>();
 		movieDates.add(movieDate1);
 		movieDates.add(movieDate2);
 		PageVo<MovieDate> pageVo = new PageVo<MovieDate>(1, maxPage, movieDates);
-		
+
 		Mockito.when(showtimesService.findMovieTimeByDate(dateSelecting, pageIndex, pageConfig.getMaxPageShowTime())).thenReturn(pageVo);
-		
+
 		mockMvc.perform(MockMvcRequestBuilders.get("/admin/showtimes").param("dateSelecting", dateSelecting))
 				.andExpect(MockMvcResultMatchers.model().attribute("listDates", listDates))
 				.andExpect(MockMvcResultMatchers.model().attribute("dateSelecting", LocalDate.now()+""))
 				.andExpect(MockMvcResultMatchers.model().attribute("pageIndex", pageVo.getPageIndex()))
 				.andExpect(MockMvcResultMatchers.model().attribute("movieDates", pageVo.getContent()))
 				.andExpect(MockMvcResultMatchers.model().attribute("totalPages", pageVo.getTotalPage()))
-				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/showtimes"));	
+				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/showtimes"));
 	}
-	
+
 	/**
-	 * TC4: Abnormal case (pageIndex = 1, dateSelecting = Current date, maxPage = 2)
-	 * @throws Exception 
+	 * TC4: Abnormal case (pageIndex = 1, dateSelecting = Current date, maxPage = 20)
+	 * @throws Exception
 	 */
 	@Test
 	void testShowtimesTC4() throws Exception {
@@ -252,29 +246,29 @@ class TicketSellingControllerTest {
 		String dateSelecting = LocalDate.now().toString();
 		Integer maxPage = 20;
 
-		
+
 		Mockito.when(showtimesService.getShowDateList(LocalDate.now().toString())).thenReturn(listDates);
-		
+
 		List<MovieDate> movieDates = new ArrayList<MovieDate>();
 		movieDates.add(movieDate1);
 		movieDates.add(movieDate2);
 		PageVo<MovieDate> pageVo = new PageVo<MovieDate>(1, maxPage, movieDates);
-		
+
 		Mockito.when(showtimesService.findMovieTimeByDate(dateSelecting, pageIndex, pageConfig.getMaxPageShowTime())).thenReturn(pageVo);
-		
+
 		mockMvc.perform(MockMvcRequestBuilders.get("/admin/showtimes").param("dateSelecting", dateSelecting)
-				.param("pageIndex", String.valueOf(pageIndex)))
+						.param("pageIndex", String.valueOf(pageIndex)))
 				.andExpect(MockMvcResultMatchers.model().attribute("listDates", listDates))
 				.andExpect(MockMvcResultMatchers.model().attribute("dateSelecting", LocalDate.now()+""))
 				.andExpect(MockMvcResultMatchers.model().attribute("pageIndex", pageVo.getPageIndex()))
 				.andExpect(MockMvcResultMatchers.model().attribute("movieDates", pageVo.getContent()))
 				.andExpect(MockMvcResultMatchers.model().attribute("totalPages", pageVo.getTotalPage()))
-				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/showtimes"));	
+				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/showtimes"));
 	}
-	
+
 	/**
-	 * TC5: Abnormal case (pageIndex = 2, dateSelecting = Current date, maxPage = 2)
-	 * @throws Exception 
+	 * TC5: Abnormal case (pageIndex = 2, dateSelecting = Current date, maxPage = 20)
+	 * @throws Exception
 	 */
 	@Test
 	void testShowtimesTC5() throws Exception {
@@ -282,29 +276,56 @@ class TicketSellingControllerTest {
 		String dateSelecting = LocalDate.now().toString();
 		Integer maxPage = 20;
 
-		
+
 		Mockito.when(showtimesService.getShowDateList(LocalDate.now().toString())).thenReturn(listDates);
-		
+
 		List<MovieDate> movieDates = new ArrayList<MovieDate>();
 		movieDates.add(movieDate1);
 		movieDates.add(movieDate2);
 		PageVo<MovieDate> pageVo = new PageVo<MovieDate>(2, maxPage, movieDates);
-		
+
 		Mockito.when(showtimesService.findMovieTimeByDate(dateSelecting, pageIndex, pageConfig.getMaxPageShowTime())).thenReturn(pageVo);
-		
-		mockMvc.perform(MockMvcRequestBuilders.get("/admin/showtimes").param("dateSelecting", dateSelecting)
-				.param("pageIndex", String.valueOf(pageIndex)))
+
+		mockMvc.perform(MockMvcRequestBuilders.get("/admin/showtimes")
+						.param("dateSelecting", dateSelecting)
+						.param("pageIndex", String.valueOf(pageIndex)))
 				.andExpect(MockMvcResultMatchers.model().attribute("listDates", listDates))
 				.andExpect(MockMvcResultMatchers.model().attribute("dateSelecting", LocalDate.now()+""))
 				.andExpect(MockMvcResultMatchers.model().attribute("pageIndex", pageVo.getPageIndex()))
+				.andExpect(MockMvcResultMatchers.model().attribute("movieDates", pageVo.getContent()))
 				.andExpect(MockMvcResultMatchers.model().attribute("totalPages", pageVo.getTotalPage()))
-				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/showtimes"));	
+				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/showtimes"));
 	}
-	
-	
+
+	/**
+	 * TC6: Normal case (pageIndex = null, dateSelecting = null)
+	 * listDates = null)
+	 * @throws Exception
+	 */
+	@Test
+	void testShowtimesTC6() throws Exception {
+		Integer pageIndex = 2;
+		String dateSelecting = LocalDate.now().toString();
+
+		List<LocalDate> listDatess = null;
+		Mockito.when(showtimesService.getShowDateList(LocalDate.now().toString())).thenReturn(listDatess);
+
+		List<MovieDate> movieDates = null;
+		PageVo<MovieDate> pageVo = null;
+
+		Mockito.when(showtimesService.findMovieTimeByDate(dateSelecting, pageIndex, pageConfig.getMaxPageShowTime())).thenReturn(pageVo);
+
+		mockMvc.perform(MockMvcRequestBuilders.get("/admin/showtimes"))
+				.andExpect(MockMvcResultMatchers.model().attribute("listDates", listDatess))
+				.andExpect(MockMvcResultMatchers.model().attribute("dateSelecting", LocalDate.now()+""))
+				.andExpect(MockMvcResultMatchers.model().attribute("movieDates", movieDates))
+				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/showtimes"));
+	}
+
+
 	/**
 	 * TC1: Case Normal (MovieId: "1", ScheduleId: 1)
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@Test
 	void testShowSelectingSeatTC1() throws Exception {
@@ -321,7 +342,7 @@ class TicketSellingControllerTest {
 		scheduleSeats.add(new ScheduleSeat(movieId, Integer.parseInt(scheduleId), 3, 1, 0));
 		scheduleSeats.add(new ScheduleSeat(movieId, Integer.parseInt(scheduleId), 4, 1, 0));
 		scheduleSeats.add(new ScheduleSeat(movieId, Integer.parseInt(scheduleId), 5, 1, 0));
-		
+
 		CinemaRoom cinemaRoomExpected = cinemaRoom;
 		cinemaRoomExpected.getSeats().get(1).setStatus(1);
 		cinemaRoomExpected.getSeats().get(2).setStatus(1);
@@ -333,15 +354,15 @@ class TicketSellingControllerTest {
 		Mockito.when(cinemaRoomService.findByMovieId(movieId)).thenReturn(cinemaRoom);
 		Mockito.when(cinemaRoomService.seatSoldsHanlder(cinemaRoomService.findByMovieId(movieId), scheduleSeats)).thenReturn(cinemaRoomExpected);
 		mockMvc.perform(MockMvcRequestBuilders.get("/admin/selecting-seat").param("movieId", movieId)
-				.param("scheduleId", scheduleId))
+						.param("scheduleId", scheduleId))
 				.andExpect(MockMvcResultMatchers.model().attribute("cinemaRoom", cinemaRoomExpected))
-				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/selecting-seat"));	
+				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/selecting-seat"));
 	}
 
 
 	/**
 	 * TC2: Case Abnormal (MovieId: "", ScheduleId: 1)
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@Test
 	void testShowSelectingSeatTC2() throws Exception {
@@ -354,14 +375,14 @@ class TicketSellingControllerTest {
 		Mockito.when(cinemaRoomService.findByMovieId(movieId)).thenReturn(cinemaRoom);
 		Mockito.when(cinemaRoomService.seatSoldsHanlder(cinemaRoomService.findByMovieId(movieId), scheduleSeats)).thenReturn(cinemaRoom);
 		mockMvc.perform(MockMvcRequestBuilders.get("/admin/selecting-seat").param("movieId", movieId)
-				.param("scheduleId", scheduleId))
+						.param("scheduleId", scheduleId))
 				.andExpect(MockMvcResultMatchers.model().attribute("cinemaRoom", cinemaRoom))
-				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/selecting-seat"));	
+				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/selecting-seat"));
 	}
-	
+
 	/**
 	 * TC3: Case Normal (MovieId: "1", ScheduleId: "")
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@Test
 	void testShowSelectingSeatTC3() throws Exception {
@@ -374,15 +395,15 @@ class TicketSellingControllerTest {
 		Mockito.when(cinemaRoomService.findByMovieId(movieId)).thenReturn(cinemaRoom);
 		Mockito.when(cinemaRoomService.seatSoldsHanlder(cinemaRoomService.findByMovieId(movieId), scheduleSeats)).thenReturn(cinemaRoom);
 		mockMvc.perform(MockMvcRequestBuilders.get("/admin/selecting-seat").param("movieId", movieId)
-				.param("scheduleId", scheduleId))
+						.param("scheduleId", scheduleId))
 				.andExpect(MockMvcResultMatchers.model().attribute("cinemaRoom", cinemaRoom))
-				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/selecting-seat"));	
+				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/selecting-seat"));
 	}
-	
+
 
 	/**
 	 * TC4: Case Abnormal (MovieId: "", ScheduleId: "")
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@Test
 	void testShowSelectingSeatTC4() throws Exception {
@@ -395,14 +416,14 @@ class TicketSellingControllerTest {
 		Mockito.when(cinemaRoomService.findByMovieId(movieId)).thenReturn(cinemaRoom);
 		Mockito.when(cinemaRoomService.seatSoldsHanlder(cinemaRoomService.findByMovieId(movieId), scheduleSeats)).thenReturn(cinemaRoom);
 		mockMvc.perform(MockMvcRequestBuilders.get("/admin/selecting-seat").param("movieId", movieId)
-				.param("scheduleId", scheduleId))
+						.param("scheduleId", scheduleId))
 				.andExpect(MockMvcResultMatchers.model().attribute("cinemaRoom", cinemaRoom))
-				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/selecting-seat"));	
+				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/selecting-seat"));
 	}
-	
+
 	/**
 	 * TC5: Case Abnormal (MovieId: null, ScheduleId: null)
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@Test
 	void testShowSelectingSeatTC5() throws Exception {
@@ -415,67 +436,139 @@ class TicketSellingControllerTest {
 		Mockito.when(cinemaRoomService.findByMovieId(movieId)).thenReturn(cinemaRoom);
 		Mockito.when(cinemaRoomService.seatSoldsHanlder(cinemaRoomService.findByMovieId(movieId), scheduleSeats)).thenReturn(cinemaRoom);
 		mockMvc.perform(MockMvcRequestBuilders.get("/admin/selecting-seat").param("movieId", String.valueOf(movieId))
-				.param("scheduleId", String.valueOf(scheduleId)))
+						.param("scheduleId", String.valueOf(scheduleId)))
 				.andExpect(MockMvcResultMatchers.model().attribute("cinemaRoom", cinemaRoom))
-				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/selecting-seat"));	
+				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/selecting-seat"));
 	}
-	
+
+	/**
+	 * TC1: Case Normal (movieId = "m1", listSelectedSeat = "1", "2", "3")
+	 * @throws Exception
+	 */
+	@Test
+	void testShowConfirmTicketTC1() throws Exception {
+		String movieId = "m1";
+		String[] listSelectedSeat = {"1", "2", "3"};
+
+		Movie movie = new Movie("m1", "actor1", "movie vn", null);
+		List<Seat> seats = new ArrayList<Seat>();
+		seats.add(new Seat(1, 0));
+		seats.add(new Seat(2, 0));
+		seats.add(new Seat(3, 1));
+
+		Mockito.when(movieService.getById(movieId)).thenReturn(movie);
+		Mockito.when(seatService.findAllBySeatId(listSelectedSeat)).thenReturn(seats);
+
+		mockMvc.perform(MockMvcRequestBuilders.get("/admin/confirm-ticket")
+						.param("listSelectedSeat", listSelectedSeat)
+						.param("movieId", movieId))
+				.andExpect(MockMvcResultMatchers.model().attribute("movie", movie))
+				.andExpect(MockMvcResultMatchers.model().attribute("seats", seats))
+				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/confirm-ticket"));
+	}
+
+	/**
+	 * TC2: Case Normal (movieId = "", listSelectedSeat = "")
+	 * @throws Exception
+	 */
+	@Test
+	void testShowConfirmTicketTC2() throws Exception {
+		String movieId = "";
+		String[] listSelectedSeat = {""};
+
+		Movie movie = null;
+		List<Seat> seats = new ArrayList<Seat>();
+
+		Mockito.when(movieService.getById(movieId)).thenReturn(movie);
+		Mockito.when(seatService.findAllBySeatId(listSelectedSeat)).thenReturn(seats);
+
+		mockMvc.perform(MockMvcRequestBuilders.get("/admin/confirm-ticket")
+						.param("listSelectedSeat", listSelectedSeat)
+						.param("movieId", movieId))
+				.andExpect(MockMvcResultMatchers.model().attribute("movie", movie))
+				.andExpect(MockMvcResultMatchers.model().attribute("seats", seats))
+				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/confirm-ticket"));
+	}
+
+	/**
+	 * TC3: Case Normal (movieId = "m1", listSelectedSeat = "")
+	 * @throws Exception
+	 */
+	@Test
+	void testShowConfirmTicketTC3() throws Exception {
+		String movieId = "m1";
+		String[] listSelectedSeat = {""};
+
+		Movie movie = new Movie("m1", "actor1", "movie vn", null);
+		List<Seat> seats = new ArrayList<Seat>();
+
+		Mockito.when(movieService.getById(movieId)).thenReturn(movie);
+		Mockito.when(seatService.findAllBySeatId(listSelectedSeat)).thenReturn(seats);
+
+		mockMvc.perform(MockMvcRequestBuilders.get("/admin/confirm-ticket")
+						.param("listSelectedSeat", listSelectedSeat)
+						.param("movieId", movieId))
+				.andExpect(MockMvcResultMatchers.model().attribute("movie", movie))
+				.andExpect(MockMvcResultMatchers.model().attribute("seats", seats))
+				.andExpect(MockMvcResultMatchers.view().name("ticket-selling/confirm-ticket"));
+	}
+
 	/**
 	 * TC1: Case Normal (memberInfor = "123")
-	 * @throws Exception 
+	 *
 	 */
 	@Test
 	void testCheckMemberTC1() throws Exception {
-		
-		String memberInfor = "123";
-		
+
+		String memberInformation = "123";
+
 		Account account = new Account("ac123", "account1", "123");
 		Member member = new Member("m123", 15000.0, account);
-		
+
 		ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
 		String jsonExpect = objectWriter.writeValueAsString(member);
-		
-		Mockito.when(memberService.findByMemberIdOrIdendityCard(memberInfor)).thenReturn(member);
-		mockMvc.perform(MockMvcRequestBuilders.get("/admin/confirm-ticket/"+ memberInfor))
-			.andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
-			.andExpect(MockMvcResultMatchers.content().json(jsonExpect));
+
+		Mockito.when(memberService.findByMemberIdOrIdendityCard(memberInformation)).thenReturn(member);
+		mockMvc.perform(MockMvcRequestBuilders.get("/admin/confirm-ticket/"+ memberInformation))
+				.andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
+				.andExpect(MockMvcResultMatchers.content().json(jsonExpect));
 	}
-	
+
 	/**
 	 * TC2: Case Abnormal (memberInfor = "")
-	 * @throws Exception 
+	 *
 	 */
 	@Test
 	void testCheckMemberTC2() throws Exception {
-		
+
 		String memberInfor = "";
-		
+
 		Member member = null;
-		
+
 		Mockito.when(memberService.findByMemberIdOrIdendityCard(memberInfor)).thenReturn(member);
 		mockMvc.perform(MockMvcRequestBuilders.get("/admin/confirm-ticket/"+ memberInfor))
-			.andExpect(MockMvcResultMatchers.status().is(HttpStatus.BAD_REQUEST.value()));
+				.andExpect(MockMvcResultMatchers.status().is(HttpStatus.BAD_REQUEST.value()));
 	}
-	
+
 	/**
 	 * TC3: Case Abnormal (memberInfor = null)
-	 * @throws Exception 
+	 *
 	 */
 	@Test
 	void testCheckMemberTC3() throws Exception {
-		
+
 		String memberInfor = null;
-		
+
 		Member member = null;
-		
+
 		Mockito.when(memberService.findByMemberIdOrIdendityCard(memberInfor)).thenReturn(member);
 		mockMvc.perform(MockMvcRequestBuilders.get("/admin/confirm-ticket/"+ memberInfor))
-			.andExpect(MockMvcResultMatchers.status().is(HttpStatus.BAD_REQUEST.value()));
+				.andExpect(MockMvcResultMatchers.status().is(HttpStatus.BAD_REQUEST.value()));
 	}
-	
+
 	/**
 	 * TC1: Case Normal: Save success
-	 * @throws Exception
+	 *
 	 */
 	@Test
 	void testConfirmBookingTC1() throws Exception {
@@ -489,22 +582,22 @@ class TicketSellingControllerTest {
 		confirmTicketVo.setTimeSelecting("15:00");
 		confirmTicketVo.setTotalPrice(30000.0);
 		confirmTicketVo.setUseScore(20000.0);
-		
+
 		ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
-		
+
 		Mockito.when(invoiceService.save(confirmTicketVo)).thenReturn(true);
-		
+
 		String jsonExpect = objectWriter.writeValueAsString(confirmTicketVo);
-		
+
 		mockMvc.perform(MockMvcRequestBuilders.post("/admin/confirm-ticket-booking")
-				.content(jsonExpect).contentType(MediaType.APPLICATION_JSON))
-			.andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
-			.andExpect(MockMvcResultMatchers.content().string(messageConfig.getSaveTicketSuccess()));
+						.content(jsonExpect).contentType(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
+				.andExpect(MockMvcResultMatchers.content().string(messageConfig.getSaveTicketSuccess()));
 	}
-	
+
 	/**
 	 * TC2: Case Normal: Save failed
-	 * @throws Exception
+	 *
 	 */
 	@Test
 	void testConfirmBookingTC2() throws Exception {
@@ -518,22 +611,22 @@ class TicketSellingControllerTest {
 		confirmTicketVo.setTimeSelecting("15:00");
 		confirmTicketVo.setTotalPrice(30000.0);
 		confirmTicketVo.setUseScore(20000.0);
-		
+
 		ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
-		
+
 		Mockito.when(invoiceService.save(confirmTicketVo)).thenReturn(false);
-		
+
 		String jsonExpect = objectWriter.writeValueAsString(confirmTicketVo);
-		
+
 		mockMvc.perform(MockMvcRequestBuilders.post("/admin/confirm-ticket-booking")
-				.content(jsonExpect).contentType(MediaType.APPLICATION_JSON))
-			.andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()))
-			.andExpect(MockMvcResultMatchers.content().string(messageConfig.getSaveTicketFailed()));
+						.content(jsonExpect).contentType(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()))
+				.andExpect(MockMvcResultMatchers.content().string(messageConfig.getSaveTicketFailed()));
 	}
-	
+
 	/**
 	 * TC3: Case Normal: idSeatSelectings = null
-	 * @throws Exception
+	 *
 	 */
 	@Test
 	void testConfirmBookingTC3() throws Exception {
@@ -547,21 +640,21 @@ class TicketSellingControllerTest {
 		confirmTicketVo.setTimeSelecting("15:00");
 		confirmTicketVo.setTotalPrice(30000.0);
 		confirmTicketVo.setUseScore(20000.0);
-		
+
 		ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
 		Mockito.when(invoiceService.save(confirmTicketVo)).thenReturn(false);
 		String jsonExpect = objectWriter.writeValueAsString(confirmTicketVo);
-		
+
 		mockMvc.perform(MockMvcRequestBuilders.post("/admin/confirm-ticket-booking")
-				.content(jsonExpect).contentType(MediaType.APPLICATION_JSON))
-			.andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()))
-			.andExpect(MockMvcResultMatchers.content().string(messageConfig.getSaveTicketFailed()));
+						.content(jsonExpect).contentType(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()))
+				.andExpect(MockMvcResultMatchers.content().string(messageConfig.getSaveTicketFailed()));
 	}
-	
+
 	/**
 	 * TC4: Case Normal: MemberId = null
-	 * @throws Exception
+	 *
 	 */
 	@Test
 	void testConfirmBookingTC4() throws Exception {
@@ -575,15 +668,15 @@ class TicketSellingControllerTest {
 		confirmTicketVo.setTimeSelecting("15:00");
 		confirmTicketVo.setTotalPrice(30000.0);
 		confirmTicketVo.setUseScore(20000.0);
-		
+
 		ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
 		Mockito.when(invoiceService.save(confirmTicketVo)).thenReturn(false);
-		
+
 		String jsonExpect = objectWriter.writeValueAsString(confirmTicketVo);
-		
+
 		mockMvc.perform(MockMvcRequestBuilders.post("/admin/confirm-ticket-booking")
-				.content(jsonExpect).contentType(MediaType.APPLICATION_JSON))
-			.andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()))
-			.andExpect(MockMvcResultMatchers.content().string(messageConfig.getSaveTicketFailed()));
+						.content(jsonExpect).contentType(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()))
+				.andExpect(MockMvcResultMatchers.content().string(messageConfig.getSaveTicketFailed()));
 	}
 }

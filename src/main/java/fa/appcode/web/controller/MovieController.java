@@ -70,7 +70,7 @@ public class MovieController {
 	@Autowired
 	MovieRepository movieRepository;
 	@Autowired
-  private StorageService storageService;
+	private StorageService storageService;
 	@GetMapping("/list")
 	public String listMovie(Model model, @RequestParam(value = "pageIndex", required = false) String pageIndex) {
 
@@ -91,7 +91,7 @@ public class MovieController {
 
 	@GetMapping("/search")
 	public String searchMovie(Model model, @RequestParam(value = "pageIndex", required = false) String pageIndex,
-			@RequestParam(defaultValue = Constants.DEFAULT_WORD, name = "searchData") String searchData) {
+							  @RequestParam(defaultValue = Constants.DEFAULT_WORD, name = "searchData") String searchData) {
 		int pageIndexVal = pageConfig.getInitPage();
 
 		if (pageIndex != null) {
@@ -158,9 +158,9 @@ public class MovieController {
 	@ResponseBody
 	@PostMapping("/save-movie")
 	public ResponseEntity<Map<String, String>> saveMovie(@Valid Movie movie, BindingResult result,
-			@RequestParam String cinemaRoom, @RequestParam List<Integer> typeIds,
-			@RequestParam List<Integer> scheduleIds,
-			@RequestParam(name = "movieImage", required = false) MultipartFile movieImage) throws IOException {
+														 @RequestParam String cinemaRoom, @RequestParam List<Integer> typeIds,
+														 @RequestParam List<Integer> scheduleIds,
+														 @RequestParam(name = "movieImage", required = false) MultipartFile movieImage) throws IOException {
 		if (result.hasErrors() || (typeIds.size() == 0) || (scheduleIds.size() == 0)
 				|| (movie.getFromDate().after(movie.getToDate()))) {
 
@@ -187,24 +187,24 @@ public class MovieController {
 			return new ResponseEntity<Map<String, String>>(errortList, HttpStatus.BAD_REQUEST);
 
 		} else {
-		  Map<String, String> messageToDisplay = new HashMap<String, String>();
+			Map<String, String> messageToDisplay = new HashMap<String, String>();
 			if (Constants.DEFAULT_WORD.equals(movie.getMovieId())) {
 				movie.setReleaseDate(movie.getFromDate());
 				movie.setMovieId(null);
 			}
 			else {
-        movie.setReleaseDate(movieServices.getById(movie.getMovieId()).getReleaseDate());
-      }
+				movie.setReleaseDate(movieServices.getById(movie.getMovieId()).getReleaseDate());
+			}
 			if (movieImage != null && !movieImage.isEmpty()) {
-        try {
-            storageService.storeFile(movieImage, Constants.MOVIE_SRC_IMG);
-            movie.setLargeImage(Constants.MOVIE_SRC_IMG_DISPLAY + movieImage.getOriginalFilename());
-        } catch (Exception exception) {
-            messageToDisplay.put("messageFailed", exception.getMessage());
-            return new ResponseEntity<>(messageToDisplay, HttpStatus.BAD_REQUEST);
-        }
-    }
-			CinemaRoom cinemaRoomToSave = cinemaRoomService.findById(cinemaRoom);
+				try {
+					storageService.storeFile(movieImage, Constants.MOVIE_SRC_IMG);
+					movie.setLargeImage(Constants.MOVIE_SRC_IMG_2 + movieImage.getOriginalFilename());
+				} catch (Exception exception) {
+					messageToDisplay.put("messageFailed", exception.getMessage());
+					return new ResponseEntity<>(messageToDisplay, HttpStatus.BAD_REQUEST);
+				}
+			}
+			CinemaRoom cinemaRoomtoSave = cinemaRoomService.findById(cinemaRoom);
 			List<MovieType> movieTypes = new ArrayList<MovieType>();
 			List<MovieSchedule> movieSchedules = new ArrayList<MovieSchedule>();
 			List<ShowDates> showDates = showDatesService.findByFromDateAndToDate(movie.getFromDate(),
@@ -221,7 +221,7 @@ public class MovieController {
 			for (Integer scheduleId : scheduleIds) {
 				movieSchedules.add(new MovieSchedule(new MovieScheduleId(movie.getMovieId(), scheduleId), movie, scheduleService.getById(scheduleId)));
 			}
-			movie.setCinemaRoom(cinemaRoomToSave);
+			movie.setCinemaRoom(cinemaRoomtoSave);
 			movie.setMovieTypes(movieTypes);
 			movie.setMovieSchedules(movieSchedules);
 			if (movieServices.saveMovie(movie)) {

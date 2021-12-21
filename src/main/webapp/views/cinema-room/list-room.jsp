@@ -31,8 +31,13 @@
                                     </c:if>
                                     <div class="row mt-1">
                                         <div class="form-input ml-3">
-                                            <button type="button" class="btn btn-primary"><i class="fa fa-plus"
-                                            aria-hidden="true"></i><span class="ml-2">Add new</span> </button>
+                                            <a href="" class="btnAddRoom">
+                                                <button type="button" class="btn btn-primary">
+
+                                    <i class="fa fa-plus" aria-hidden="true"></i><span class="ml-2">Add new</span>
+
+                                </button>
+                                            </a>
                                         </div>
 
                                     </div>
@@ -69,10 +74,13 @@
                                                                     <c:out value="${loop.index + 1}" />
                                                                 </td>
                                                                 <td>${room.cinemaRoomId}</td>
-                                                                <td><a value="${room.cinemaRoomId}" data-toggle="tooltip" data-placement="top" data-html="true" class="room-image" style="text-decoration:none;" title="">${room.cinemaRoomName}</a></td>
+                                                                <td><a value="${room.cinemaRoomId}" data-toggle="tooltip" data-placement="top" data-html="true" class="room-image" style="text-decoration:none;" title="">${room.cinemaRoomName}</a>
+                                                                </td>
                                                                 <td>${room.seatQuantity}</td>
                                                                 <td>
-                                                                    <a href="${pageContext.servletContext.contextPath}/room/edit-room" type="button" class="btnUpdate" value="${content.contentId}"><i class="fa fa-info-circle" aria-hidden="true"></i> Seat detail</a>
+                                                                    <a href="" class="btnUpdateRoom" value="${room.cinemaRoomId}"><i
+                                                        class="fa fa-info-circle" aria-hidden="true"></i> Seat
+                                                    detail</a>
                                                                 </td>
                                                             </tr>
                                                         </c:forEach>

@@ -1,5 +1,7 @@
 package fa.appcode.services.impl;
 
+import fa.appcode.common.logging.LogUtils;
+import fa.appcode.exceptions.ImageFileException;
 import fa.appcode.services.StorageService;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
@@ -22,24 +24,26 @@ public class ImageServiceImpl implements StorageService {
         String fileExtension = FilenameUtils.getExtension(file.getOriginalFilename());
         if (fileExtension == null) {
             return false;
-        } else
-            return Arrays.asList(new String[]{"png", "jpg", "jpeg", "bmp"}).contains(fileExtension.trim().toLowerCase());
+        }
+        return Arrays.asList(new String[]{"png", "jpg", "jpeg", "bmp"}).contains(fileExtension.trim().toLowerCase());
     }
 
     @Override
     public String storeFile(MultipartFile file, String storageFolder) {
-        try {
+
             if (file.isEmpty()) {
-                throw new RuntimeException("Failed to store empty file.");
+                throw new ImageFileException("Failed to store empty file.");
             }
             if (!isImageFile(file)) {
-                throw new RuntimeException("You can only upload image file (png, jpg, jpeg, bmp)");
+                throw new ImageFileException("You can only upload image file (png, jpg, jpeg, bmp)");
             }
-            //file must be <=5MB
-            float fileSizeInMegabytes = file.getSize() / 1_000_000;
-            if (fileSizeInMegabytes > 5.0f) {
-                throw new RuntimeException("Fail must be <= 5MB");
-            }
+
+//            //file must be <=5MB
+//            float fileSizeInMegabytes = file.getSize() / 1_000_000;
+//            if (fileSizeInMegabytes > 5.0f) {
+//                throw new ImageFileException("Fail must be <= 5MB");
+//            }
+
             // rename file
             String fileExtension = FilenameUtils.getExtension(file.getOriginalFilename());
             String generatedFileName = UUID.randomUUID().toString().replace("-", "");
@@ -49,11 +53,13 @@ public class ImageServiceImpl implements StorageService {
             Path destinationFilePath = uploadPath.resolve(Paths.get(generatedFileName)).normalize().toAbsolutePath();
             try (InputStream inputStream = file.getInputStream()) {
                 Files.copy(inputStream, destinationFilePath, StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                LogUtils.getLogger().info("Failed to store file " + e.getMessage());
+                throw new ImageFileException("Failed to store file. " + e);
             }
-            return generatedFileName;
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to store file. " + e);
-        }
+
+        return generatedFileName;
+
     }
 
     @Override

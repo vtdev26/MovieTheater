@@ -12,8 +12,8 @@
 	<groupId>fa.appcode</groupId>
 	<artifactId>java04_movietheter_g3</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>java04_movietheter_g3</name>
-	<description>Movietheter</description>
+	<name>java04_movie-theater_g3</name>
+	<description>MovieTheater</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>

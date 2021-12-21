@@ -45,10 +45,10 @@ class EmployeeServiceTest {
         int pageSize = 6;
         Pageable pageable = PageRequest.of(pageIndex, pageSize);
 
-        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = dateFor.parse("08/07/2021");
+            date = DateFor.parse("08/07/2021");
 
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
@@ -81,10 +81,10 @@ class EmployeeServiceTest {
         int pageSize = 6;
         String dataSearch = "";
         Pageable pageable = PageRequest.of(pageIndex, pageSize);
-        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = dateFor.parse("08/07/2021");
+            date = DateFor.parse("08/07/2021");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }
@@ -114,10 +114,10 @@ class EmployeeServiceTest {
         int pageSize = 6;
         String dataSearch = "kien";
         Pageable pageable = PageRequest.of(pageIndex, pageSize);
-        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = dateFor.parse("08/07/2021");
+            date = DateFor.parse("08/07/2021");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }
@@ -144,11 +144,10 @@ class EmployeeServiceTest {
         int pageSize = 6;
         String dataSearch = "kien";
         Pageable pageable = PageRequest.of(pageIndex, pageSize);
-        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
-        @SuppressWarnings("unused")
-		Date date = new Date();
+        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
         try {
-            date = dateFor.parse("08/07/2021");
+            date = DateFor.parse("08/07/2021");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }
@@ -171,10 +170,10 @@ class EmployeeServiceTest {
      */
     @Test
     void saveEmployee() {
-        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = dateFor.parse("08/07/2021");
+            date = DateFor.parse("08/07/2021");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }
@@ -193,10 +192,10 @@ class EmployeeServiceTest {
     @Test
     void findEmployeeById() {
         final String id = "G3_0000001";
-        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = dateFor.parse("08/07/2021");
+            date = DateFor.parse("08/07/2021");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }
@@ -214,10 +213,10 @@ class EmployeeServiceTest {
     @Test
     void findEmployeeById2() {
         final String id = "G3_0000001";
-        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = dateFor.parse("08/07/2021");
+            date = DateFor.parse("08/07/2021");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }

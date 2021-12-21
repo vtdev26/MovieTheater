@@ -72,7 +72,7 @@ public class PromotionServiceImpl implements PromotionService {
 			promotionRepository.save(promotion);
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogUtils.getLogger().info(e.getMessage());
 			return false;
 		}
 	}
@@ -92,7 +92,7 @@ public class PromotionServiceImpl implements PromotionService {
 			promotionRepository.deleteById(promotionId);
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogUtils.getLogger().info(e.getMessage());
 			return false;
 		}
 	}

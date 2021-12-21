@@ -1,24 +1,30 @@
 package fa.appcode.common.utils;
 
+import fa.appcode.common.logging.LogUtils;
+
 import java.time.LocalDate;
 
 public class ConvertUtils {
 
 	public static LocalDate convertStrToDate(String dateOfBirth) {
+		LocalDate date = null;
 		try {
-			LocalDate date = LocalDate.parse(dateOfBirth);
-			return date;
+			 date = LocalDate.parse(dateOfBirth);
+
 		} catch (Exception e) {
-			return null;
+			LogUtils.getLogger().info(e.getMessage());
 		}
+		return date;
 	}
 
 	public static Integer convertStrToInt(String number) {
+		Integer numberResult = null;
 		try {
-			Integer numberResult = Integer.parseInt(number);
-			return numberResult;
+			 numberResult = Integer.parseInt(number);
+
 		} catch (Exception e) {
-			return null;
+			LogUtils.getLogger().info(e.getMessage());
 		}
+		return numberResult;
 	}
 }

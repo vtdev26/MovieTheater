@@ -135,13 +135,12 @@ $(document).ready(function() {
                 processData: false, // added
                 data: formData,
                 success: function(responseData) {
-					$("message").css("color", "blue");
-                    $("#message").html(responseData.messageSuccess);
+                    console.log('aaaaaaaaa')
+                    $("#message").html(responseData.messageSuccess).css('color', 'blue');
                 },
                 error: function(responseError) {
                     alert(JSON.stringify(responseError));
-					$("message").css("color", "red");
-                    $("#message").html(responseError.responseJSON.messageFail);
+                    $("#message").html(responseError.responseJSON.messageFail).css('color', 'red');
                     $("#movieNameVnErr").html(responseError.responseJSON.movieNameEnglish);
                     $("#movieNameEnglishErr").html(responseError.responseJSON.movieNameVn);
                     $("#fromDateEr").html(responseError.responseJSON.fromDate);

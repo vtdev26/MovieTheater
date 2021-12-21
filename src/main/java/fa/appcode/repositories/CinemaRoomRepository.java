@@ -17,4 +17,6 @@ public interface CinemaRoomRepository extends JpaRepository<CinemaRoom, Integer>
 	@Query("SELECT c FROM CinemaRoom c WHERE c.cinemaRoomId IN (SELECT m.cinemaRoom.cinemaRoomId FROM "
 			+ "Movie m WHERE m.movieId = ?1)")
 	CinemaRoom findRoomByMovieId(String movieId);
+
+	CinemaRoom findRoomByCinemaRoomName(String roomName);
 }

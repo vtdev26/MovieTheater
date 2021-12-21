@@ -10,6 +10,7 @@ import fa.appcode.common.utils.LibraryCustomize;
 import fa.appcode.repositories.SeatRepository;
 import fa.appcode.services.SeatService;
 import fa.appcode.web.entities.Seat;
+import fa.appcode.web.vo.SeatVo;
 
 @Service
 public class SeatServiceImpl implements SeatService {
@@ -28,6 +29,25 @@ public class SeatServiceImpl implements SeatService {
 			}
 		}
 		return seatRepository.findAllBySeatIdIn(listSeatIds);
+	}
+
+// method to update a seat record
+	@Override
+	public boolean updateSeat(SeatVo updateSeat) {
+
+		if (updateSeat != null) {
+			seatRepository.updateSeatTypeAndPrice(updateSeat.getSeatId(), updateSeat.getSeatType(),
+					updateSeat.getSeatPrice());
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public List<Seat> findAllByCinemaRoomCinemaRoomId(Integer cinemaRoomId) {
+		return seatRepository.findAllByCinemaRoomCinemaRoomId(cinemaRoomId);
+
 	}
 
 }

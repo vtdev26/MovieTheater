@@ -1,7 +1,8 @@
 package fa.appcode.common.utils;
 
-public class Constants {
+public class  Constants {
 
+	public static final String SPACE_WORD = " ";
 	public static final String DEFAULT_WORD = "";
 	public static final String PAGE_SIZE_STRING = "5";
 	public static final String REGEX_DIGIT = "\\d+";
@@ -14,7 +15,9 @@ public class Constants {
     //Truong
     public static final String SRC_PROMOTION_IMAGE = "src/main/webapp/resources/img/promotion/";
 	public static final String SRC_PROMOTION_IMAGE_2 = "/resources/img/promotion/";
-	public static final String MOVIE_SRC_IMG= "src/main/webapp/resources/img/movie/";
-	public static final String MOVIE_SRC_IMG_DISPLAY= "/resources/img/movie/"; 
+	public static final String MOVIE_SRC_IMG= "src/main/webapp/resources/img/movie"; 
 
+
+	// Khanh
+	public static final String MOVIE_SRC_IMG_2 = "/resources/img/movie/";
 }

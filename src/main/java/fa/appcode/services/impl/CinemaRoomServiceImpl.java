@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import fa.appcode.common.logging.LogUtils;
 import fa.appcode.common.utils.Constants;
+import fa.appcode.exceptions.CinemaRoomException;
 import fa.appcode.repositories.CinemaRoomRepository;
 import fa.appcode.services.CinemaRoomService;
 import fa.appcode.web.entities.CinemaRoom;
@@ -120,6 +121,26 @@ public class CinemaRoomServiceImpl implements CinemaRoomService{
   @Override
   public List<CinemaRoom> findAll() {
     return cinemaRoomRepository.findAll();
+  }
+
+  @Override
+  public CinemaRoom saveCinemaRoom(CinemaRoom cinemaRoom) throws CinemaRoomException {
+	  if (cinemaRoom == null) {
+		  return null;
+	  }
+
+	  return cinemaRoomRepository.save(cinemaRoom);
+  }
+
+  // Check if a CinemaRoom existed in database by roomName
+  @Override
+  public boolean checkExistedRoomName(String roomName) {
+	  CinemaRoom findingRoom = cinemaRoomRepository.findRoomByCinemaRoomName(roomName);
+	  if (findingRoom == null) {
+		  return false;
+	  } else {
+		  return true;
+	  }
   }
 
 }

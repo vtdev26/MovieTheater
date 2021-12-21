@@ -1,5 +1,7 @@
 package fa.appcode.config;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -55,4 +57,48 @@ public class PageConfig {
   @Value("${movie.delete.fail}")
   private String deleteMovieFail;
  
+  @Value("${room.image.upload.path}")
+	private String roomImageUploadPath;
+
+	@Value("${room.image.load.path}")
+	private String roomImageLoadPath;
+
+	@Value("${room.add.ok}")
+	private String addRoomOk;
+
+	@Value("${room.add.notok}")
+	private String addRoomNotOk;
+
+	@Value("${room.existed.name}")
+	private String roomNameExisted;
+
+	@Value("${room.id.invalid}")
+	private String roomIdNotValid;
+
+	@Value("${seat.normal.price}")
+	private String normalSeatPrice;
+
+	@Value("${seat.vip.price}")
+	private String vipSeatPrice;
+
+	@Value("${room.name.blank}")
+	private String roomNameBlank;
+
+	@Value("${seat.not.found.size}")
+	private Integer zeroSeatFound;
+
+	@Value("${seat.list.update.ok}")
+	private String updateListSeatOk;
+
+	@Value("${seat.list.update.notok}")
+	private String updateListSeatNotOk;
+
+	@Value("#{'${seat.column.arr}'.split(',')}")
+	private List<String> listSeatColumn;
+
+	@Value("#{'${seat.quantity.arr}'.split(',')}")
+	private List<Integer> listSeatQuantity;
+
+	@Value("${seat.max.column}")
+	private Integer maxSeatColumn;
 }
