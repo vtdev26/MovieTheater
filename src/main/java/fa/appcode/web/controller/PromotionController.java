@@ -1,13 +1,11 @@
 package fa.appcode.web.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
 
-import fa.appcode.web.vo.PromotionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -15,17 +13,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import fa.appcode.common.logging.LogUtils;
 import fa.appcode.common.utils.Constants;
-import fa.appcode.common.utils.FileUploadUtils;
 import fa.appcode.config.MessageConfig;
 import fa.appcode.config.PageConfig;
 import fa.appcode.services.PromotionService;
+import fa.appcode.services.StorageService;
 import fa.appcode.web.entities.Promotion;
+import fa.appcode.web.vo.PromotionVo;
 
 /**
  * @author TruongNguyen
@@ -42,6 +48,9 @@ public class PromotionController {
 
 	@Autowired
 	private PromotionService promotionService;
+
+	@Autowired
+	private StorageService storageService;
 
 	/**
 	 * Controller when user first click promotion management
@@ -117,7 +126,7 @@ public class PromotionController {
 		/*
 		 * If request has promotion id
 		 */
-		if (promotionId != null && promotionId != 0) {
+		if (promotionId != null) {
 			Promotion promotion = promotionService.getById(promotionId);
 			model.addAttribute("promotion", promotion);
 		}
@@ -190,20 +199,21 @@ public class PromotionController {
 			if (file != null && !file.isEmpty()) {
 				try {
 					LogUtils.getLogger().info("co file");
-					FileUploadUtils.saveFile(Constants.SRC_PROMOTION_IMAGE, file.getOriginalFilename(), file);
-					promotion.setImage(Constants.SRC_PROMOTION_IMAGE_2 + file.getOriginalFilename());
+					String fileName = storageService.storeFile(file, Constants.SRC_PROMOTION_IMAGE);
+					LogUtils.getLogger().info("file name: " + fileName);
+					promotion.setImage(Constants.SRC_PROMOTION_IMAGE_2 + fileName);
 					LogUtils.getLogger().info(promotion);
-				} catch (IOException e) {
-					message.put("messageFailed", messageConfig.getSavePromotionFailed());
+				} catch (Exception e) {
+					message.put("messageFailed", e.getMessage());
 					return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 				}
-			}
 
-			LogUtils.getLogger().info(promotion);
+			}
 
 			/*
 			 * Save a promotion into database
 			 */
+			LogUtils.getLogger().info(promotion);
 			if (promotionService.saveOrUpdate(promotion)) {
 				message.put("messageSuccess", messageConfig.getSavePromotionSuccess());
 				return new ResponseEntity<>(message, HttpStatus.OK);
@@ -212,6 +222,7 @@ public class PromotionController {
 				return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 			}
 		}
+
 	}
 
 	/**
