@@ -33,7 +33,7 @@
 						<div class="movie">
 							<div class="movie__avatar">
 								<img
-									src="/resources/img/ticket-selling/${movieDate.movie.largeImage}"
+									src="/resources/img/movie/${movieDate.movie.largeImage}"
 									alt="">
 							</div>
 							<div class="movie__detail">

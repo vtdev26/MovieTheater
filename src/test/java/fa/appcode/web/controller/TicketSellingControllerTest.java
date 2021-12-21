@@ -589,6 +589,7 @@ class TicketSellingControllerTest {
 		Mockito.when(messageConfig.getSaveTicketSuccess()).thenReturn("saveTicketSuccess");
 		Mockito.when(messageConfig.getSaveTicketFailed()).thenReturn("saveTicketFailed");
 		Mockito.when(invoiceService.save(confirmTicketVo)).thenReturn(false);
+		
 		String jsonExpect = objectWriter.writeValueAsString(confirmTicketVo);
 		
 		mockMvc.perform(MockMvcRequestBuilders.post("/admin/confirm-ticket-booking")

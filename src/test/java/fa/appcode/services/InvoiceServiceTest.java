@@ -155,7 +155,7 @@ class InvoiceServiceTest {
 	}
 	
 	/**
-	 * TC2: Abnormal case: SeatIds = null;
+	 * TC2: Abnormal case: 	 = null;
 	 */
 	@Test
 	void testSave_TC2() {

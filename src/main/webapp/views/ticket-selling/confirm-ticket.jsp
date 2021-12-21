@@ -6,7 +6,7 @@
                 <div class="container-fluid bg-white mt-5 p-5 rounded-lg">
                     <div class="row">
                         <div class="col-2">
-                            <img class="img-responsive poster" src="/resources/img/ticket-selling/poster_shangchi.jpg">
+                            <img class="img-responsive poster" src="/resources/img/movie/${movie.largeImage}">
                         </div>
                         <div class="col-10">
                             <div class="ticket-infor">
