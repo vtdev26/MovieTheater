@@ -502,7 +502,7 @@ class TicketSellingControllerTest {
 	}
 	
 	/**
-	 * TC1: Case Normal: Save failed
+	 * TC2: Case Normal: Save failed
 	 * @throws Exception
 	 */
 	@Test
@@ -513,6 +513,70 @@ class TicketSellingControllerTest {
 		confirmTicketVo.setDateSelecting("2021-12-20");
 		confirmTicketVo.setIdSeatSelecting(idSeatSelectings);
 		confirmTicketVo.setMemberId("m123");
+		confirmTicketVo.setMovieId("1");
+		confirmTicketVo.setScheduleId(1);
+		confirmTicketVo.setTimeSelecting("15:00");
+		confirmTicketVo.setTotalPrice(30000.0);
+		confirmTicketVo.setUseScore(20000.0);
+		
+		ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+
+		
+		Mockito.when(messageConfig.getSaveTicketSuccess()).thenReturn("saveTicketSuccess");
+		Mockito.when(messageConfig.getSaveTicketFailed()).thenReturn("saveTicketFailed");
+		Mockito.when(invoiceService.save(confirmTicketVo)).thenReturn(false);
+		String jsonExpect = objectWriter.writeValueAsString(confirmTicketVo);
+		
+		mockMvc.perform(MockMvcRequestBuilders.post("/admin/confirm-ticket-booking")
+				.content(jsonExpect).contentType(MediaType.APPLICATION_JSON))
+			.andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()))
+			.andExpect(MockMvcResultMatchers.content().string("saveTicketFailed"));
+	}
+	
+	/**
+	 * TC3: Case Normal: idSeatSelectings = null
+	 * @throws Exception
+	 */
+	@Test
+	void testConfirmBooking_TC3() throws Exception {
+		ConfirmTicketVo confirmTicketVo = new ConfirmTicketVo();
+		String[] idSeatSelectings = null;
+		confirmTicketVo = new ConfirmTicketVo();
+		confirmTicketVo.setDateSelecting("2021-12-20");
+		confirmTicketVo.setIdSeatSelecting(idSeatSelectings);
+		confirmTicketVo.setMemberId("m123");
+		confirmTicketVo.setMovieId("1");
+		confirmTicketVo.setScheduleId(1);
+		confirmTicketVo.setTimeSelecting("15:00");
+		confirmTicketVo.setTotalPrice(30000.0);
+		confirmTicketVo.setUseScore(20000.0);
+		
+		ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+
+		
+		Mockito.when(messageConfig.getSaveTicketSuccess()).thenReturn("saveTicketSuccess");
+		Mockito.when(messageConfig.getSaveTicketFailed()).thenReturn("saveTicketFailed");
+		Mockito.when(invoiceService.save(confirmTicketVo)).thenReturn(false);
+		String jsonExpect = objectWriter.writeValueAsString(confirmTicketVo);
+		
+		mockMvc.perform(MockMvcRequestBuilders.post("/admin/confirm-ticket-booking")
+				.content(jsonExpect).contentType(MediaType.APPLICATION_JSON))
+			.andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()))
+			.andExpect(MockMvcResultMatchers.content().string("saveTicketFailed"));
+	}
+	
+	/**
+	 * TC4: Case Normal: MemberId = null
+	 * @throws Exception
+	 */
+	@Test
+	void testConfirmBooking_TC4() throws Exception {
+		ConfirmTicketVo confirmTicketVo = new ConfirmTicketVo();
+		String[] idSeatSelectings = {"1", "2", "3"};
+		confirmTicketVo = new ConfirmTicketVo();
+		confirmTicketVo.setDateSelecting("2021-12-20");
+		confirmTicketVo.setIdSeatSelecting(idSeatSelectings);
+		confirmTicketVo.setMemberId(null);
 		confirmTicketVo.setMovieId("1");
 		confirmTicketVo.setScheduleId(1);
 		confirmTicketVo.setTimeSelecting("15:00");

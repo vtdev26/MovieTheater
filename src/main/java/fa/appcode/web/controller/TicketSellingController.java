@@ -175,5 +175,4 @@ public class TicketSellingController {
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(messageConfig.getSaveTicketFailed());
 	}
 	
-	
 }
