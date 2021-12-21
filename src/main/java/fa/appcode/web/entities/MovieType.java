@@ -1,11 +1,10 @@
 package fa.appcode.web.entities;
-import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -19,18 +18,15 @@ import lombok.Setter;
 @Setter
 @Getter
 @Table(name = "movie_type",schema = "movie_theater")
-public class MovieType implements Serializable{
+public class MovieType {
+	@EmbeddedId
+	private MovieTypeId movieTypeId;
 
-	private static final long serialVersionUID = 1L;
-
-	@Id
+	@MapsId(value = "movieId")
 	@ManyToOne
-	@JoinColumn(name = "movie_id", referencedColumnName = "movie_id")
 	private Movie movie;
-	
-	@Id
+	@MapsId(value = "typeId")
 	@ManyToOne
-	@JoinColumn(name = "type_id", referencedColumnName = "type_id")
 	private Type type;
 
 	@Override
@@ -49,4 +45,11 @@ public class MovieType implements Serializable{
 		MovieType other = (MovieType) obj;
 		return Objects.equals(movie, other.movie) && Objects.equals(type, other.type);
 	}
+
+  public MovieType(Movie movie, Type type) {
+    super();
+    this.movie = movie;
+    this.type = type;
+  }
+
 }

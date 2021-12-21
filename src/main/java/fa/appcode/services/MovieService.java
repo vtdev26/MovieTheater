@@ -6,8 +6,8 @@ import fa.appcode.web.entities.Movie;
 
 public interface MovieService {
 	Page<Movie> searchAll(String searchData, int pageIndex, int pageSize);
-	
 	Page<Movie> findAll(int pageIndex,int pageSize);
-	
-	Movie findByMovieId(String movieId);
+	boolean saveMovie(Movie movie);
+	boolean deleteMovie(String movieId);
+	Movie getById(String movieId);
 }

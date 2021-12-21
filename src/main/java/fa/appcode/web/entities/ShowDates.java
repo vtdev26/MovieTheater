@@ -61,4 +61,8 @@ public class ShowDates {
 		this.showDate = showDate;
 		this.dateName = dateName;
 	}
+	public ShowDates(Integer showDateId) {
+    super();
+    this.showDateId = showDateId;
+  }
 }

@@ -117,4 +117,9 @@ public class CinemaRoomServiceImpl implements CinemaRoomService{
 		return cinemaRoom;
 	}
 
+  @Override
+  public List<CinemaRoom> findAll() {
+    return cinemaRoomRepository.findAll();
+  }
+
 }

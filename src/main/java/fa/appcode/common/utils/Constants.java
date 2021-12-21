@@ -14,5 +14,6 @@ public class Constants {
     //Truong
     public static final String SRC_PROMOTION_IMAGE = "src/main/webapp/resources/img/promotion/";
 	public static final String SRC_PROMOTION_IMAGE_2 = "/resources/img/promotion/";
+	public static final String MOVIE_SRC_IMG= "src/main/webapp/resources/img/movie"; 
 
 }

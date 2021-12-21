@@ -1,12 +1,14 @@
 package fa.appcode.web.entities;
 
-import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -20,18 +22,16 @@ import lombok.Setter;
 @Setter
 @Getter
 @Table(name = "movie_date", schema = "movie_theater")
-public class MovieDate implements Serializable{
+public class MovieDate  {
+	@EmbeddedId
+	private MoviDateId movieDateId;
 
-	private static final long serialVersionUID = 1L;
-
-	@Id
+	@MapsId(value = "movieId")
 	@ManyToOne
-	@JoinColumn(name = "movie_id", referencedColumnName = "movie_id")
 	private Movie movie;
 
-	@Id
+	@MapsId(value = "showDateId")
 	@ManyToOne
-	@JoinColumn(name = "show_date_id", referencedColumnName = "show_date_id")
 	private ShowDates showDates;
 
 	@Override
@@ -50,4 +50,11 @@ public class MovieDate implements Serializable{
 		MovieDate other = (MovieDate) obj;
 		return Objects.equals(movie, other.movie) && Objects.equals(showDates, other.showDates);
 	}
+
+  public MovieDate(Movie movie, ShowDates showDates) {
+    super();
+    this.movie = movie;
+    this.showDates = showDates;
+  }
+	
 }

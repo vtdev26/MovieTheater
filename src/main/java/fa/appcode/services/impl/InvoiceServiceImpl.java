@@ -80,7 +80,11 @@ public class InvoiceServiceImpl implements InvoiceService {
 		Invoice invoice = new Invoice();
 		invoice.setAccount(member.getAccount());
 		invoice.setBookingDate(DateUtils.convertToDate(LocalDate.now()));
-		invoice.setMovieName(movieService.findByMovieId(confirmTicketVo.getMovieId()).getMovieNameVn());
+		if(movieService.getById(confirmTicketVo.getMovieId()) != null) {
+		  invoice.setMovieName(movieService.getById(confirmTicketVo.getMovieId()).getMovieNameVn());
+		  }else {
+		  return false;
+		  }
 		invoice.setScheduleShow(DateUtils.convertToDate(LocalDate.parse(confirmTicketVo.getDateSelecting())));
 		invoice.setScheduleShowTime(confirmTicketVo.getTimeSelecting());
 		invoice.setStatus(Constants.INVOICE_BOOKED);

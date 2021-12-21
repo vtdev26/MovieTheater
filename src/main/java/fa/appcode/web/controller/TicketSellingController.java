@@ -133,7 +133,7 @@ public class TicketSellingController {
 	@GetMapping("/confirm-ticket")
 	public String showConfirmTicket(ModelMap modelMap, @RequestParam String[] listSelectedSeat,
 			@RequestParam String movieId) {
-		Movie movie = movieService.findByMovieId(movieId);
+		Movie movie = movieService.getById(movieId);
 		List<Seat> seats = seatService.findAllBySeatId(listSelectedSeat);
 		
 		modelMap.addAttribute("movie", movie);
