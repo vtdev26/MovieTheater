@@ -135,10 +135,12 @@ $(document).ready(function() {
                 processData: false, // added
                 data: formData,
                 success: function(responseData) {
-                    $("#message").html(responseData.messageSucces);
+					$("message").css("color", "blue");
+                    $("#message").html(responseData.messageSuccess);
                 },
                 error: function(responseError) {
                     alert(JSON.stringify(responseError));
+					$("message").css("color", "red");
                     $("#message").html(responseError.responseJSON.messageFail);
                     $("#movieNameVnErr").html(responseError.responseJSON.movieNameEnglish);
                     $("#movieNameEnglishErr").html(responseError.responseJSON.movieNameVn);
