@@ -57,7 +57,6 @@ class EmployeeControllerTest {
     void showListEmployee() throws Exception {
         final int pageIndex = 1;
         final int pageSize = 5;
-        final String dataSearch = "";
 
         SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
@@ -182,10 +181,6 @@ class EmployeeControllerTest {
         final String accountId = "";
         final String userName = "chuong";
         final String password = "123";
-        final String fullName = "hoang van chuong";
-        final String gender = "M";
-        final String identityCard = "123456";
-        final String email = "chuong@gmail.com";
         final String address = "nam dinh";
         final String phoneNumber = "0983012606";
         SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
