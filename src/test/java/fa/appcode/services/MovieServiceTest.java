@@ -1,9 +1,8 @@
 package fa.appcode.services;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -126,23 +125,6 @@ class MovieServiceTest {
 		Mockito.when(movieRepository.findAll(pageable)).thenReturn(page);
 		Page<Movie> actual = movieService.findAll(pageIndex, pageSize);
 		assertEquals(page, actual);
-		
-	}
-	/**
-	 * Test find all with searchData = null.
-	 *
-	 */
-	@Test
-	void testSearchAll2()   {
-		//Init: Test input
-		final int pageIndex = 1;
-		final int pageSize = 5;
-		Page<Movie> page = new PageImpl<>(movies);
-		String searchData = null;
-		Pageable pageable = PageRequest.of(pageIndex-1, pageSize);
-		Mockito.when(movieRepository.searchText("%%",pageable)).thenReturn(page);
-		Page<Movie> actual = movieService.searchAll(searchData,pageIndex, pageSize);
-		assertNull(actual);
 		
 	}
 	/**

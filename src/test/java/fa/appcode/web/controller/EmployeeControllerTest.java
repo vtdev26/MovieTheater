@@ -1,15 +1,14 @@
 package fa.appcode.web.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import fa.appcode.common.logging.LogUtils;
-import fa.appcode.config.MessageConfig;
-import fa.appcode.services.AccountService;
-import fa.appcode.services.EmployeeService;
-import fa.appcode.web.entities.Account;
-import fa.appcode.web.entities.Employee;
-import fa.appcode.web.vo.EmployeeVo;
-import fa.appcode.web.vo.ResponseObject;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +24,18 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.util.StringUtils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import fa.appcode.common.logging.LogUtils;
+import fa.appcode.config.MessageConfig;
+import fa.appcode.services.AccountService;
+import fa.appcode.services.EmployeeService;
+import fa.appcode.web.entities.Account;
+import fa.appcode.web.entities.Employee;
+import fa.appcode.web.vo.EmployeeVo;
+import fa.appcode.web.vo.ResponseObject;
 
 
 @SpringBootTest
@@ -61,10 +65,10 @@ class EmployeeControllerTest {
         final int pageIndex = 1;
         final int pageSize = 5;
 
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = DateFor.parse("08/07/2021");
+            date = dateFor.parse("08/07/2021");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }
@@ -95,10 +99,10 @@ class EmployeeControllerTest {
         final Integer pageSize = 5;
         final String dataSearch = "";
 
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = DateFor.parse("08/07/2021");
+            date = dateFor.parse("08/07/2021");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }
@@ -144,10 +148,10 @@ class EmployeeControllerTest {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String jsonExpect = ow.writeValueAsString(responseObject);
 
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = DateFor.parse("08/07/2021");
+            date = dateFor.parse("08/07/2021");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }
@@ -190,10 +194,10 @@ class EmployeeControllerTest {
         final String password = "123";
         final String address = "nam dinh";
         final String phoneNumber = "0983012606";
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = DateFor.parse("08/07/2021");
+            date = dateFor.parse("08/07/2021");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }
@@ -240,16 +244,8 @@ class EmployeeControllerTest {
         final String address = "nam dinh";
         final String phoneNumber = "0983012606";
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
-        try {
-            date = DateFor.parse("08/07/2010");
-        } catch (ParseException e) {
-            LogUtils.getLogger().info("Convert date fail !!!");
-        }
+        
         Mockito.when(accountService.findAccountByUserName(userName)).thenReturn(null);
-        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         Account account = new Account(accountId, address, null, email, fullName, gender, identityCard, null, bCryptPasswordEncoder.encode(password), phoneNumber, new Date(), 1, userName);
         Employee employee = new Employee(employeeId, account);
         Mockito.when(employeeService.save(employee)).thenReturn(true);
@@ -288,17 +284,14 @@ class EmployeeControllerTest {
         final String email = "chuong@gmail.com";
         final String address = "nam dinh";
         final String phoneNumber = "0983012606";
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = DateFor.parse("08/07/2010");
+            date = dateFor.parse("08/07/2010");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }
-
-        Account account = new Account("G3_00000001", "hanoi", null, "chuong1@gmail.com", "chuonghoang", "M", "1234561", "image", null, "0983012606", null, 1, "chuong");
 
         Account accountDB = new Account("G3_00000001", "hanoi", date, "chuong1@gmail.com", "chuonghoang", "M", "1234561", "image", "123", "0983012606", date, 1, "chuong");
         Employee employee = new Employee(employeeId, accountDB);
@@ -342,17 +335,15 @@ class EmployeeControllerTest {
         final String email = "chuong@gmail.com";
         final String address = "nam dinh";
         final String phoneNumber = "0983012606";
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = DateFor.parse("08/07/2010");
+            date = dateFor.parse("08/07/2010");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }
 
-        Account account = new Account("G3_00000001", "hanoi", null, "chuong1@gmail.com", "chuonghoang", "M", "1234561", "image", null, "0983012606", null, 1, "chuong");
 
         Account accountDB = new Account("G3_00000001", "hanoi", date, "chuong1@gmail.com", "chuonghoang", "M", "1234561", "image", "123", "0983012606", date, 1, "chuong");
         Employee employee = new Employee(employeeId, accountDB);

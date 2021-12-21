@@ -30,10 +30,10 @@ class AccountServiceTest {
     void findAccountByUserName() {
 
         final String userName = "chuong";
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = DateFor.parse("08/07/2021");
+            date = dateFor.parse("08/07/2021");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }
@@ -47,10 +47,10 @@ class AccountServiceTest {
     @Test
     void findAccountByAccountId() {
         final String id = "G3_0000001";
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = DateFor.parse("08/07/2021");
+            date = dateFor.parse("08/07/2021");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }

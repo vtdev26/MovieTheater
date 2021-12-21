@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <h3 class="row justify-content-center" id="titlePage"></h3>
-<img id="imgMovie" src="${movie.largeImage}">
+<img id="imgMovie" src="/resources/img/movie/${movie.largeImage}">
 <div>
     <hr>
     <form action="#" method="post" name="formMovie" id="formMovie" enctype="multipart/form-data">

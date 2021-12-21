@@ -30,7 +30,6 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import fa.appcode.config.PageConfig;
 import fa.appcode.services.CinemaRoomService;
 import fa.appcode.services.SeatService;
-import fa.appcode.web.controller.CinemaRoomController;
 import fa.appcode.web.entities.CinemaRoom;
 import fa.appcode.web.entities.Seat;
 import fa.appcode.web.vo.SeatVo;

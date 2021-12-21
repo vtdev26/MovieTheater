@@ -50,9 +50,13 @@
 									<div class="text-center">
 										<h1 class="h4 text-gray-900 mb-4">LOGIN</h1>
 
-										<c:if test="${param.error == true}">
-											<h6 class="text-danger">User or password is incorrect !
-											</h6>
+										<c:if test="${param.incorrect == true}">
+											<h6 class="text-danger">User / password is invalid.
+												Please try again!</h6>
+										</c:if>
+
+										<c:if test="${param.locked == true}">
+											<h6 class="text-danger">Account has been locked</h6>
 										</c:if>
 
 										<form class="user" action="/j_spring_security_check"

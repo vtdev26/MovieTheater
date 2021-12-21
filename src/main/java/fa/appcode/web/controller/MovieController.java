@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import fa.appcode.common.utils.Constants;
-import fa.appcode.common.utils.FileUploadUtils;
 import fa.appcode.config.PageConfig;
 import fa.appcode.repositories.MovieRepository;
 import fa.appcode.services.CinemaRoomService;
@@ -71,6 +70,7 @@ public class MovieController {
 	MovieRepository movieRepository;
 	@Autowired
 	private StorageService storageService;
+
 	@GetMapping("/list")
 	public String listMovie(Model model, @RequestParam(value = "pageIndex", required = false) String pageIndex) {
 
@@ -91,7 +91,7 @@ public class MovieController {
 
 	@GetMapping("/search")
 	public String searchMovie(Model model, @RequestParam(value = "pageIndex", required = false) String pageIndex,
-							  @RequestParam(defaultValue = Constants.DEFAULT_WORD, name = "searchData") String searchData) {
+			@RequestParam(defaultValue = Constants.DEFAULT_WORD, name = "searchData") String searchData) {
 		int pageIndexVal = pageConfig.getInitPage();
 
 		if (pageIndex != null) {
@@ -158,9 +158,9 @@ public class MovieController {
 	@ResponseBody
 	@PostMapping("/save-movie")
 	public ResponseEntity<Map<String, String>> saveMovie(@Valid Movie movie, BindingResult result,
-														 @RequestParam String cinemaRoom, @RequestParam List<Integer> typeIds,
-														 @RequestParam List<Integer> scheduleIds,
-														 @RequestParam(name = "movieImage", required = false) MultipartFile movieImage) throws IOException {
+			@RequestParam String cinemaRoom, @RequestParam List<Integer> typeIds,
+			@RequestParam List<Integer> scheduleIds,
+			@RequestParam(name = "movieImage", required = false) MultipartFile movieImage) throws IOException {
 		if (result.hasErrors() || (typeIds.size() == 0) || (scheduleIds.size() == 0)
 				|| (movie.getFromDate().after(movie.getToDate()))) {
 
@@ -191,18 +191,19 @@ public class MovieController {
 			if (Constants.DEFAULT_WORD.equals(movie.getMovieId())) {
 				movie.setReleaseDate(movie.getFromDate());
 				movie.setMovieId(null);
-			}
-			else {
+			} else {
 				movie.setReleaseDate(movieServices.getById(movie.getMovieId()).getReleaseDate());
 			}
 			if (movieImage != null && !movieImage.isEmpty()) {
 				try {
-					storageService.storeFile(movieImage, Constants.MOVIE_SRC_IMG);
-					movie.setLargeImage(Constants.MOVIE_SRC_IMG_2 + movieImage.getOriginalFilename());
+					String fileName = storageService.storeFile(movieImage, Constants.MOVIE_SRC_IMG);
+					movie.setLargeImage(fileName);
 				} catch (Exception exception) {
 					messageToDisplay.put("messageFailed", exception.getMessage());
 					return new ResponseEntity<>(messageToDisplay, HttpStatus.BAD_REQUEST);
 				}
+			} else {
+				movie.setLargeImage(movieServices.getById(movie.getMovieId()).getLargeImage());
 			}
 			CinemaRoom cinemaRoomtoSave = cinemaRoomService.findById(cinemaRoom);
 			List<MovieType> movieTypes = new ArrayList<MovieType>();
@@ -211,15 +212,18 @@ public class MovieController {
 					movie.getToDate());
 			List<MovieDate> movieDates = new ArrayList<MovieDate>();
 			for (ShowDates showDate : showDates) {
-				movieDates.add(new MovieDate(new MoviDateId(movie.getMovieId(), showDate.getShowDateId()), movie, showDate));
+				movieDates.add(
+						new MovieDate(new MoviDateId(movie.getMovieId(), showDate.getShowDateId()), movie, showDate));
 			}
 			movie.setMovieDates(movieDates);
 
 			for (Integer typeId : typeIds) {
-				movieTypes.add(new MovieType(new MovieTypeId(movie.getMovieId(), typeId), movie, typeService.getById(typeId)));
+				movieTypes.add(
+						new MovieType(new MovieTypeId(movie.getMovieId(), typeId), movie, typeService.getById(typeId)));
 			}
 			for (Integer scheduleId : scheduleIds) {
-				movieSchedules.add(new MovieSchedule(new MovieScheduleId(movie.getMovieId(), scheduleId), movie, scheduleService.getById(scheduleId)));
+				movieSchedules.add(new MovieSchedule(new MovieScheduleId(movie.getMovieId(), scheduleId), movie,
+						scheduleService.getById(scheduleId)));
 			}
 			movie.setCinemaRoom(cinemaRoomtoSave);
 			movie.setMovieTypes(movieTypes);
