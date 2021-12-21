@@ -58,10 +58,10 @@ class EmployeeControllerTest {
         final int pageIndex = 1;
         final int pageSize = 5;
 
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = DateFor.parse("08/07/2021");
+            date = dateFor.parse("08/07/2021");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }
@@ -88,10 +88,10 @@ class EmployeeControllerTest {
         final Integer pageSize = 5;
         final String dataSearch = "";
 
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = DateFor.parse("08/07/2021");
+            date = dateFor.parse("08/07/2021");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }
@@ -137,10 +137,10 @@ class EmployeeControllerTest {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String jsonExpect = ow.writeValueAsString(responseObject);
 
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = DateFor.parse("08/07/2021");
+            date = dateFor.parse("08/07/2021");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }
@@ -183,10 +183,10 @@ class EmployeeControllerTest {
         final String password = "123";
         final String address = "nam dinh";
         final String phoneNumber = "0983012606";
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = DateFor.parse("08/07/2021");
+            date = dateFor.parse("08/07/2021");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }
@@ -285,10 +285,10 @@ class EmployeeControllerTest {
         final String phoneNumber = "0983012606";
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = DateFor.parse("08/07/2010");
+            date = dateFor.parse("08/07/2010");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }
@@ -334,10 +334,10 @@ class EmployeeControllerTest {
         final String phoneNumber = "0983012606";
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         try {
-            date = DateFor.parse("08/07/2010");
+            date = dateFor.parse("08/07/2010");
         } catch (ParseException e) {
             LogUtils.getLogger().info("Convert date fail !!!");
         }

@@ -139,7 +139,7 @@ class InvoiceServiceTest {
 	 * TC1: Normal case: ConfirmTicketVo != null
 	 */
 	@Test
-	void testSave_TC1() {
+	void testSaveTC1() {
 		
 		String[] seatIds = {"1","2","3"};
 		
@@ -158,7 +158,7 @@ class InvoiceServiceTest {
 	 * TC2: Abnormal case: 	 = null;
 	 */
 	@Test
-	void testSave_TC2() {
+	void testSaveTC2() {
 		
 		String[] seatIds = null;
 		
@@ -177,7 +177,7 @@ class InvoiceServiceTest {
 	 * TC3: Abnormal case: MovieId = null;
 	 */
 	@Test
-	void testSave_TC3() {
+	void testSaveTC3() {
 		
 		String[] seatIds = {"1","2","3"};
 		
@@ -196,7 +196,7 @@ class InvoiceServiceTest {
 	 * TC4: Abnormal case: SeatIds = null, Tickets = null.
 	 */
 	@Test
-	void testSave_TC4() {
+	void testSaveTC4() {
 		
 		String[] seatIds = null;
 		
@@ -215,7 +215,7 @@ class InvoiceServiceTest {
 	 * TC5: Abnormal case: SeatIds = 0, Tickets = null.
 	 */
 	@Test
-	void testSave_TC5() {
+	void testSaveTC5() {
 		
 		String[] seatIds = {};
 		
@@ -234,7 +234,7 @@ class InvoiceServiceTest {
 	 * TC6: Abnormal case: memberId = null;
 	 */
 	@Test
-	void testSave_TC6() {
+	void testSaveTC6() {
 		
 		String[] seatIds = {"1","2","3"};
 		
