@@ -441,6 +441,82 @@ class MovieControllerTest {
 				.andExpect(jsonPath("$.version").value("Version is required"));
 
 	}
+//	/**
+//   * Test edit movie normal case.
+//   *
+//   * @throws Exception the exception
+//   */
+//  @Test
+//  @WithMockUser(roles = "ADMIN", username = "admin")
+//  void testSaveMovie3() throws Exception {
+//    Movie movie = new Movie();
+//    movie.setActor("Duy Khanh");
+//    movie.setMovieId("1");
+//    movie.setDuration((double) 111);
+//    movie.setDirector("Duy Khanh");
+//    movie.setContent("aaaa");
+//    movie.setFromDate(new SimpleDateFormat("yyy-MM-dd").parse("2021-11-11"));
+//    movie.setToDate(new SimpleDateFormat("yyy-MM-dd").parse("2021-12-11"));
+//    movie.setReleaseDate(new SimpleDateFormat("yyy-MM-dd").parse("2021-12-11"));
+//    movie.setMovieNameEnglish("ENG");
+//    movie.setMovieNameVn("VN");
+//    movie.setMovieProductCompany("Marvel");
+//    movie.setCinemaRoom(cinemaRooms.get(0));
+//    movie.setVersion("2D,3D");
+//    movie.setLargeImage("abc.jpg");
+//    StringBuilder typeIdsString = new StringBuilder();
+//    StringBuilder scheduleIdsString = new StringBuilder();
+//    String prefix = "";
+//    for (Type type : types) {
+//      movieTypes.add(new MovieType(new MovieTypeId(movie.getMovieId(),type.getTypeId()), movie,type));
+//      typeIdsString.append(prefix);
+//      typeIdsString.append(",");
+//      typeIdsString.append(type.getTypeId());
+//      Mockito.when(typeService.getById(type.getTypeId())).thenReturn(type);
+//    }
+//    prefix = "";
+//    for (Schedule schedule : schedules) {
+//      movieSchedules.add(new MovieSchedule(new MovieScheduleId(movie.getMovieId(),schedule.getScheduleId()),movie, schedule));
+//      scheduleIdsString.append(prefix);
+//      scheduleIdsString.append(",");
+//      scheduleIdsString.append(schedule.getScheduleId());
+//      Mockito.when(scheduleService.getById(schedule.getScheduleId())).thenReturn(schedule);
+//    }
+//    for (ShowDates showDate : showDates) {
+//      movieDates.add(new MovieDate(new MoviDateId(movie.getMovieId(),showDate.getShowDateId()),movie, showDate));
+//    }
+//    Path path = Paths.get("src/test/resources/Test image01.jpg");
+//    String name = "Test image01.jpg";
+//    String originalFileName = "Test image01.jpg";
+//    String contentType = "image";
+//    byte[] content = null;
+//    try {
+//      content = Files.readAllBytes(path);
+//    } catch (final IOException e) {
+//    }
+//    MultipartFile movieImage = new MockMultipartFile(name, originalFileName, contentType, content);
+//    movie.setMovieDates(movieDates);
+//    movie.setMovieTypes(movieTypes);
+//    movie.setMovieSchedules(movieSchedules);
+//    Mockito.when(movieService.getById(movie.getMovieId())).thenReturn(movie);
+//    Mockito.when(cinemaRoomService.findById("0")).thenReturn(cinemaRooms.get(0));
+//    Mockito.when(showDatesService.findByFromDateAndToDate(movie.getFromDate(), movie.getToDate()))
+//        .thenReturn(showDates);
+//    Mockito.when(movieService.saveMovie(movie)).thenReturn(true);
+//    mockMvc.perform(MockMvcRequestBuilders.multipart("/admin/movie/save-movie")
+//            .file((MockMultipartFile) movieImage)
+//            .param("movieId", "")
+//            .param("version", movie.getVersion()).param("actor", movie.getActor())
+//            .param("duration", movie.getDuration().toString()).param("director", movie.getDirector())
+//            .param("content", movie.getContent()).param("fromDate", "2021-11-11").param("toDate", "2021-12-11")
+//            .param("movieNameEnglish", movie.getMovieNameEnglish()).param("movieNameVn", movie.getMovieNameVn())
+//            .param("movieProductCompany", movie.getMovieProductCompany()).param("typeIds", typeIdsString.toString())
+//            .param("scheduleIds", scheduleIdsString.toString())
+//            .param("cinemaRoom", movie.getCinemaRoom().getCinemaRoomId().toString()))
+//        .andExpect(MockMvcResultMatchers.status().isOk())
+//        .andExpect(jsonPath("$.messageSuccess").value(pageConfig.getSaveSuccess()));
+//
+//  }
 
 	/**
 	 * Test delete success.

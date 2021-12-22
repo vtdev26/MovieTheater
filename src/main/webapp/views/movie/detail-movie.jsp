@@ -75,7 +75,7 @@
         </div>
         <div class="form-group">
             <label for="duration" class="font-weight-bold">Duration<span class="text-danger">(*)</span></label>
-            <input type="text" class="form-control" id="duration" name="duration" placeholder="Duration"
+            <input type="number" class="form-control" id="duration" name="duration" placeholder="Duration"
                    value="${movie.duration}">
             <!-- <label class="text-danger"><c:out value="${errorList['duration']}"/></label> -->
             <p class="error" id="durationErr" hidden="true">
