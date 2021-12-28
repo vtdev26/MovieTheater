@@ -19,6 +19,7 @@ $(document).ready(function () {
     // Click edit icon  - employee management
     body.on("click", "#editEmployee", function (e) {
         let employeeId = $(this).attr('value');
+        console.log(employeeId);
         $("#content-page").load("../views/employee/detail-employee.jsp", function () {
             $('#titlePage').text('Edit Employee')
             $('input[type=password]').css("opacity", "0.7").prop("readonly", true)
@@ -73,7 +74,6 @@ $(document).ready(function () {
         });
 
     });
-
 
     body.on('click', 'embed', function (e) {
         $('#file').click();
@@ -152,8 +152,6 @@ $(document).ready(function () {
         modalDelete.modal('hide');
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
-
-
     });
 
     // Click change select

@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import fa.appcode.common.logging.LogUtils;
 import fa.appcode.services.AccountService;
 import fa.appcode.web.entities.Account;
 

@@ -30,10 +30,10 @@ public class AccountServiceImpl implements AccountService {
 		return accountRepository.findByAccountId(id);
 	}
 
-	@Override
-	public boolean save(Account account) {
-		accountRepository.save(account);
-		return true;
-	}
+//	@Override
+//	public boolean save(Account account) {
+//		accountRepository.save(account);
+//		return true;
+//	}
 
 }

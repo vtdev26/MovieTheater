@@ -48,11 +48,14 @@ $(document).ready(function () {
                         spanValidImg.text('');
                     }
                 },
+
                 error: function (response) {
                     JSON.parse(JSON.stringify(response))
                     $('#info-save').addClass("text-danger").text(response.responseJSON.message)
                     if (response.responseJSON.status === 'ERROR-ACCOUNT-EXISTS') {
+
                         let spanValidAcc = $('#validate-account')
+
                         spanValidAcc.parent().addClass('invalid')
                         spanValidAcc.text(response.responseJSON.message);
                     }

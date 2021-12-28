@@ -30,5 +30,11 @@ public class Ticket {
 	
 	@Column(name = "ticket_type")
 	private Integer ticketType;
+
+	public Ticket(Double price, Integer ticketType) {
+		super();
+		this.price = price;
+		this.ticketType = ticketType;
+	}
 }
 

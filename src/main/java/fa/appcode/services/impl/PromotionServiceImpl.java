@@ -15,10 +15,10 @@ import fa.appcode.repositories.PromotionRepository;
 import fa.appcode.services.PromotionService;
 import fa.appcode.web.entities.Promotion;
 
+import javax.persistence.EntityNotFoundException;
+
 /**
- *
  * @author TruongNguyen
- *
  */
 @Service
 public class PromotionServiceImpl implements PromotionService {
@@ -27,7 +27,7 @@ public class PromotionServiceImpl implements PromotionService {
 	private PromotionRepository promotionRepository;
 
 	@Override
-	public Page<Promotion> searchAll(String searchData, int pageIndex, int pageSize) {
+	public Page<Promotion> searchAll(String searchData, Integer pageIndex, Integer pageSize) {
 
 		Pageable pageable = PageRequest.of(pageIndex - 1, pageSize);
 
@@ -35,22 +35,80 @@ public class PromotionServiceImpl implements PromotionService {
 
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
-		try {
-			Date date = format.parse(searchData);
-			LogUtils.getLogger().info(date);
-			promotions = promotionRepository.searchDate(date, pageable);
-
-		} catch (ParseException e) {
-			String searchVal;
-			if (searchData == null) {
-				searchVal = "%%";
-			} else {
-				searchVal = "%" + searchData + "%";
-			}
+		String searchVal;
+		
+		/*
+		 *No has search data 
+		 */
+		if (searchData == null) {
+			LogUtils.getLogger().info("search text null");
+			searchVal = "%%";
 			promotions = promotionRepository.searchText(searchVal, pageable);
-		}
+		} else {
+			
+			/*
+			 * Search data is a date
+			 */
+			try {
+				Date date = format.parse(searchData);
+				LogUtils.getLogger().info(date);
+				promotions = promotionRepository.searchDate(date, pageable);
+				LogUtils.getLogger().info("search date");
 
+			} catch (ParseException e) {
+
+				LogUtils.getLogger().info("search text");
+
+				searchVal = "%" + searchData + "%";
+				promotions = promotionRepository.searchText(searchVal, pageable);
+			}
+		}
 		return promotions;
 	}
 
+	@Override
+	public boolean saveOrUpdate(Promotion promotion) {
+		try {
+			promotionRepository.save(promotion);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public Promotion getById(Integer promotionId) {
+		try {
+			return promotionRepository.getById(promotionId);
+		} catch (EntityNotFoundException e) {
+			return null;
+		}
+	}
+
+	@Override
+	public boolean deletePromotionById(Integer promotionId) {
+		try {
+			promotionRepository.deleteById(promotionId);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public boolean checkTitleExist(Integer promotionId, String title) {
+		Promotion promotion;
+		if (promotionId == null || promotionId == 0) {
+			promotion = promotionRepository.findByTitle(title);
+		} else {
+			promotion = promotionRepository.checkByIdAndTitle(promotionId, title);
+		}
+		if (promotion == null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 }

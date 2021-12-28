@@ -25,15 +25,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private CustomLogoutSuccessHandler logoutSuccessHandler;
 
-//	public WebSecurityConfig(CustomAuthenticationSuccessHandler loginSuccessHandler,
-//
-//			CustomAuthenticationFailureHandler loginFailureHandler, CustomLogoutSuccessHandler logoutSuccessHandler) {
-//		super();
-//		this.loginSuccessHandler = loginSuccessHandler;
-//		this.loginFailureHandler = loginFailureHandler;
-//		this.logoutSuccessHandler = logoutSuccessHandler;
-//	}
-
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
 
@@ -54,7 +45,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	// // And Setting PassswordEncoder
 	// auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	// }
-
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/resources/**");
@@ -65,9 +55,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.csrf().disable();
 
-//		http.authorizeRequests().antMatchers("/user/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')");
-//
-//		http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
+		http.authorizeRequests().antMatchers("/user/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')");
+
+		http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
 
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 

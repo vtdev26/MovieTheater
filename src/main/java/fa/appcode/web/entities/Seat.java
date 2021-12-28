@@ -44,6 +44,9 @@ public class Seat {
     @JoinColumn(name = "cinema_room_id", referencedColumnName = "cinema_room_id")
     private CinemaRoom cinemaRoom;
 
-  
-
+	public Seat(Integer seatId, Integer status) {
+		super();
+		this.seatId = seatId;
+		this.status = status;
+	}
 }

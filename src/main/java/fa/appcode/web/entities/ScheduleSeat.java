@@ -24,13 +24,13 @@ import lombok.Setter;
 public class ScheduleSeat {
 	
 	@Id
-	@Column(name = "cinema_room_id", columnDefinition = "NVARCHAR(10)")
+	@Column(name = "schedule_seat_id", columnDefinition = "NVARCHAR(10)")
 	@GenericGenerator(name = "sequence_string_id", strategy = "fa.appcode.common.utils.StringGenerator")
 	@GeneratedValue(generator = "sequence_string_id")
-	private String cinemaRoomId;
+	private String scheduleSeatId;
 	
 	@Column(name = "movie_id")
-	private Integer movieId;
+	private String movieId;
 	
 	@Column(name = "schedule_id")
 	private Integer scheduleId;
@@ -53,4 +53,20 @@ public class ScheduleSeat {
     @ManyToOne
     @JoinColumn(name = "invoice_id", referencedColumnName = "invoice_id")
     private Invoice invoice;
+
+	public ScheduleSeat(String movieId, Integer scheduleId, Integer seatId, Integer status, Integer seatType) {
+		super();
+		this.movieId = movieId;
+		this.scheduleId = scheduleId;
+		this.seatId = seatId;
+		this.status = status;
+		this.seatType = seatType;
+	}
+
+	public ScheduleSeat(String scheduleSeatId, Integer seatId, Integer status) {
+		super();
+		this.scheduleSeatId = scheduleSeatId;
+		this.seatId = seatId;
+		this.status = status;
+	}
 }

@@ -33,7 +33,7 @@ public class ImageServiceImpl implements StorageService {
                 throw new RuntimeException("Failed to store empty file.");
             }
             if (!isImageFile(file)) {
-                throw new RuntimeException("You can only upload image file (png, jpg, jpeg, bmp");
+                throw new RuntimeException("You can only upload image file (png, jpg, jpeg, bmp)");
             }
             //file must be <=5MB
             float fileSizeInMegabytes = file.getSize() / 1_000_000;

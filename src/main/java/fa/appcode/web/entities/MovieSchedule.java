@@ -1,13 +1,12 @@
 package fa.appcode.web.entities;
-import java.io.Serializable;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -21,18 +20,14 @@ import lombok.Setter;
 @Setter
 @Getter
 @Table(name = "movie_schedule",schema = "movie_theater")
-public class MovieSchedule implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "movie_id", referencedColumnName = "movie_id")
+public class MovieSchedule  {
+	@EmbeddedId
+	private MovieScheduleId movieScheduleId;
+	@MapsId(value = "movieId")
+	@ManyToOne
 	private Movie movie;
-	
-	@Id
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "schedule_id", referencedColumnName = "schedule_id")
+	@MapsId(value = "scheduleId")
+	@ManyToOne
 	private Schedule schedule;
 
 	@Override
@@ -51,4 +46,11 @@ public class MovieSchedule implements Serializable {
 		MovieSchedule other = (MovieSchedule) obj;
 		return Objects.equals(movie, other.movie) && Objects.equals(schedule, other.schedule);
 	}
+
+  public MovieSchedule(Movie movie, Schedule schedule) {
+    super();
+    this.movie = movie;
+    this.schedule = schedule;
+  }
+	
 }

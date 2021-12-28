@@ -11,7 +11,6 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import fa.appcode.common.logging.LogUtils;
-import fa.appcode.config.MessageConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,8 +25,6 @@ import fa.appcode.web.vo.EmployeeVo;
 @Service("employeeService")
 @Transactional
 public class EmployeeServiceImpl implements EmployeeService {
-
-
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
@@ -59,11 +56,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Optional<Employee> findById(String id) {
         return employeeRepository.findById(id);
-    }
-
-    @Override
-    public Employee findEmployeeById(String id){
-        return  employeeRepository.findEmployeeByEmployeeId(id);
     }
 
     @Override
