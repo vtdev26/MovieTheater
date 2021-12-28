@@ -268,7 +268,7 @@ $(document).ready(function () {
 		});
 	});
 
-	$("body").on("click", "#btn_Back_To_Dashboard", function () {
+		$("body").on("click", "#btn_Back_To_Dashboard", function () {	
 		dateSelecting = '';
 		pageIndex = 0;
 		scheduleId = 0;
@@ -276,14 +276,20 @@ $(document).ready(function () {
 		seatQuantity = 0;
 		timeName = '';
 		listSelectedSeat = [];
-
-		// window.location.href = "/admin/dashboard";
+		
+		pageIndex = $(this).attr("value");
 		$.get({
-			url: "/admin/dashboard",
-			success: function(response) {
-				$(".container-fluid").html(`<h1 class="row justify-content-center mt-5">Welcome To G3 -
-				MovieTheater</h1>`);
+			url: "/admin/showtimes",
+			data: {
+				pageIndex: pageIndex,
+				dateSelecting: dateSelecting
 			},
+			success: function (response) {
+				$(".container-fluid").html(response);
+			},
+			error: function (error) {
+				alert("Falied!" + error);
+			}
 		});
 	});
 });
