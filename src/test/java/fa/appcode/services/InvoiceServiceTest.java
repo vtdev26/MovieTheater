@@ -248,5 +248,24 @@ class InvoiceServiceTest {
 		
 		assertTrue(!invoiceService.save(confirmTicketVo));
 	}
+	
+	/**
+	 * TC7: Abnormal case: movieId not exist;
+	 */
+	@Test
+	void testSave_TC7() {
+		
+		String[] seatIds = {"1","2","3"};
+		
+		Mockito.when(memberService.save(member)).thenReturn(member);
+		Mockito.when(invoiceRepository.save(invoice)).thenReturn(invoice);
+		Mockito.when(ticketService.saveAll(tickets)).thenReturn(tickets);
+		Mockito.when(seatService.findAllBySeatId(seatIds)).thenReturn(seats);
+		Mockito.when(memberService.findByMemberIdOrIdendityCard(confirmTicketVo.getMemberId())).thenReturn(null);
+		Mockito.when(movieService.getById(confirmTicketVo.getMovieId())).thenReturn(movie);
+		Mockito.when(pageConfig.getScoreAdd()).thenReturn(15000.0);
+		
+		assertTrue(!invoiceService.save(confirmTicketVo));
+	}
 
 }
