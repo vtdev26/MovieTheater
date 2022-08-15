@@ -42,7 +42,7 @@ public class Promotion {
     @NotNull(message = "{promotion.discountLevel.empty}")
     private Integer discountLevel;
 
-    @Column(name = "end_time", columnDefinition = "DATETIME")
+    @Column(name = "end_time", columnDefinition = "DATE")
     @NotNull(message = "{promotion.endTime.empty}")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endTime;
@@ -50,7 +50,7 @@ public class Promotion {
     @Column(name = "image", columnDefinition = "VARCHAR(255)")
     private String image;
 
-    @Column(name = "start_time", columnDefinition = "DATETIME")
+    @Column(name = "start_time", columnDefinition = "DATE")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "{promotion.startTime.empty}")
     private Date startTime;

@@ -25,7 +25,7 @@ public class Ticket {
 	@Column(name = "ticket_id")
 	private Integer ticketId;
 	
-	@Column(name = "price", columnDefinition = "MONEY")
+	@Column(name = "price", columnDefinition="Decimal(10,2)")
 	private Double price;
 	
 	@Column(name = "ticket_type")

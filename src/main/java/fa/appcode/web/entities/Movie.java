@@ -62,7 +62,7 @@ public class Movie {
 	@NotNull(message = "{movie.duration.empty}")
 	private Double duration;
 
-	@Column(name = "from_date", columnDefinition = "DATETIME")
+	@Column(name = "from_date", columnDefinition = "DATE")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "{movie.fromDate.empty}")
 	private Date fromDate;
@@ -71,12 +71,12 @@ public class Movie {
 	@NotEmpty(message = "{movie.productionCompany.empty}")
 	private String movieProductCompany;
 
-	@Column(name = "to_date", columnDefinition = "DATETIME")
+	@Column(name = "to_date", columnDefinition = "DATE")
 	@NotNull(message = "{movie.toDate.empty}")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date toDate;
 
-	@Column(name = "release_date", columnDefinition = "DATETIME")
+	@Column(name = "release_date", columnDefinition = "DATE")
 	private Date releaseDate;
 
 	@Column(name = "version", columnDefinition = "NVARCHAR(255)")

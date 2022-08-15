@@ -38,16 +38,16 @@ public class Invoice {
 	@Column(name = "invoice_id", columnDefinition = "VARCHAR(10)")
 	private String invoiceId;
 
-	@Column(name = "add_score", columnDefinition = "MONEY")
+	@Column(name = "add_score", columnDefinition="Decimal(10,2)")
 	private Double addScore;
 
-	@Column(name = "booking_date", columnDefinition = "DATETIME")
+	@Column(name = "booking_date", columnDefinition = "DATE")
 	private Date bookingDate;
 	
 	@Column(name = "movie_name", columnDefinition = "NVARCHAR(255)")
 	private String movieName;
 	
-	@Column(name = "schedule_show", columnDefinition = "DATETIME")
+	@Column(name = "schedule_show", columnDefinition = "DATE")
 	private Date scheduleShow;
 	
 	@Column(name = "schedule_show_time", columnDefinition = "NVARCHAR(255)")
@@ -56,10 +56,10 @@ public class Invoice {
 	@Column(name = "status")
 	private Integer status;
 	
-	@Column(name = "total_money", columnDefinition = "MONEY")
+	@Column(name = "total_money", columnDefinition="Decimal(10,2)")
 	private Double totalMoney;
 	
-	@Column(name = "use_score", columnDefinition = "MONEY")
+	@Column(name = "use_score", columnDefinition="Decimal(10,2)")
 	private Double useScore;
 	
 	@Column(name = "seat", columnDefinition = "NVARCHAR(255)")

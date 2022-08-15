@@ -29,7 +29,7 @@ public class ShowDates {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer showDateId;
 
-	@Column(name = "show_date",  columnDefinition = "DATETIME")
+	@Column(name = "show_date",  columnDefinition = "DATE")
 	private Date showDate;
 
 	@Column(name = "date_name", columnDefinition = "NVARCHAR(255)")

@@ -19,7 +19,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -48,9 +47,7 @@ public class Account {
     @NotEmpty(message = "{account.address.empty}")
     private String address;
 
-    @Column(name = "date_of_birth", columnDefinition = "DATETIME")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(shape = JsonFormat.Shape.STRING ,pattern = "yyyy-MM-dd" , timezone="UTC")
     private Date dateOfBirth;
 
     @Column(name = "email")
@@ -81,7 +78,7 @@ public class Account {
     @NotEmpty(message = "{account.phoneNumber.empty}")
     private String phoneNumber;
 
-    @Column(name = "register_date", columnDefinition = "DATETIME")
+    @Column(name = "register_date", columnDefinition = "DATE")
     private Date registerDate;
 
     @Column(name = "status")
